@@ -4,10 +4,39 @@ body{
 
 
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
+  font-size: 24px;
+}
+
+.smal {
+    font-size: 16px !important;  /* !important tvingar storleken */
+}
+
+.button{
+    background-color: white;
+     border-radius: 8px;
+     width: 250px;
+     height: 45px;
+     border: solid black 0.5px;
+     display: flex;  
+      justify-content: center;  
+      align-items: center; 
+      font-size: 170%;
+}
+.back {
+    background-color: white;
+    border-radius: 4px;
+    width: 100px;
+    height: 30px;
+    border: solid black 0.5px;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;           
+    padding: 0 8px;     
+}
+
+a{
+    text-decoration: none;
+    color: black;
 }
 
