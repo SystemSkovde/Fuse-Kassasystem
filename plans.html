@@ -91,5 +91,57 @@ arrow_back_ios
     <script src="script.js"></script>
     <div id="product-result"></div>
 
+    <div class="time-picker">
+  <div class="time-labels">
+    <span>08</span><span>09</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
+  </div>
+  <input type="range" min="8" max="16" step="1" value="8" class="hour-slider">
+  <p>Vald tid: <span id="clock">08:00</span></p>
+</div>
+
+<style>
+.hour-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 60px;
+  /* Skapar 8 boxar för timmarna 08-16 */
+  background: repeating-linear-gradient(
+    90deg,
+    #f8f9fa 0%, #f8f9fa 12.3%, 
+    #dee2e6 12.3%, #dee2e6 12.5%
+  );
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  outline: none;
+}
+
+.hour-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12.5%; /* Matchar exakt en timmes bredd */
+  height: 60px;
+  background: rgba(40, 167, 69, 0.2); /* Grön "highlight" */
+  border: 3px solid #28a745;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.time-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5% 5px 5%; /* Justera för att centrera siffror över boxar */
+  font-family: sans-serif;
+  color: #666;
+}
+</style>
+
+<script>
+  const slider = document.querySelector('.hour-slider');
+  const display = document.getElementById('clock');
+  
+  slider.oninput = function() {
+    display.innerText = this.value.padStart(2, '0') + ':00';
+  }
+</script>
+
     </body>
 </html>
