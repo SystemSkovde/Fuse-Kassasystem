@@ -7,6 +7,19 @@
         <link href="style.css" rel="stylesheet">
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+  <style>
+        #qr-reader {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+        }
+        @media (max-width: 600px) {
+            #qr-reader {
+                width: 100%;
+            }
+        }
+    </style>
     </head>
     
     
@@ -77,5 +90,13 @@ arrow_back_ios
 
 
 </div>
+ <div id="qr-reader" style="width:600px"></div>
+    <div id="qr-reader-results"></div>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="script.js"></script>
+</body>
+
+
+
     </body>
 </html>
