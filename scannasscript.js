@@ -1,15 +1,14 @@
 function docReady(fn) {
     if (document.readyState === "complete" || document.readyState === "interactive") {
         setTimeout(fn, 1);
-    } else {
+    } 
+    else{
         document.addEventListener("DOMContentLoaded", fn);
     }
 }
 
 docReady(function () {
-
     const resultContainer = document.getElementById("qr-reader-results");
-
     let lastResult = null;
 
     // ===== MATERIAL DATABAS =====
@@ -36,7 +35,6 @@ docReady(function () {
         "qr-reader",
         {
             fps: 10,
-            
         }
     );
 
@@ -76,24 +74,25 @@ docReady(function () {
                 <p>${material.name}</p>
             `;
 
-        } 
+        } else {
+
+            resultContainer.innerHTML = `
+                <h3>Okänd kod</h3>
+                <p>${decodedText}</p>
+                <button onclick="startScanner()">Scanna igen</button>
+            `;
+        }
 
     }
 
     function updateCart() {
-
     const cartDiv = document.getElementById("cart");
 
-
-window.changeQuantity = function(code, quantity) {
-
-    cart[code].quantity = parseInt(quantity);
-
-    updateCart();
+    // Vi vill inte visa varukorgens innehåll, så lämna HTML tom
+    cartDiv.innerHTML = ""; 
 }
 
-    cartDiv.innerHTML = html;
-}
+
 
     function onScanError(errorMessage) {
         // Ignorerar fel
