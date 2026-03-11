@@ -70,7 +70,7 @@ docReady(function () {
             updateCart();
 
             resultContainer.innerHTML = `
-                <p>Material tillagt i varukorg${material.name}</p>
+                <p>Material tillagt i varukorg ${material.name}</p>
             `;
 
         } else {
