@@ -108,6 +108,28 @@ docReady(function () {
         `;
     });
 
+    function createOptions(selected) {
+
+    let options = "";
+
+    for (let i = 1; i <= 20; i++) {
+
+        options += `
+        <option value="${i}" ${i == selected ? "selected" : ""}>
+            ${i}
+        </option>`;
+    }
+
+    return options;
+}
+
+window.changeQuantity = function(code, quantity) {
+
+    cart[code].quantity = parseInt(quantity);
+
+    updateCart();
+}
+
     cartDiv.innerHTML = html;
 }
 
