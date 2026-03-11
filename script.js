@@ -40,6 +40,7 @@ docReady(function () {
         }
     );
 
+    let cart = [];
     function onScanSuccess(decodedText, decodedResult) {
 
         if (decodedText === lastResult) {
@@ -55,14 +56,18 @@ docReady(function () {
 
             const material = materials[decodedText];
 
+            cart.push({
+                code: decodedText,
+                name: material.name,
+                type: material.type,
+                location: material.location
+            });
+
+            updateCart();
+
             resultContainer.innerHTML = `
-                <h3>Material hittat</h3>
-                <p><b>Barcode:</b> ${decodedText}</p>
-                <p><b>Namn:</b> ${material.name}</p>
-                <p><b>Typ:</b> ${material.type}</p>
-                <p><b>Plats:</b> ${material.location}</p>
-                <br>
-                <button onclick="startScanner()">Scanna igen</button>
+                <h3>Material tillagt i varukorg</h3>
+                <p>${material.name}</p>
             `;
 
         } else {
@@ -75,6 +80,23 @@ docReady(function () {
         }
 
     }
+
+    function updateCart() {
+
+    const cartDiv = document.getElementById("cart");
+
+    let html = "<h3>Varukorg</h3>";
+
+    cart.forEach(item => {
+        html += `
+        <div>
+            ${item.name} (${item.code})
+        </div>
+        `;
+    });
+
+    cartDiv.innerHTML = html;
+}
 
     function onScanError(errorMessage) {
         // Ignorerar fel
