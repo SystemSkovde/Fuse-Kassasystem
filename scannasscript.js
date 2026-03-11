@@ -32,13 +32,35 @@ docReady(function () {
     };
 
     // ===== QR SCANNER =====
-    const html5QrcodeScanner = new Html5QrcodeScanner(
-        "qr-reader",
+  const html5QrCode = new Html5Qrcode("qr-reader");
+  Html5Qrcode.getCameras().then(devices => {
+
+    const cameraId = devices[0].id;
+
+    html5QrCode.start(
+        cameraId,
         {
             fps: 10,
             qrbox: "auto"
+        },
+        (decodedText) => {
+
+            if (scannedCodes.has(decodedText)) {
+                return;
+            }
+
+            scannedCodes.add(decodedText);
+
+            onScanSuccess(decodedText);
+
         }
     );
+
+});
+
+window.stopScanner = function () {
+    html5QrCode.stop();
+}
 
     let cart = {};
     function onScanSuccess(decodedText, decodedResult) {
@@ -76,14 +98,7 @@ docReady(function () {
                 <p>${material.name}</p>
             `;
 
-        } else {
-
-            resultContainer.innerHTML = `
-                <h3>Okänd kod</h3>
-                <p>${decodedText}</p>
-                <button onclick="startScanner()">Scanna igen</button>
-            `;
-        }
+        } 
 
     }
 
