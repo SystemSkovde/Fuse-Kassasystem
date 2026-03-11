@@ -36,7 +36,7 @@ docReady(function () {
         "qr-reader",
         {
             fps: 10,
-            qrbox: 250
+            qrbox: "auto"
         }
     );
 
