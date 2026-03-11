@@ -15,6 +15,30 @@ body{
     font-size: 40px !important;  /* !important tvingar storleken */
 }
 
+
+.cart-icon-wrapper {
+    position: relative;        /* gör så att cirkeln kan positioneras relativt */
+    display: inline-block;     
+}
+
+/* Cirkeln med röd bakgrund */
+.circle {
+    position: absolute;        /* absolut i förhållande till wrapper */
+    top: -3px;                /* justera vertikalt över ikonen */
+    right: -5px;              /* justera horisontellt */
+    width: 20px;
+    height: 20px;
+    background-color: red;     /* röd cirkel */
+    color: white;
+    border-radius: 50%;        /* gör den rund */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
 .button{
     background-color: white;
      border-radius: 8px;

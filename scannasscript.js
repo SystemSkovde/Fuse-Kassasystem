@@ -87,6 +87,12 @@ docReady(function () {
     function updateCart() {
     const cartDiv = document.getElementById("cart");
     cartDiv.innerHTML = ""; 
+
+    // Räkna totalt antal varor
+let totalQuantity = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
+
+// Visa total i cirkeln
+document.getElementById("cart-count").textContent = totalQuantity;
 }
 
 
