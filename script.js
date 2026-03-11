@@ -36,11 +36,11 @@ docReady(function () {
         "qr-reader",
         {
             fps: 10,
-            qrbox: 250
+            qrbox: "auto"
         }
     );
 
-    let cart = [];
+    let cart = {};
     function onScanSuccess(decodedText, decodedResult) {
 
         if (decodedText === lastResult) {
@@ -56,12 +56,18 @@ docReady(function () {
 
             const material = materials[decodedText];
 
-            cart.push({
-                code: decodedText,
-                name: material.name,
-                type: material.type,
-                location: material.location
-            });
+            if (cart[decodedText]) {
+                cart[decodedText].quantity += 1;
+            } else {
+
+                cart[decodedText] = {
+                    code: decodedText,
+                    name: material.name,
+                    type: material.type,
+                    location: material.location,
+                    quantity: 1
+                };
+            }
 
             updateCart();
 
@@ -87,10 +93,17 @@ docReady(function () {
 
     let html = "<h3>Varukorg</h3>";
 
-    cart.forEach(item => {
+    Object.values(cart).forEach(item => {
+
         html += `
-        <div>
-            ${item.name} (${item.code})
+        <div class="cart-item">
+
+            <span>${item.name}</span>
+
+            <select onchange="changeQuantity('${item.code}', this.value)">
+                ${createOptions(item.quantity)}
+            </select>
+
         </div>
         `;
     });
