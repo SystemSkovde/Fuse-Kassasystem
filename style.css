@@ -93,3 +93,8 @@ footer {
     background-color: white;    
 }
 
+#qr-reader {
+    max-height: 80%; /* justera efter önskad höjd */
+    width: 100%;        /* full bredd */
+    margin-bottom: 20px;
+}
