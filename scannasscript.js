@@ -93,35 +93,6 @@ docReady(function () {
 
     let html = "<h3>Varukorg</h3>";
 
-    Object.values(cart).forEach(item => {
-
-        html += `
-        <div class="cart-item">
-
-            <span>${item.name}</span>
-
-            <select onchange="changeQuantity('${item.code}', this.value)">
-                ${createOptions(item.quantity)}
-            </select>
-
-        </div>
-        `;
-    });
-
-    function createOptions(selected) {
-
-    let options = "";
-
-    for (let i = 1; i <= 20; i++) {
-
-        options += `
-        <option value="${i}" ${i == selected ? "selected" : ""}>
-            ${i}
-        </option>`;
-    }
-
-    return options;
-}
 
 window.changeQuantity = function(code, quantity) {
 
