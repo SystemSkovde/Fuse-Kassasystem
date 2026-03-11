@@ -23,16 +23,16 @@ body{
       font-size: 170%;
 }
 .back {
-    background-color: white;
-    border-radius: 4px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    gap: 5px;               
+    padding: 0 8px;
     width: 100px;
     height: 30px;
+    background-color: white;
+    border-radius: 4px;
     border: solid black 0.5px;
-
-    display: flex;
-    align-items: center;
-    gap: 5px;           
-    padding: 0 8px;     
 }
 
 a{
@@ -42,12 +42,26 @@ a{
 
 nav {
     display: flex;
-    align-items: center; /* Vertikal centrering */
-    gap: 10px;           /* Avstånd mellan back-knapp och rubrik */
+    align-items: center; 
+    gap: 10px;           
+    padding: 20px;
 }
 
 nav h1 {
-    margin: 0;           /* Ta bort standardmarginal */
-    font-size: 1.5rem;   /* Justera storlek på rubrik */
+    margin: 0;          
+    font-size: 1.5rem;   
+}
+
+#scan {
+    margin-left: auto; 
+    margin-right: 30px; 
+}
+
+footer {
+    display: flex;              
+    justify-content: center;   
+    align-items: center;        
+    height: 60px;               
+    background-color: white;    
 }
 
