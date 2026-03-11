@@ -33,15 +33,37 @@ docReady(function () {
 
     // ===== QR SCANNER =====
   const html5QrCode = new Html5Qrcode("qr-reader");
-  Html5Qrcode.getCameras().then(devices => {
+const scannedCodes = new Set();
 
-   
+let cameras = [];
+
+Html5Qrcode.getCameras().then(devices => {
+
+    cameras = devices;
+
+    const cameraSelect = document.getElementById("camera-select");
+
+    devices.forEach((camera, index) => {
+
+        const option = document.createElement("option");
+
+        option.value = camera.id;
+        option.text = camera.label || "Camera " + (index + 1);
+
+        cameraSelect.appendChild(option);
+    });
+
+});
+
+window.startSelectedCamera = function () {
+
+    const cameraId = document.getElementById("camera-select").value;
 
     html5QrCode.start(
-         { facingMode: "environment" },
+        cameraId,
         {
             fps: 10,
-            qrbox: "auto"
+            qrbox: { width: 250, height: 250 }
         },
         (decodedText) => {
 
@@ -52,11 +74,9 @@ docReady(function () {
             scannedCodes.add(decodedText);
 
             onScanSuccess(decodedText);
-
         }
     );
-
-});
+}
 
 window.stopScanner = function () {
     html5QrCode.stop();
