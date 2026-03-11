@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Fuse Login</title>
+
 <style>
+/* Global styling */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -12,88 +14,123 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #f0f2f5;
+    background: #f0f2f5; /* Ljus bakgrund */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    height: 100vh;
-    padding-top: 80px; /* Fuse högst upp */
+    justify-content: start;
+    min-height: 100vh;
+    padding-top: 40px;
 }
 
-/* Titel */
+/* Huvudrubrik */
 h1 {
     font-size: 36px;
     font-weight: bold;
-    color: #000;
-    margin-bottom: 40px;
+    color: #222;
+    margin-bottom: 30px;
     text-align: center;
 }
 
+/* Container för input och knappar */
+.container {
+    width: 90%;
+    max-width: 480px;
+    background: white;
+    border-radius: 12px;
+    padding: 30px 25px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
 /* Form-element */
+label {
+    font-size: 15px;
+    color: #444;
+    display: block;
+    margin-bottom: 6px;
+}
+
 input {
-    width: 300px;
-    max-width: 90%;
+    width: 100%;
     padding: 14px;
-    margin-bottom: 20px;
-    border: 2px solid #000;
+    margin-bottom: 18px;
+    border: 1px solid #aaa;
     border-radius: 8px;
     font-size: 16px;
+    transition: 0.25s;
 }
 
 input:focus {
+    border-color: #020305;
     outline: none;
-    border-color: #0066ff;
+    box-shadow: 0 0 4px rgba(7, 9, 11, 0.3);
 }
 
-/* Log in knapp */
-.login-btn {
-    width: 300px;
-    max-width: 90%;
-    padding: 14px;
-    background: #1d1d1f;
-    color: white;
+/* Knappar */
+button {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
     border: none;
     border-radius: 8px;
-    font-size: 18px;
     cursor: pointer;
-    margin-bottom: 12px;
+    transition: 0.25s;
 }
 
-/* Forgot password knapp */
+.login-btn {
+    background: #07080a;
+    color: white;
+    margin-top: 10px;
+}
+
+.login-btn:hover {
+    background: #0a0b0c;
+}
+
 .forgot {
-    width: 300px;
-    max-width: 90%;
-    padding: 12px;
-    background: white;
-    color: black;
-    border: 2px solid #000;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
+    background: #e3e3e3;
+    color: #333;
+    margin-top: 10px;
 }
 
-/* Responsiv mobilanpassning */
+.forgot:hover {
+    background: #d1d1d1;
+}
+
+/* Responsiv design */
 @media (max-width: 500px) {
     h1 {
         font-size: 30px;
     }
-    input, .login-btn, .forgot {
-        width: 90%;
-        font-size: 16px;
+
+    input {
+        padding: 16px;
+        font-size: 17px;
+    }
+
+    .login-btn, .forgot {
+        font-size: 17px;
     }
 }
 </style>
 </head>
+
 <body>
 
 <h1>Fuse</h1>
 
-<input type="text" placeholder="Text field in empty state">
-<input type="password" placeholder="Text field in empty state">
+<div class="container">
 
-<button class="login-btn">Log in</button>
-<button class="forgot">Forgot password?</button>
+    <label for="cid">CID</label>
+    <input type="text" id="cid" placeholder="Ange din CID">
+
+    <label for="pass">Password</label>
+    <input type="password" id="pass" placeholder="Ange ditt lösenord">
+
+    <button class="login-btn">Log in</button>
+    <button class="forgot">Forgot password?</button>
+
+</div>
 
 </body>
 </html>
