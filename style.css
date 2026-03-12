@@ -95,7 +95,7 @@ footer {
 
 #qr-reader {
     width: 100%;
-    height: 500px;      /* bestämmer hur hög kameran är */
+    height: 460px;      /* bestämmer hur hög kameran är */
     overflow: hidden;   /* klipper bort resten av kamerabilden */
 }
 
