@@ -117,12 +117,19 @@ footer {
       height: 30px;
 }
 .wrap-c{
-   position: absolute;       /* flyter ovanpå resten */
+   position: fixed;       /* flyter ovanpå resten */
     z-index: 10;     
     width: 100%;
     background-color: white;
-    bottom: 0px;    
+     bottom: -300px;
+     transition: bottom 0.4s ease;
 }
+
+.wrap-c.show {
+    bottom: 0px; 
+}
+
+
 
 #start{
     position: relative;

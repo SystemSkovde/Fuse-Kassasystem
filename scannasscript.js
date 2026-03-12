@@ -1,3 +1,4 @@
+
 function docReady(fn) {
     if (document.readyState === "complete" || document.readyState === "interactive") {
         setTimeout(fn, 1);
@@ -5,7 +6,11 @@ function docReady(fn) {
     else{
         document.addEventListener("DOMContentLoaded", fn);
     }
+    document.querySelector(".wrap-c").addEventListener("click", function(){
+    this.classList.remove("show");
+});
 }
+
 
 docReady(function () {
     const resultContainer = document.getElementById("qr-reader-results");
@@ -81,7 +86,7 @@ docReady(function () {
                 <button onclick="startScanner()">Scanna igen</button>
             `;
         }
-
+        document.querySelector(".wrap-c").classList.add("show");
     }
 
     function updateCart() {
@@ -91,11 +96,13 @@ docReady(function () {
     // Räkna totalt antal varor
 let totalQuantity = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
 
+
+
+    
+    
 // Visa total i cirkeln
 document.getElementById("cart-count").textContent = totalQuantity;
 }
-
-
 
     function onScanError(errorMessage) {
         // Ignorerar fel
