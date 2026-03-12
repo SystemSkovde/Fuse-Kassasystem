@@ -117,12 +117,13 @@ footer {
       height: 30px;
 }
 .wrap-c{
-   position: fixed;       /* flyter ovanpå resten */
+   position: fixed;     
     z-index: 10;     
     width: 100%;
     background-color: white;
      bottom: -300px;
      transition: bottom 0.4s ease;
+     height: 230px;
 }
 
 .wrap-c.show {
@@ -130,7 +131,30 @@ footer {
 }
 
 
-
 #start{
     position: relative;
+}
+
+#o-wrap{
+ position: fixed;   
+    z-index: 13;     
+    width: 100%;
+    background-color: white;
+     bottom: -300px;
+     transition: bottom 0.4s ease;
+     height: 230px;
+      text-align: center;
+}
+.o-wrap.show {
+    bottom: 0px; 
+}
+
+#options{
+    background-color: white;
+     border-radius: 8px;
+     border: solid black 0.5px; 
+      font-size: 18px;
+      padding: 2px;
+      width: 70%;
+      text-align: center;
 }

@@ -6,9 +6,17 @@ function docReady(fn) {
     else{
         document.addEventListener("DOMContentLoaded", fn);
     }
-    document.querySelector(".wrap-c").addEventListener("click", function(){
-    this.classList.remove("show");
-});
+       const wrapC = document.querySelector(".wrap-c");
+    const wrapO = document.querySelector(".wrap-o");
+
+    wrapC.addEventListener("click", function () {
+
+        wrapC.classList.remove("show"); // göm c
+        wrapO.classList.add("show");    // visa o
+
+    });
+
+
 }
 
 
