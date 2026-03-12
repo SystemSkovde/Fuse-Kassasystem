@@ -145,7 +145,7 @@ footer {
      height: 230px;
       text-align: center;
 }
-.o-wrap.show {
+#o-wrap.show {
     bottom: 0px; 
 }
 

@@ -6,21 +6,25 @@ function docReady(fn) {
     else{
         document.addEventListener("DOMContentLoaded", fn);
     }
-       const wrapC = document.querySelector(".wrap-c");
-    const wrapO = document.querySelector(".wrap-o");
-
-    wrapC.addEventListener("click", function () {
-
-        wrapC.classList.remove("show"); // göm c
-        wrapO.classList.add("show");    // visa o
-
-    });
-
-
 }
 
 
+
 docReady(function () {
+     const wrapC = document.querySelector(".wrap-c");
+    const wrapO = document.querySelector("#o-wrap");
+
+    wrapC.addEventListener("click", function () {
+
+        wrapC.classList.remove("show");
+        wrapO.classList.add("show");
+
+    });
+    document.querySelector("#o-wrap").addEventListener("submit", function(e){
+    e.preventDefault(); // stoppar att sidan laddas om
+    this.classList.remove("show"); // stänger formuläret
+});
+
     const resultContainer = document.getElementById("qr-reader-results");
     let lastResult = null;
 
@@ -67,18 +71,16 @@ docReady(function () {
 
             const material = materials[decodedText];
 
-            if (cart[decodedText]) {
-                cart[decodedText].quantity += 1;
-            } else {
-
-                cart[decodedText] = {
-                    code: decodedText,
-                    name: material.name,
-                    type: material.type,
-                    location: material.location,
-                    quantity: 1
-                };
-            }
+       if (!cart[decodedText]) {
+    cart[decodedText] = {
+        code: decodedText,
+        name: material.name,
+        type: material.type,
+        location: material.location,
+        quantity: 1
+    };
+    updateCart();
+} 
 
             updateCart();
 
@@ -86,14 +88,7 @@ docReady(function () {
                 <p>Material tillagt i varukorg ${material.name}</p>
             `;
 
-        } else {
-
-            resultContainer.innerHTML = `
-                <h3>Okänd kod</h3>
-                <p>${decodedText}</p>
-                <button onclick="startScanner()">Scanna igen</button>
-            `;
-        }
+        } 
         document.querySelector(".wrap-c").classList.add("show");
     }
 
