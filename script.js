@@ -145,7 +145,7 @@ window.changeQuantity = function(code, quantity) {
 
 window.goToCart = function () {
 
-    window.location.href = "cart.html";
+    window.location.href = "cartAlt2.html";
 
 }
 
