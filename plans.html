@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="sv">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Test</title>
-        <link href="style.css" rel="stylesheet">
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-
-  <style>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanner</title>
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <style>
         #qr-reader {
             width: 100%;
             max-width: 600px;
@@ -36,8 +34,7 @@
 }
 </style>
 </head>
-    
-    
+        
 <body>
     
     <div>
@@ -103,13 +100,20 @@ arrow_back_ios
 
 
 </div>
+
+<!--QR scanner-->
  <div id="qr-reader" style="width:600px"></div>
     <div id="qr-reader-results"></div>
-    <script src="https://unpkg.com/html5-qrcode"></script>
-    <script src="script.js"></script>
 
-<h2>Varukorg</h2>
-<div id="cart"></div>
+<!--Shopping Cart-->
+<div class="cart-button" onclick="goToCart()">
+<span class="material-symbols-outlined">
+    shopping_basket
+</span>
+</div>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script src="script.js"></script>
 
 </body>
 </html>

@@ -40,7 +40,9 @@ docReady(function () {
         }
     );
 
-    let cart = {};
+    // Gör att varukorgen sparas om sidan laddas om
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
     function onScanSuccess(decodedText, decodedResult) {
 
         if (decodedText === lastResult) {
@@ -139,6 +141,12 @@ window.changeQuantity = function(code, quantity) {
         <h3>Material tillagt i varukorg</h3>
         <p>${material.name}</p>
     `;
+}
+
+window.goToCart = function () {
+
+    window.location.href = "cart.html";
+
 }
 
 
