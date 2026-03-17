@@ -63,19 +63,19 @@ document.addEventListener("DOMContentLoaded", function () {
         return options;
     }
 
-    // 🔧 Ändra antal
+    // Ändra antal
     window.changeQuantity = function (code, quantity) {
         cart[code].quantity = parseInt(quantity);
         save();
     };
 
-    // 🔧 Ändra pott
+    // Ändra pott
     window.changePot = function (code, pot) {
         cart[code].pot = pot;
         save();
     };
 
-    // 🔧 Ta bort produkt
+    // Ta bort produkt
     window.removeItem = function (code) {
         delete cart[code];
         save();
