@@ -5,16 +5,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderCart() {
         let html = `
-        <h3>Shopping Cart</h3>
 
         <table class="cart-table">
             <thead>
                 <tr>
-                    <th>Namn</th>
-                    <th>Typ</th>
-                    <th>Plats</th>
-                    <th>Antal</th>
-                    <th>Pott</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                    <th>Account</th>
                     <th></th>
                 </tr>
             </thead>
@@ -37,9 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <td>
                     <select onchange="changePot('${item.code}', this.value)">
-                        <option value="personlig" ${item.pot === "personlig" ? "selected" : ""}>Personlig</option>
-                        <option value="forskning" ${item.pot === "forskning" ? "selected" : ""}>Forskning</option>
-                        <option value="kurs" ${item.pot === "kurs" ? "selected" : ""}>Kurs</option>
+                        <option value="personl" ${item.pot === "personl" ? "selected" : ""}>Personl</option>
+                        <option value="resaerch" ${item.pot === "reserch" ? "selected" : ""}>Research</option>
+                        <option value="course" ${item.pot === "course" ? "selected" : ""}>Course</option>
                     </select>
                 </td>
 
