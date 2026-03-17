@@ -10,13 +10,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
     padding-top: 40px;
 }
 
 /* Huvudrubrik */
 h1 {
-    font-size: 36px;
+    font-size: 50px;
     font-weight: bold;
     color: #222;
     margin-bottom: 30px;
@@ -27,8 +27,8 @@ h1 {
 
 /* Form-element */
 label {
-    font-size: 15px;
-    color: #444;
+    font-size: 32px;
+    color: black;
     display: block;
     margin-bottom: 6px;
 }
@@ -39,7 +39,7 @@ input {
     margin-bottom: 18px;
     border: 1px solid black;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 32px;
     transition: 0.25s;
 }
 
@@ -51,6 +51,7 @@ input:focus {
 
 /* Knappar */
 button {
+     display: block;
     padding: 15px;
     font-size: 18px;
     border: none;
@@ -58,7 +59,7 @@ button {
     cursor: pointer;
     transition: 0.25s;
     width: 50%;
-    margin: 0 auto;
+    margin:20px auto;
 }
 
 .login-btn {
@@ -81,6 +82,8 @@ button {
 
 .container{
     width: 90%;
+     flex-direction: column;
+    align-items: center;
 }
 </style>
 </head>
