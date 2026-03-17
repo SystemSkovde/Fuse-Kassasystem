@@ -7,13 +7,34 @@
     <link href="style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <style>
-        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        select { width: 50px; }
-        button { padding: 4px 8px; cursor: pointer; }
-        #totals p { font-weight: bold; }
-        .cart-icon-wrapper { display: inline-flex; align-items: center; gap: 5px; }
-        .circle { background: red; color: white; border-radius: 50%; padding: 4px 8px; }
+        table{ 
+            border-collapse: collapse; 
+            width: 100%; 
+            margin-bottom: 20px; 
+        }
+
+        th, td{ 
+            border: 1px solid #ccc; 
+            padding: 8px; 
+            text-align: left; 
+        }
+
+        select { 
+            width: 50px; 
+        }
+        
+        button{ 
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 12px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
     </style>
 </head>
 <body>
@@ -32,6 +53,7 @@
 <table id="cart"></table>
 <div id="totals"></div>
 
+<button >Pay</button>
 <footer>
     <div class="back">
         <span class="material-symbols-outlined smal">arrow_back_ios</span>
