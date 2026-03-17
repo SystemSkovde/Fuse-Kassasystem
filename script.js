@@ -11,7 +11,7 @@ docReady(function () {
     const resultContainer = document.getElementById("qr-reader-results");
 
     let lastScanTime = 0;
-    const scanCooldown = 2000; // ⏱️ 2 sekunder mellan scans
+    const scanCooldown = 2000; // 2 sekunder mellan scans
 
     const materials = {
         "123456789": {
@@ -37,6 +37,19 @@ docReady(function () {
     });
 
     let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
+    function updateCartCount() {
+    let total = 0;
+
+    Object.values(cart).forEach(item => {
+        total += item.quantity;
+    });
+
+    const countEl = document.getElementById("cart-count");
+    if (countEl) {
+        countEl.textContent = total;
+    }
+}
 
     function onScanSuccess(decodedText) {
 
@@ -67,6 +80,7 @@ docReady(function () {
             }
 
             localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
 
             resultContainer.innerHTML = `
                 <h3>${material.name} tillagd</h3>
@@ -83,5 +97,7 @@ docReady(function () {
     function onScanError() {}
 
     html5QrcodeScanner.render(onScanSuccess, onScanError);
+
+    updateCartCount();
 
 });

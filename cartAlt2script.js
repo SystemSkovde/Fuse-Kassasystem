@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderCart() {
 
-        let html = "<h3>Varukorg</h3>";
+        let html = "<h3>Shopping Cart</h3>";
 
         Object.values(cart).forEach(item => {
 
