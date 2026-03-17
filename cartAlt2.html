@@ -37,21 +37,21 @@
 
 .cart-total {
     margin-top: 15px;
-    font-size: 20px;
+    font-size: 30px;
     text-align: right;
 }
 
 .pay-button-wrapper {
     margin-top: 10px;
-    text-align: right;
+    text-align: center;
 }
 
 .pay-btn {
     background-color: #27ae60;
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 15px 100px;
+    font-size: 25px;
     cursor: pointer;
     border-radius: 5px;
 }
@@ -66,18 +66,49 @@
     border: none;
     padding: 5px 10px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 5px;
+}
+
+.back-button {
+    display: inline-flex;      /* ikon + text på samma rad */
+    align-items: center;
+    padding: 8px 15px;
+    border: 2px solid #2196F3; /* blå ram */
+    border-radius: 6px;
+    background-color: #eaf4ff; /* ljus bakgrund */
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 20px;       /* lite avstånd från tabellen */
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.back-button:hover {
+    background-color: #d0e7ff;
+    border-color: #1976d2;
+}
+
+.back-button a {
+    text-decoration: none;
+    color: #1976d2;
+    margin-left: 5px; /* lite space mellan ikon och text */
 }
 </style>
 </head>
 
 <body>
-
+<span class="material-symbols-outlined">
+arrow_back_ios
+</span>
 <h1>Shopping Cart</h1>
 
 <div id="cart"></div>
 
-<a href="scannaAlt2.html">← Back</a>
+<div class="back">
+    <span class="material-symbols-outlined smal">
+        arrow_back_ios
+    </span>
+    <a href="scannaAlt2.html">Back</a>
 
 <script src="cartAlt2script.js"></script>
 
