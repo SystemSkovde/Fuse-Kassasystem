@@ -15,57 +15,139 @@
     <body>
     
         <nav>
+              <span class="material-symbols-outlined big">
+home
+</span>
             <div class="cart-icon-wrapper">
         <span class="circle" id="cart-count">0</span>
         <span class="material-symbols-outlined big">
         shopping_basket
     </span>
- 
      </div>
+   
+
+
+
+<span class="material-symbols-outlined big">
+person
+</span>
         </nav>
+
+
+        <h1>Shopping cart</h1>
+<table id="cart"></table>
+<div id="totals"></div>
+<span id="cart-count"></span>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const cartData = localStorage.getItem("cart");
+    if (!cartData) return;
+    
+    let cart = JSON.parse(cartData);
+    const cartTable = document.getElementById("cart");
+    const totalsDiv = document.getElementById("totals");
+    cartTable.innerHTML = "";
+    totalsDiv.innerHTML = "";
 
-    if (cartData) {
-        const cart = JSON.parse(cartData);
-        const cartTable = document.getElementById("cart");
+    // --- Header ---
+    const firstItem = cart[Object.keys(cart)[0]];
+    const header = document.createElement("tr");
 
-        // --- Header ---
-        const firstItem = cart[Object.keys(cart)[0]];
-        const header = document.createElement("tr");
+    Object.keys(firstItem).forEach(key => {
+        if (key === "code") return;
+        const th = document.createElement("th");
+        // Byt "quantity" → "Amount"
+        th.textContent = key === "quantity" ? "Amount" : key.charAt(0).toUpperCase() + key.slice(1);
+        header.appendChild(th);
+    });
 
-       Object.keys(firstItem).forEach(key => {
-    if (key === "code") return;
+    const thDelete = document.createElement("th");
+    thDelete.textContent = "Ta bort";
+    header.appendChild(thDelete);
+    cartTable.appendChild(header);
 
-    // Första bokstaven stor, resten små
-    const headerText = key.charAt(0).toUpperCase() + key.slice(1);
+    // --- Rader ---
+    Object.values(cart).forEach(item => {
+        const tr = document.createElement("tr");
 
-    const th = document.createElement("th");
-    th.textContent = headerText;
-    header.appendChild(th);
-});
+        Object.entries(item).forEach(([key, value]) => {
+            if (key === "code") return;
 
-        cartTable.appendChild(header);
+            const td = document.createElement("td");
 
-        // --- Rader ---
-        Object.values(cart).forEach(item => {
-            const tr = document.createElement("tr");
+            if (key === "quantity") { // dropdown för amount
+                const select = document.createElement("select");
+                for (let i = 1; i <= 10; i++) {
+                    const option = document.createElement("option");
+                    option.value = i;
+                    option.textContent = i;
+                    if (i === value) option.selected = true;
+                    select.appendChild(option);
+                }
 
-            Object.entries(item).forEach(([key, value]) => {
-                if (key === "code") return; // hoppa över code
-                const td = document.createElement("td");
+                select.addEventListener("change", (e) => {
+                    item.quantity = parseInt(e.target.value);
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    updateTotals();
+                    updateCartCount();
+                });
+
+                td.appendChild(select);
+            } else if (key === "Price") { // visa pris
                 td.textContent = value;
-                tr.appendChild(td);
-            });
+            } else {
+                td.textContent = value;
+            }
 
-            cartTable.appendChild(tr);
+            tr.appendChild(td);
         });
+
+        // Ta bort-knapp
+        const tdDelete = document.createElement("td");
+        const btn = document.createElement("button");
+        btn.textContent = "Ta bort";
+        btn.addEventListener("click", () => {
+            delete cart[item.code];
+            localStorage.setItem("cart", JSON.stringify(cart));
+            tr.remove();
+            updateTotals();
+            updateCartCount();
+        });
+        tdDelete.appendChild(btn);
+        tr.appendChild(tdDelete);
+
+        cartTable.appendChild(tr);
+    });
+
+    // --- Funktion: uppdatera totalsumma per Account ---
+    function updateTotals() {
+        totalsDiv.innerHTML = "";
+        const totals = {};
+
+        Object.values(cart).forEach(item => {
+            const priceNum = parseFloat(item.Price.replace(/[^\d.-]/g, "")); // konvertera "20kr" → 20
+            const qty = item.quantity;
+            if (!totals[item.Account]) totals[item.Account] = 0;
+            totals[item.Account] += priceNum * qty;
+        });
+
+        for (let account in totals) {
+            const p = document.createElement("p");
+            p.textContent = `Total ${account}: ${totals[account]}kr`;
+            totalsDiv.appendChild(p);
+        }
     }
+
+    function updateCartCount() {
+        const totalQty = Object.values(cart).reduce((sum, i) => sum + i.quantity, 0);
+        document.getElementById("cart-count").textContent = totalQty;
+    }
+
+    updateTotals();
+    updateCartCount();
 });
 </script>
-      
-<table id="cart"></table>
 
 <footer>
    <div class="back">
