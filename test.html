@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fuse Login</title>
+
+<style>
+/* Global styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5; /* Ljus bakgrund */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    min-height: 100vh;
+    padding-top: 40px;
+}
+
+/* Huvudrubrik */
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+
+
+/* Form-element */
+label {
+    font-size: 15px;
+    color: #444;
+    display: block;
+    margin-bottom: 6px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 18px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: 0.25s;
+}
+
+input:focus {
+    border-color: #020305;
+    outline: none;
+    box-shadow: 0 0 4px rgba(7, 9, 11, 0.3);
+}
+
+/* Knappar */
+button {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.login-btn {
+    background: #07080a;
+    color: white;
+    margin-top: 10px;
+}
+
+.login-btn:hover {
+    background: #0a0b0c;
+}
+
+.forgot {
+    background: #e3e3e3;
+    color: #333;
+    margin-top: 10px;
+}
+
+.forgot:hover {
+    background: #d1d1d1;
+}
+
+/* Responsiv design */
+@media (max-width: 500px) {
+    h1 {
+        font-size: 30px;
+    }
+
+    input {
+        padding: 16px;
+        font-size: 17px;
+    }
+
+    .login-btn, .forgot {
+        font-size: 17px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Fuse</h1>
+
+<div class="container">
+
+    <label for="cid">CID</label>
+    <input type="text" id="cid" placeholder="Ange din CID">
+
+    <label for="pass">Password</label>
+    <input type="password" id="pass" placeholder="Ange ditt lösenord">
+
+    <button class="login-btn">Log in</button>
+    <button class="forgot">Forgot password?</button>
+
+</div>
+
+</body>
+</html>
