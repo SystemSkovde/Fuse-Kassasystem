@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <td>
                     <select onchange="changePot('${item.code}', this.value)">
-                        <option value="personl" ${item.pot === "personl" ? "selected" : ""}>Personl</option>
+                        <option value="personal" ${item.pot === "personal" ? "selected" : ""}>Personal</option>
                         <option value="resaerch" ${item.pot === "reserch" ? "selected" : ""}>Research</option>
                         <option value="course" ${item.pot === "course" ? "selected" : ""}>Course</option>
                     </select>
