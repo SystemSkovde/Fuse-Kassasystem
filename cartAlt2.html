@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 <meta charset="UTF-8">
 <title>Shopping Cart</title>
 <link rel="stylesheet" href="style.css">
@@ -27,23 +28,24 @@
     padding: 5px;
 }
 
-.cart-table button {
-    background: red;
+.remove-btn {
+    background: #e74c3c;
     color: white;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .cart-total {
     margin-top: 15px;
     font-size: 30px;
-    text-align: right;
+    text-align: center; /* centrerad total */
 }
 
 .pay-button-wrapper {
     margin-top: 10px;
-    text-align: center;
+    text-align: center; /* centrerad PAY-knapp */
 }
 
 .pay-btn {
@@ -60,56 +62,36 @@
     background-color: #219150;
 }
 
-.remove-btn {
-    background: #e74c3c;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.back-button {
-    display: inline-flex;      /* ikon + text på samma rad */
+/* Back-knapp */
+.back {
+    display: inline-flex;      
     align-items: center;
-    padding: 8px 15px;
-    border: 2px solid #2196F3; /* blå ram */
+    padding: 8px 10px;
+    border: 2px solid #000000; 
     border-radius: 6px;
-    background-color: #eaf4ff; /* ljus bakgrund */
-    text-decoration: none;
+    background-color: #ffffff; 
     cursor: pointer;
     font-weight: bold;
-    margin-bottom: 20px;       /* lite avstånd från tabellen */
-    transition: background-color 0.2s, border-color 0.2s;
-}
-
-.back-button:hover {
-    background-color: #d0e7ff;
-    border-color: #1976d2;
-}
-
-.back-button a {
+    margin-bottom: 20px; 
     text-decoration: none;
-    color: #1976d2;
-    margin-left: 5px; /* lite space mellan ikon och text */
 }
 </style>
 </head>
 
 <body>
-<span class="material-symbols-outlined">
-arrow_back_ios
-</span>
+
+<!-- Back-knappen -->
+<div class="back">
+    <span class="material-symbols-outlined smal">arrow_back_ios</span>
+    <a href="scannaAlt2.html">Back</a>
+</div>
+
 <h1>Shopping Cart</h1>
 
+<!-- Varukorg -->
 <div id="cart"></div>
 
-<div class="back">
-    <span class="material-symbols-outlined smal">
-        arrow_back_ios
-    </span>
-    <a href="scannaAlt2.html">Back</a>
-
+<!-- Script -->
 <script src="cartAlt2script.js"></script>
 
 </body>
