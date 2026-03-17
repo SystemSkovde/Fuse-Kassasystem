@@ -158,3 +158,7 @@ footer {
       width: 70%;
       text-align: center;
 }
+
+table{
+    border: black solid 1;
+}

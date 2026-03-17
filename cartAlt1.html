@@ -1,167 +1,148 @@
 <!DOCTYPE html>
 <html lang="sv">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Test</title>
-        <link href="style.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <style>
+        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        select { width: 50px; }
+        button { padding: 4px 8px; cursor: pointer; }
+        #totals p { font-weight: bold; }
+        .cart-icon-wrapper { display: inline-flex; align-items: center; gap: 5px; }
+        .circle { background: red; color: white; border-radius: 50%; padding: 4px 8px; }
+    </style>
+</head>
+<body>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-
-
-    </head>
-    
-    
-    <body>
-    
-        <nav>
-              <span class="material-symbols-outlined big">
-home
-</span>
-            <div class="cart-icon-wrapper">
+<nav>
+    <span class="material-symbols-outlined big">home</span>
+    <div class="cart-icon-wrapper">
         <span class="circle" id="cart-count">0</span>
-        <span class="material-symbols-outlined big">
-        shopping_basket
-    </span>
-     </div>
-   
+        <span class="material-symbols-outlined big">shopping_basket</span>
+    </div>
+    <span class="material-symbols-outlined big">person</span>
+</nav>
 
+<h1>Shopping Cart</h1>
 
-
-<span class="material-symbols-outlined big">
-person
-</span>
-        </nav>
-
-
-        <h1>Shopping cart</h1>
 <table id="cart"></table>
 <div id="totals"></div>
-<span id="cart-count"></span>
+
+<footer>
+    <div class="back">
+        <span class="material-symbols-outlined smal">arrow_back_ios</span>
+        <a href="scannaAlt1.html">Back</a>
+    </div>
+</footer>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const cartData = localStorage.getItem("cart");
     if (!cartData) return;
-    
+
     let cart = JSON.parse(cartData);
     const cartTable = document.getElementById("cart");
     const totalsDiv = document.getElementById("totals");
-    cartTable.innerHTML = "";
-    totalsDiv.innerHTML = "";
 
-    // --- Header ---
-    const firstItem = cart[Object.keys(cart)[0]];
-    const header = document.createElement("tr");
+    function renderCart() {
+        cartTable.innerHTML = "";
+        totalsDiv.innerHTML = "";
 
-    Object.keys(firstItem).forEach(key => {
-        if (key === "code") return;
-        const th = document.createElement("th");
-        // Byt "quantity" → "Amount"
-        th.textContent = key === "quantity" ? "Amount" : key.charAt(0).toUpperCase() + key.slice(1);
-        header.appendChild(th);
-    });
+        const items = Object.values(cart);
+        if(items.length === 0){
+            cartTable.innerHTML = "<tr><td>Varukorgen är tom</td></tr>";
+            document.getElementById("cart-count").textContent = 0;
+            return;
+        }
 
-    const thDelete = document.createElement("th");
-    thDelete.textContent = "Ta bort";
-    header.appendChild(thDelete);
-    cartTable.appendChild(header);
+        // --- Header ---
+        const header = document.createElement("tr");
+        Object.keys(items[0]).forEach(key => {
+            if(key === "code") return;
+            const th = document.createElement("th");
+            th.textContent = key === "quantity" ? "Amount" : key.charAt(0).toUpperCase() + key.slice(1);
+            header.appendChild(th);
+        });
+        const thDelete = document.createElement("th");
+        thDelete.textContent = "Ta bort";
+        header.appendChild(thDelete);
+        cartTable.appendChild(header);
 
-    // --- Rader ---
-    Object.values(cart).forEach(item => {
-        const tr = document.createElement("tr");
+        // --- Rows ---
+        items.forEach(item => {
+            const tr = document.createElement("tr");
+            Object.entries(item).forEach(([key, value]) => {
+                if(key === "code") return;
+                const td = document.createElement("td");
 
-        Object.entries(item).forEach(([key, value]) => {
-            if (key === "code") return;
-
-            const td = document.createElement("td");
-
-            if (key === "quantity") { // dropdown för amount
-                const select = document.createElement("select");
-                for (let i = 1; i <= 10; i++) {
-                    const option = document.createElement("option");
-                    option.value = i;
-                    option.textContent = i;
-                    if (i === value) option.selected = true;
-                    select.appendChild(option);
+                if(key === "quantity") {
+                    const select = document.createElement("select");
+                    for(let i=1;i<=10;i++){
+                        const option = document.createElement("option");
+                        option.value = i;
+                        option.textContent = i;
+                        if(i===value) option.selected = true;
+                        select.appendChild(option);
+                    }
+                    select.addEventListener("change",(e)=>{
+                        item.quantity = parseInt(e.target.value);
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        renderCart();
+                    });
+                    td.appendChild(select);
+                } else {
+                    td.textContent = value;
                 }
+                tr.appendChild(td);
+            });
 
-                select.addEventListener("change", (e) => {
-                    item.quantity = parseInt(e.target.value);
-                    localStorage.setItem("cart", JSON.stringify(cart));
-                    updateTotals();
-                    updateCartCount();
-                });
+            // Ta bort-knapp
+            const tdDelete = document.createElement("td");
+            const btn = document.createElement("button");
+            btn.textContent = "Ta bort";
+            btn.addEventListener("click",()=>{
+                delete cart[item.code];
+                localStorage.setItem("cart", JSON.stringify(cart));
+                renderCart();
+            });
+            tdDelete.appendChild(btn);
+            tr.appendChild(tdDelete);
 
-                td.appendChild(select);
-            } else if (key === "Price") { // visa pris
-                td.textContent = value;
-            } else {
-                td.textContent = value;
-            }
-
-            tr.appendChild(td);
+            cartTable.appendChild(tr);
         });
 
-        // Ta bort-knapp
-        const tdDelete = document.createElement("td");
-        const btn = document.createElement("button");
-        btn.textContent = "Ta bort";
-        btn.addEventListener("click", () => {
-            delete cart[item.code];
-            localStorage.setItem("cart", JSON.stringify(cart));
-            tr.remove();
-            updateTotals();
-            updateCartCount();
-        });
-        tdDelete.appendChild(btn);
-        tr.appendChild(tdDelete);
+        updateTotals();
+        updateCartCount();
+    }
 
-        cartTable.appendChild(tr);
-    });
+    function updateCartCount(){
+        const totalQty = Object.values(cart).reduce((sum, i) => sum + i.quantity, 0);
+        document.getElementById("cart-count").textContent = totalQty;
+    }
 
-    // --- Funktion: uppdatera totalsumma per Account ---
-    function updateTotals() {
+    function updateTotals(){
         totalsDiv.innerHTML = "";
         const totals = {};
-
-        Object.values(cart).forEach(item => {
-            const priceNum = parseFloat(item.Price.replace(/[^\d.-]/g, "")); // konvertera "20kr" → 20
+        Object.values(cart).forEach(item=>{
+            const priceNum = parseFloat(item.Price); // utan "kr"
             const qty = item.quantity;
-            if (!totals[item.Account]) totals[item.Account] = 0;
+            if(!totals[item.Account]) totals[item.Account] = 0;
             totals[item.Account] += priceNum * qty;
         });
-
-        for (let account in totals) {
+        for(let account in totals){
             const p = document.createElement("p");
             p.textContent = `Total ${account}: ${totals[account]}kr`;
             totalsDiv.appendChild(p);
         }
     }
 
-    function updateCartCount() {
-        const totalQty = Object.values(cart).reduce((sum, i) => sum + i.quantity, 0);
-        document.getElementById("cart-count").textContent = totalQty;
-    }
-
-    updateTotals();
-    updateCartCount();
+    renderCart();
 });
 </script>
 
-<footer>
-   <div class="back">
-                <span class="material-symbols-outlined smal">
-                    arrow_back_ios
-                </span>
-                <a href="scannaAlt1.html">Back</a>
-            </div> 
-</footer>
-
- 
-
-
-
-
-    </body>
+</body>
 </html>

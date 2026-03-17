@@ -32,17 +32,17 @@ docReady(function () {
     const materials = {
         "123456789": {
             Category: "Trä",
-            Price: "20kr",
+            Price: "20",
             Account: "Personal"
         },
         "987654321": {
             Category: "Stål",
-            Price: "40kr",
+            Price: "40",
             Account: "Personal"
         },
         "555666777": {
             Category: "Plast",
-            Price: "50kr",
+            Price: "50",
             Account: "Personal"
         }
     };
