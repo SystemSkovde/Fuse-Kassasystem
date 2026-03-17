@@ -4,41 +4,59 @@ document.addEventListener("DOMContentLoaded", function () {
     let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
     function renderCart() {
+        let html = `
+        <h3>Shopping Cart</h3>
 
-        let html = "<h3>Shopping Cart</h3>";
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Namn</th>
+                    <th>Typ</th>
+                    <th>Plats</th>
+                    <th>Antal</th>
+                    <th>Pott</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        `;
 
         Object.values(cart).forEach(item => {
 
             html += `
-            <div class="cart-item">
-                <p><strong>${item.name}</strong></p>
-                <p>Typ: ${item.type}</p>
-                <p>Plats: ${item.location}</p>
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.type}</td>
+                <td>${item.location}</td>
 
-                <label>Antal:</label>
-                <select onchange="changeQuantity('${item.code}', this.value)">
-                    ${createOptions(item.quantity)}
-                </select>
+                <td>
+                    <select onchange="changeQuantity('${item.code}', this.value)">
+                        ${createOptions(item.quantity)}
+                    </select>
+                </td>
 
-                <br><br>
+                <td>
+                    <select onchange="changePot('${item.code}', this.value)">
+                        <option value="personlig" ${item.pot === "personlig" ? "selected" : ""}>Personlig</option>
+                        <option value="forskning" ${item.pot === "forskning" ? "selected" : ""}>Forskning</option>
+                        <option value="kurs" ${item.pot === "kurs" ? "selected" : ""}>Kurs</option>
+                    </select>
+                </td>
 
-                <label>Pott:</label>
-                <select onchange="changePot('${item.code}', this.value)">
-                    <option value="personlig" ${item.pot === "personlig" ? "selected" : ""}>Personlig</option>
-                    <option value="forskning" ${item.pot === "forskning" ? "selected" : ""}>Forskning</option>
-                    <option value="kurs" ${item.pot === "kurs" ? "selected" : ""}>Kurs</option>
-                </select>
-
-                <br><br>
-
-                <button onclick="removeItem('${item.code}')">Ta bort</button>
-                <hr>
-            </div>
+                <td>
+                    <button onclick="removeItem('${item.code}')">❌</button>
+                </td>
+            </tr>
             `;
         });
 
-        cartDiv.innerHTML = html;
-    }
+        html += `
+            </tbody>
+        </table>
+        `;
+
+    cartDiv.innerHTML = html;
+}
 
     function createOptions(selected) {
         let options = "";
