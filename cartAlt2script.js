@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <tbody>
         `;
 
+        let totalCost = 0;
+
         Object.values(cart).forEach(item => {
 
             html += `
@@ -50,6 +52,16 @@ document.addEventListener("DOMContentLoaded", function () {
         html += `
             </tbody>
         </table>
+
+        <!-- Total cost -->
+        <div class="cart-total">
+            <strong>Total: ${totalCost} kr</strong>
+        </div>
+
+        <!-- Pay button -->
+        <div class="pay-button-wrapper">
+            <button onclick="payCart()" class="pay-btn">Pay</button>
+        </div>
         `;
 
     cartDiv.innerHTML = html;
@@ -80,6 +92,22 @@ document.addEventListener("DOMContentLoaded", function () {
         delete cart[code];
         save();
     };
+
+    window.payCart = function() {
+    if (Object.keys(cart).length === 0) {
+        alert("Varukorgen är tom!");
+        return;
+    }
+
+    // Här kan du t.ex. skicka ordern till server eller visa bekräftelse
+    alert(`Betalning genomförd! Total: ${Object.values(cart).reduce((sum, item) => sum + item.price * item.quantity, 0)} kr`);
+    
+    // Tömmer varukorgen
+    cart = {};
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+    updateCartCount();
+}
 
     function save() {
         localStorage.setItem("cart", JSON.stringify(cart));
