@@ -17,17 +17,20 @@ docReady(function () {
         "123456789": {
             name: "Trä",
             type: "Byggmaterial",
-            location: "Lager A"
+            location: "Lager A",
+            price: 50
         },
         "987654321": {
             name: "Stål",
             type: "Metall",
-            location: "Lager B"
+            location: "Lager B",
+            price: 120
         },
         "555666777": {
             name: "Plast",
             type: "Polymer",
-            location: "Lager C"
+            location: "Lager C",
+            price: 30
         }
     };
 
