@@ -4,6 +4,16 @@ document.addEventListener("DOMContentLoaded", function () {
     let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
     function renderCart() {
+        const cartDiv = document.getElementById("cart");
+    
+        // Kontroll om varukorgen är tom
+        if (Object.keys(cart).length === 0) {
+            cartDiv.innerHTML = `
+                <p>Your cart is empty/p>
+            `;
+            updateCartCount();
+            return;
+        }
         let html = `
 
         <table class="cart-table">
