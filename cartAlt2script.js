@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Kontroll om varukorgen är tom
         if (Object.keys(cart).length === 0) {
             cartDiv.innerHTML = `
-                <p>Your cart is empty/p>
+                <p>Your cart is empty</p>
             `;
             updateCartCount();
             return;
