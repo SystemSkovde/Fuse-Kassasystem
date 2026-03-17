@@ -14,12 +14,12 @@ docReady(function () {
      const wrapC = document.querySelector(".wrap-c");
     const wrapO = document.querySelector("#o-wrap");
 
-    wrapC.addEventListener("click", function () {
-
+   wrapC.addEventListener("click", function (e) {
+    if (e.target.closest(".choice")) {
         wrapC.classList.remove("show");
         wrapO.classList.add("show");
-
-    });
+    }
+});
     document.querySelector("#o-wrap").addEventListener("submit", function(e){
     e.preventDefault(); // stoppar att sidan laddas om
     this.classList.remove("show"); // stänger formuläret
@@ -31,19 +31,19 @@ docReady(function () {
     // ===== MATERIAL DATABAS =====
     const materials = {
         "123456789": {
-            name: "Trä",
-            type: "Byggmaterial",
-            location: "Lager A"
+            Category: "Trä",
+            Price: "20kr",
+            Account: "Personal"
         },
         "987654321": {
-            name: "Stål",
-            type: "Metall",
-            location: "Lager B"
+            Category: "Stål",
+            Price: "40kr",
+            Account: "Personal"
         },
         "555666777": {
-            name: "Plast",
-            type: "Polymer",
-            location: "Lager C"
+            Category: "Plast",
+            Price: "50kr",
+            Account: "Personal"
         }
     };
 
@@ -58,11 +58,9 @@ docReady(function () {
     let cart = {};
     function onScanSuccess(decodedText, decodedResult) {
 
-        if (decodedText === lastResult) {
-            return;
-        }
+        decodedText = decodedText.trim();
 
-        lastResult = decodedText;
+if (cart[decodedText]) return; // redan i cart → ignorera
 
         console.log("Scan result:", decodedText);
 
@@ -72,21 +70,17 @@ docReady(function () {
             const material = materials[decodedText];
 
        if (!cart[decodedText]) {
-    cart[decodedText] = {
-        code: decodedText,
-        name: material.name,
-        type: material.type,
-        location: material.location,
-        quantity: 1
-    };
-    updateCart();
-} 
-
+   cart[decodedText] = {
+    code: decodedText,
+    name: material.Category,
+    price: material.Price,
+    account: material.Account,
+    quantity: 1};
+    } 
             updateCart();
 
-            resultContainer.innerHTML = `
-                <p>Material tillagt i varukorg ${material.name}</p>
-            `;
+         resultContainer.innerHTML = `
+    <p>Material tillagt i varukorg ${material.Category}</p>`;
 
         } 
         document.querySelector(".wrap-c").classList.add("show");
@@ -94,17 +88,14 @@ docReady(function () {
 
     function updateCart() {
     const cartDiv = document.getElementById("cart");
-    cartDiv.innerHTML = ""; 
+    cartDiv.innerHTML = ""; // viktigt!
 
-    // Räkna totalt antal varor
-let totalQuantity = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
+    let totalQuantity = Object.values(cart)
+        .reduce((sum, item) => sum + item.quantity, 0);
 
+    document.getElementById("cart-count").textContent = totalQuantity;
 
-
-    
-    
-// Visa total i cirkeln
-document.getElementById("cart-count").textContent = totalQuantity;
+    localStorage.setItem("cart", JSON.stringify(cart));
 }
 
     function onScanError(errorMessage) {
@@ -117,7 +108,5 @@ document.getElementById("cart-count").textContent = totalQuantity;
     window.startScanner = function () {
         resultContainer.innerHTML = "";
         lastResult = null;
-
-        html5QrcodeScanner.render(onScanSuccess, onScanError);
     };
 });

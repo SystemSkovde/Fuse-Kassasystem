@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test</title>
+        <link href="style.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+
+    </head>
+    
+    
+    <body>
+    
+        <nav>
+            <div class="cart-icon-wrapper">
+        <span class="circle" id="cart-count">0</span>
+        <span class="material-symbols-outlined big">
+        shopping_basket
+    </span>
+ 
+     </div>
+        </nav>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const cartData = localStorage.getItem("cart");
+
+    if (cartData) {
+        const cart = JSON.parse(cartData);
+        const cartTable = document.getElementById("cart");
+
+        // --- Header ---
+        const firstItem = cart[Object.keys(cart)[0]];
+        const header = document.createElement("tr");
+
+       Object.keys(firstItem).forEach(key => {
+    if (key === "code") return;
+
+    // Första bokstaven stor, resten små
+    const headerText = key.charAt(0).toUpperCase() + key.slice(1);
+
+    const th = document.createElement("th");
+    th.textContent = headerText;
+    header.appendChild(th);
+});
+
+        cartTable.appendChild(header);
+
+        // --- Rader ---
+        Object.values(cart).forEach(item => {
+            const tr = document.createElement("tr");
+
+            Object.entries(item).forEach(([key, value]) => {
+                if (key === "code") return; // hoppa över code
+                const td = document.createElement("td");
+                td.textContent = value;
+                tr.appendChild(td);
+            });
+
+            cartTable.appendChild(tr);
+        });
+    }
+});
+</script>
+      
+<table id="cart"></table>
+
+<footer>
+   <div class="back">
+                <span class="material-symbols-outlined smal">
+                    arrow_back_ios
+                </span>
+                <a href="scannaAlt1.html">Back</a>
+            </div> 
+</footer>
+
+ 
+
+
+
+
+    </body>
+</html>
