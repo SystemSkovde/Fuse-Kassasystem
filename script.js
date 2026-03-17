@@ -40,7 +40,9 @@ docReady(function () {
         }
     );
 
-    let cart = {};
+    // Gör att varukorgen sparas om sidan laddas om
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
     function onScanSuccess(decodedText, decodedResult) {
 
         if (decodedText === lastResult) {
@@ -88,6 +90,7 @@ docReady(function () {
     }
 
     function updateCart() {
+        
 
     const cartDiv = document.getElementById("cart");
 
@@ -107,6 +110,9 @@ docReady(function () {
         </div>
         `;
     });
+
+    cartDiv.innerHTML = html;
+}
 
     function createOptions(selected) {
 
@@ -128,10 +134,22 @@ window.changeQuantity = function(code, quantity) {
     cart[code].quantity = parseInt(quantity);
 
     updateCart();
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    resultContainer.innerHTML = `
+        <h3>Material tillagt i varukorg</h3>
+        <p>${material.name}</p>
+    `;
 }
 
-    cartDiv.innerHTML = html;
+window.goToCart = function () {
+
+    window.location.href = "cartAlt2.html";
+
 }
+
+
 
     function onScanError(errorMessage) {
         // Ignorerar fel

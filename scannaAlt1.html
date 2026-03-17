@@ -14,32 +14,75 @@
     
     <body>
     
-        <nav><div class="back">
-    <span class="material-symbols-outlined smal">
-        arrow_back_ios
-    </span>
-    <a href="https://example.com">Back</a>
-</div> <h1>Scan barcode</h1></nav>
-  
+        <nav>
+            <div class="back">
+                <span class="material-symbols-outlined smal">
+                    arrow_back_ios
+                </span>
+                <a href="https://example.com">Back</a>
+            </div> <h1 id="scan">Scan barcode</h1>
+        </nav>
 
+      
 
-<div>
-<select>
-<option>1</option>
-<option>2</option>
-<option>3</option>
-</select>
-
-
+ <div id="start">
+            <div class="wrap-c">
+        <h3>Choose place of purchase</h3>
+<div class="choice">
+   <p>Course</p>
 </div>
- <div id="qr-reader" style="width:600px"></div>
-    <div id="qr-reader-results"></div>
-    <script src="https://unpkg.com/html5-qrcode"></script>
-    <script src="script.js"></script>
-</body>
+<div class="choice">
+   <p>Research</p>
+</div>
+<div class="choice">
+   <p>Personal</p>
+</div>
+<div class="choice">
+   <p>Group</p>
+</div>
+</div>
 
-<h2>Varukorg</h2>
+
+
+
+<form id="o-wrap">
+    
+        <h3>Choose option</h3>
+   <select id="options" >
+<option>Option one</option>
+<option>Option two</option>
+<option>Option three</option>
+</select>
+<input type="submit">
+</form>
+</div>
+
+
+
+        
+  
+        <div id="scanner-section"> <!-- SCANNER + RESULTAT -->
+    <div id="qr-reader-results"></div>
+ <div id="qr-reader"></div>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="scannasscript.js"></script>
+
+
 <div id="cart"></div>
+
+<footer>
+      <div class="cart-icon-wrapper">
+        <span class="circle" id="cart-count">0</span>
+    <span class="material-symbols-outlined big">
+        shopping_basket
+    </span>
+     </div>
+</footer>
+</div>
+ </div>
+
+
+
 
     </body>
 </html>
