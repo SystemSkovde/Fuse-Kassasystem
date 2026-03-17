@@ -40,20 +40,25 @@ docReady(function () {
         }
     );
 
-    // Gör att varukorgen sparas om sidan laddas om
+    // ===== CART (hämtas från localStorage) =====
     let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
     function onScanSuccess(decodedText, decodedResult) {
 
+        // STOPPAR dubbelscan direkt
         if (decodedText === lastResult) {
             return;
         }
 
         lastResult = decodedText;
 
+        // Tillåt samma kod igen efter 1.5 sek
+        setTimeout(() => {
+            lastResult = null;
+        }, 1500);
+
         console.log("Scan result:", decodedText);
 
-        // Kontrollera om material finns
         if (materials[decodedText]) {
 
             const material = materials[decodedText];
@@ -61,7 +66,6 @@ docReady(function () {
             if (cart[decodedText]) {
                 cart[decodedText].quantity += 1;
             } else {
-
                 cart[decodedText] = {
                     code: decodedText,
                     name: material.name,
@@ -71,11 +75,13 @@ docReady(function () {
                 };
             }
 
+            // ✅ SPARA ALLTID
+            localStorage.setItem("cart", JSON.stringify(cart));
+
             updateCart();
 
             resultContainer.innerHTML = `
-                <h3>Material tillagt i varukorg</h3>
-                <p>${material.name}</p>
+                <h3>${material.name} tillagd i varukorg</h3>
             `;
 
         } else {
@@ -83,86 +89,81 @@ docReady(function () {
             resultContainer.innerHTML = `
                 <h3>Okänd kod</h3>
                 <p>${decodedText}</p>
-                <button onclick="startScanner()">Scanna igen</button>
             `;
         }
-
     }
 
     function updateCart() {
-        
 
-    const cartDiv = document.getElementById("cart");
+        const cartDiv = document.getElementById("cart");
+        if (!cartDiv) return; // om den inte finns
 
-    let html = "<h3>Varukorg</h3>";
+        let html = "<h3>Varukorg</h3>";
 
-    Object.values(cart).forEach(item => {
+        Object.values(cart).forEach(item => {
 
-        html += `
-        <div class="cart-item">
+            html += `
+            <div class="cart-item">
+                <span>${item.name}</span>
 
-            <span>${item.name}</span>
+                <select onchange="changeQuantity('${item.code}', this.value)">
+                    ${createOptions(item.quantity)}
+                </select>
+            </div>
+            `;
+        });
 
-            <select onchange="changeQuantity('${item.code}', this.value)">
-                ${createOptions(item.quantity)}
-            </select>
-
-        </div>
-        `;
-    });
-
-    cartDiv.innerHTML = html;
-}
+        cartDiv.innerHTML = html;
+    }
 
     function createOptions(selected) {
 
-    let options = "";
+        let options = "";
 
-    for (let i = 1; i <= 20; i++) {
+        for (let i = 1; i <= 20; i++) {
+            options += `
+            <option value="${i}" ${i == selected ? "selected" : ""}>
+                ${i}
+            </option>`;
+        }
 
-        options += `
-        <option value="${i}" ${i == selected ? "selected" : ""}>
-            ${i}
-        </option>`;
+        return options;
     }
 
-    return options;
-}
+    // ✅ FIXAD
+    window.changeQuantity = function (code, quantity) {
 
-window.changeQuantity = function(code, quantity) {
+        cart[code].quantity = parseInt(quantity);
 
-    cart[code].quantity = parseInt(quantity);
+        localStorage.setItem("cart", JSON.stringify(cart));
 
-    updateCart();
+        updateCart();
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+        const item = cart[code];
 
-    resultContainer.innerHTML = `
-        <h3>Material tillagt i varukorg</h3>
-        <p>${material.name}</p>
-    `;
-}
+        resultContainer.innerHTML = `
+            <h3>Uppdaterad mängd</h3>
+            <p>${item.name}</p>
+        `;
+    }
 
-window.goToCart = function () {
-
-    window.location.href = "cartAlt2.html";
-
-}
-
-
+    window.goToCart = function () {
+        window.location.href = "cartAlt2.html";
+    }
 
     function onScanError(errorMessage) {
-        // Ignorerar fel
+        // Ignorera
     }
 
     html5QrcodeScanner.render(onScanSuccess, onScanError);
 
-    // Starta scanner igen
+    // Starta om scanner (om du vill använda knapp senare)
     window.startScanner = function () {
         resultContainer.innerHTML = "";
         lastResult = null;
-
-        html5QrcodeScanner.render(onScanSuccess, onScanError);
     };
+
+    // Visa cart direkt om du har div
+    updateCart();
 
 });
