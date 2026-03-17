@@ -53,7 +53,7 @@ input:focus {
 button {
      display: block;
     padding: 15px;
-    font-size: 18px;
+    font-size: 30px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -85,6 +85,10 @@ button {
      flex-direction: column;
     align-items: center;
 }
+
+#knapp{
+    margin-top: 100px;
+}
 </style>
 </head>
 
@@ -97,11 +101,13 @@ button {
     <label for="cid">CID</label>
     <input type="text" id="cid" placeholder="Ange din CID">
 
+    
     <label for="pass">Password</label>
     <input type="password" id="pass" placeholder="Ange ditt lösenord">
-
+<div id="knapp">
     <button class="login-btn">Log in</button>
     <button class="forgot">Forgot password?</button>
+    </div>
 
 </div>
 
