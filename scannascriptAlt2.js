@@ -15,7 +15,7 @@ docReady(function () {
 
     const materials = {
         "123456789": {
-            name: "Wooden plank",
+            category: "Wooden plank",
             price: "50"
         },
         "987654321": {
@@ -23,7 +23,7 @@ docReady(function () {
             price: "120"
         },
         "555666777": {
-            name: "Plastic roll",
+            category: "Plastic roll",
             price: "30"
         }
     };
@@ -68,7 +68,8 @@ docReady(function () {
             } else {
                 cart[decodedText] = {
                     code: decodedText,
-                    name: material.name,
+                    category: material.category,
+                    price: parseInt(material.price),
                     quantity: 1,
                     pot: "personal" // standard
                 };

@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             html += `
             <tr>
-                <td>${item.type}</td> <!-- Category -->
+                <td>${item.category}</td> <!-- Category -->
                 <td>${item.price} <!-- Price -->
 
                 <td>
