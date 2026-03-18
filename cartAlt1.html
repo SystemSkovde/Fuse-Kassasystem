@@ -1,94 +1,124 @@
 <!DOCTYPE html>
 <html lang="sv">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <link href="style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-    <style>
-        table{ 
-            border-collapse: collapse; 
-            width: 100%; 
-            margin-bottom: 20px; 
-        }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        th, td{ 
-            border: 1px solid #ccc; 
-            padding: 8px; 
-            text-align: left; 
-        }
+        <title>Shopping Cart</title>
 
-        select { 
-            width: 50px; 
-        }
+        <link href="style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+        <style>
+            table{ 
+                border-collapse: collapse; 
+                width: 100%; 
+                margin-bottom: 20px; 
+            }
+
+            th, td{ 
+                border: 1px solid #ccc; 
+                padding: 8px; 
+                text-align: left; 
+            }
+
+            select { 
+                width: 50px; 
+            }
         
-        button{ 
-            display: block;
-            width: 80%;
-            margin: 10px auto;
-            padding: 12px;
-            border: 2px solid #333;
-            border-radius: 8px;
-            background: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-    </style>
-</head>
+            button{ 
+                display: block;
+                width: 80%;
+                margin: 10px auto;
+                padding: 12px;
+                border: 2px solid #333;
+                border-radius: 8px;
+                background: white;
+                font-size: 16px;
+                cursor: pointer;
+                transition: 0.2s;
+            }
+        </style>   
+    </head>
 <body>
+    
+    <nav>
+        <span class="material-symbols-outlined big">home</span>
+        
+        <div class="cart-icon-wrapper">
+            <span class="circle" id="cart-count">0</span>
+            <span class="material-symbols-outlined big">shopping_basket</span>
+        </div>
+        
+        <span class="material-symbols-outlined big">person</span>
+    </nav>
+    
+    <h1>Shopping Cart</h1>
+    
+    <table id="cart"></table>
+    
+    <div id="totals"></div>
+    
+    <button onclick="payCart()">Pay</button>
+    
+    <footer>
+        <div class="back">
+            <span class="material-symbols-outlined smal">arrow_back_ios</span>
+            <a href="scannaAlt1.html">Back</a>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cartData = localStorage.getItem("cart");
 
-<nav>
-    <span class="material-symbols-outlined big">home</span>
-    <div class="cart-icon-wrapper">
-        <span class="circle" id="cart-count">0</span>
-        <span class="material-symbols-outlined big">shopping_basket</span>
-    </div>
-    <span class="material-symbols-outlined big">person</span>
-</nav>
+            if (!cartData) return;
+            
+            let cart = JSON.parse(cartData);
+            
+            const cartTable = document.getElementById("cart");
+            const totalsDiv = document.getElementById("totals");
+            
+            function renderCart() {
+                cartTable.innerHTML = "";
+                totalsDiv.innerHTML = "";
 
-<h1>Shopping Cart</h1>
+                const items = Object.values(cart);
 
-<table id="cart"></table>
-<div id="totals"></div>
+                if(items.length === 0){
+                    cartTable.innerHTML = "<tr><td>The cart is empty</td></tr>";
+                    document.getElementById("cart-count").textContent = 0;
+                    return;
+                }
+                
+                const header = document.createElement("tr");
+                Object.keys(items[0]).forEach(key => {
 
-<button >Pay</button>
-<footer>
-    <div class="back">
-        <span class="material-symbols-outlined smal">arrow_back_ios</span>
-        <a href="scannaAlt1.html">Back</a>
-    </div>
-</footer>
+                if(key === "code") return;
+                
+                const th = document.createElement("th");
+                th.textContent = key === "quantity" ? "Amount" : key.charAt(0).toUpperCase() + key.slice(1);
+                header.appendChild(th);
+                window.payCart = function() {
+    if (Object.keys(cart).length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const cartData = localStorage.getItem("cart");
-    if (!cartData) return;
+    const total = Object.values(cart).reduce((sum, item) => {
+        return sum + (parseFloat(item.price) || 0) * (item.quantity || 0);
+    }, 0);
 
-    let cart = JSON.parse(cartData);
-    const cartTable = document.getElementById("cart");
-    const totalsDiv = document.getElementById("totals");
+    alert(`Payment complete! Total: ${total.toFixed(2)} kr`);
+    
+    // Tömmer varukorgen
+    cart = {};
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+    updateCartCount();
+}
+            });
 
-    function renderCart() {
-        cartTable.innerHTML = "";
-        totalsDiv.innerHTML = "";
-
-        const items = Object.values(cart);
-        if(items.length === 0){
-            cartTable.innerHTML = "<tr><td>The cart is empty</td></tr>";
-            document.getElementById("cart-count").textContent = 0;
-            return;
-        }
-
-        // --- Header ---
-        const header = document.createElement("tr");
-        Object.keys(items[0]).forEach(key => {
-            if(key === "code") return;
-            const th = document.createElement("th");
-            th.textContent = key === "quantity" ? "Amount" : key.charAt(0).toUpperCase() + key.slice(1);
-            header.appendChild(th);
-        });
         const thDelete = document.createElement("th");
         thDelete.textContent = "Delete";
         header.appendChild(thDelete);
