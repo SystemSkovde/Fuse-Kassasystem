@@ -8,8 +8,6 @@ function docReady(fn) {
     }
 }
 
-
-
 docReady(function () {
      const wrapC = document.querySelector(".wrap-c");
     const wrapO = document.querySelector("#o-wrap");
