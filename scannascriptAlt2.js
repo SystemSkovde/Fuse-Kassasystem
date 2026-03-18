@@ -68,10 +68,11 @@ docReady(function () {
             } else {
                 cart[decodedText] = {
                     code: decodedText,
-                    category: material.category,
+                    category: material.category || material.name,
                     price: parseInt(material.price),
                     quantity: 1,
                     pot: "personal" // standard
+                    accountId: null
                 };
             }
 

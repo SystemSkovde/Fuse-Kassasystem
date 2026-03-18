@@ -3,6 +3,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const cartDiv = document.getElementById("cart");
     let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
+    const courses = [
+        { id: "course1", name: "Web Development" },
+        { id: "course2", name: "UX Design" }
+    ];
+
+    const groups = [
+        { id: "group1", name: "Project A" },
+        { id: "group2", name: "Lab Team" }
+    ];
+
     function renderCart() {
         const cartDiv = document.getElementById("cart");
     
@@ -52,6 +62,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         <option value="course" ${item.pot === "course" ? "selected" : ""}>Course</option>
                         <option value="group" ${item.pot === "group" ? "selected" : ""}>Group</option>
                     </select>
+
+                    ${renderAccountSelector(item)}
                 </td>
 
                 <td>
@@ -88,6 +100,36 @@ document.addEventListener("DOMContentLoaded", function () {
         return options;
     }
 
+    function renderAccountSelector(item) {
+    if (item.pot === "course") {
+        return `
+            <select onchange="changeAccount('${item.code}', this.value)">
+                <option value="">Select course</option>
+                ${courses.map(c => `
+                    <option value="${c.id}" ${item.accountId === c.id ? "selected" : ""}>
+                        ${c.name}
+                    </option>
+                `).join("")}
+            </select>
+        `;
+    }
+
+    if (item.pot === "group") {
+        return `
+            <select onchange="changeAccount('${item.code}', this.value)">
+                <option value="">Select group</option>
+                ${groups.map(g => `
+                    <option value="${g.id}" ${item.accountId === g.id ? "selected" : ""}>
+                        ${g.name}
+                    </option>
+                `).join("")}
+            </select>
+        `;
+    }
+
+    return "";
+}
+
     // Total kostnad
     function updateCartCount() {
         const badge = document.getElementById("cart-count");
@@ -109,6 +151,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Ändra pott
     window.changePot = function (code, pot) {
         cart[code].pot = pot;
+        save();
+    };
+
+    window.changeAccount = function (code, accountId) {
+        cart[code].accountId = accountId;
         save();
     };
 
