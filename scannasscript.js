@@ -43,7 +43,7 @@ docReady(function () {
         "555666777": {
             Category: "Plast",
             Price: "50",
-            Account: "Personal"
+            Account: "Kurs1"
         }
     };
 
