@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const items = Object.values(cart);
         if(items.length === 0){
-            cartTable.innerHTML = "<tr><td>Varukorgen är tom</td></tr>";
+            cartTable.innerHTML = "<tr><td>The cart is empty</td></tr>";
             document.getElementById("cart-count").textContent = 0;
             return;
         }
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
             header.appendChild(th);
         });
         const thDelete = document.createElement("th");
-        thDelete.textContent = "Ta bort";
+        thDelete.textContent = "Delete";
         header.appendChild(thDelete);
         cartTable.appendChild(header);
 
@@ -124,14 +124,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Ta bort-knapp
             const tdDelete = document.createElement("td");
-            const btn = document.createElement("button");
-            btn.textContent = "Ta bort";
-            btn.addEventListener("click",()=>{
-                delete cart[item.code];
-                localStorage.setItem("cart", JSON.stringify(cart));
-                renderCart();
-            });
-            tdDelete.appendChild(btn);
+            const icon = document.createElement("span");
+icon.classList.add("material-symbols-outlined");
+icon.textContent = "close";
+
+// gör den klickbar
+icon.style.cursor = "pointer";
+
+icon.addEventListener("click", () => {
+    delete cart[item.code];
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+});
+
+tdDelete.appendChild(icon);
             tr.appendChild(tdDelete);
 
             cartTable.appendChild(tr);
@@ -149,12 +155,14 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateTotals(){
         totalsDiv.innerHTML = "";
         const totals = {};
-        Object.values(cart).forEach(item=>{
-            const priceNum = parseFloat(item.Price); // utan "kr"
-            const qty = item.quantity;
-            if(!totals[item.Account]) totals[item.Account] = 0;
-            totals[item.Account] += priceNum * qty;
-        });
+Object.values(cart).forEach(item=>{
+    const priceNum = parseFloat(item.price); // FIX
+    const qty = item.quantity;
+
+    if(!totals[item.account]) totals[item.account] = 0; // FIX
+    totals[item.account] += priceNum * qty;
+});
+
         for(let account in totals){
             const p = document.createElement("p");
             p.textContent = `Total ${account}: ${totals[account]}kr`;
