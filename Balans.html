@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Balances</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
   <style>
     
     body {
@@ -50,18 +51,21 @@
       font-size: 40px;
     }
 
-    .back-button {
-      margin-top: 40px;
-       display: flex;
+    .back {
+    display: flex;
     justify-content: center; 
-    align-items: center;               
+    align-items: center;    
+    gap: 5px;               
     padding: 0 8px;
     width: 100px;
     height: 30px;
     background-color: white;
     border-radius: 4px;
     border: solid black 0.5px;
-    }
+}
+.smal {
+    font-size: 16px !important;  /* !important tvingar storleken */
+}
 
     button {
       padding: 10px 20px;
@@ -74,6 +78,10 @@
     button:hover {
       background-color: #ddd;
     }
+    a{
+    text-decoration: none;
+    color: black;
+}
   </style>
 </head>
 <body>
@@ -114,8 +122,8 @@
                 <span class="material-symbols-outlined smal">
                     arrow_back_ios
                 </span>
-
-  </div>
+                <a href="Hem.html">Back</a>
+            </div> 
 
 </body>
 </html>
