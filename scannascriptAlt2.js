@@ -71,7 +71,7 @@ docReady(function () {
                     category: material.category || material.name,
                     price: parseInt(material.price),
                     quantity: 1,
-                    pot: "personal" // standard
+                    pot: "personal", // standard
                     accountId: null
                 };
             }
