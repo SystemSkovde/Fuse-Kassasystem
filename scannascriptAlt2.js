@@ -15,21 +15,15 @@ docReady(function () {
 
     const materials = {
         "123456789": {
-            name: "Trä",
-            type: "Byggmaterial",
-            location: "Lager A",
+            name: "Wooden plank",
             price: "50"
         },
         "987654321": {
-            name: "Stål",
-            type: "Metall",
-            location: "Lager B",
+            category: "Steel bar",
             price: "120"
         },
         "555666777": {
-            name: "Plast",
-            type: "Polymer",
-            location: "Lager C",
+            name: "Plastic roll",
             price: "30"
         }
     };
@@ -75,10 +69,8 @@ docReady(function () {
                 cart[decodedText] = {
                     code: decodedText,
                     name: material.name,
-                    type: material.type,
-                    location: material.location,
                     quantity: 1,
-                    pot: "personlig" // standard
+                    pot: "personal" // standard
                 };
             }
 
@@ -86,7 +78,7 @@ docReady(function () {
             updateCartCount();
 
             resultContainer.innerHTML = `
-                <h3>${material.name} tillagd</h3>
+                <h3>${material.name} added to cart!</h3>
             `;
 
         } else {
