@@ -79,7 +79,7 @@ docReady(function () {
             updateCartCount();
 
             resultContainer.innerHTML = `
-                <h3>${material.name} added to cart!</h3>
+                <h3>${material.category} added to cart!</h3>
             `;
 
         } else {
