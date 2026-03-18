@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <option value="personal" ${item.pot === "personal" ? "selected" : ""}>Personal</option>
                         <option value="resaerch" ${item.pot === "reserch" ? "selected" : ""}>Research</option>
                         <option value="course" ${item.pot === "course" ? "selected" : ""}>Course</option>
+                        <option value="group" ${item.pot === "group" ? "selected" : ""}>Group</option>
                     </select>
                 </td>
 
