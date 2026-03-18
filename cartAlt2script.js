@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
         let html = `
-
         <table class="cart-table">
             <thead>
                 <tr>
@@ -32,6 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let totalCost = 0;
 
         Object.values(cart).forEach(item => {
+
+            totalCost += item.price * item.quantity; // Lägger till Total Cost
 
             html += `
             <tr>
@@ -75,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
 
     cartDiv.innerHTML = html;
+    updateCartCount();
 }
 
     function createOptions(selected) {
@@ -83,6 +85,18 @@ document.addEventListener("DOMContentLoaded", function () {
             options += `<option value="${i}" ${i == selected ? "selected" : ""}>${i}</option>`;
         }
         return options;
+    }
+
+    // Total kostnad
+    function updateCartCount() {
+        const badge = document.getElementById("cart-count");
+        if (!badge) return;
+
+        const total = Object.values(cart).reduce((sum, item) => {
+            return sum + item.quantity;
+        }, 0);
+
+        badge.textContent = total;
     }
 
     // Ändra antal
@@ -105,12 +119,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.payCart = function() {
     if (Object.keys(cart).length === 0) {
-        alert("Varukorgen är tom!");
+        alert("Your cart is empty!");
         return;
     }
 
     // Här kan du t.ex. skicka ordern till server eller visa bekräftelse
-    alert(`Betalning genomförd! Total: ${Object.values(cart).reduce((sum, item) => sum + item.price * item.quantity, 0)} kr`);
+    alert(`Payment complete! Total: ${Object.values(cart).reduce((sum, item) => sum + item.price * item.quantity, 0)} kr`);
     
     // Tömmer varukorgen
     cart = {};
@@ -122,8 +136,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function save() {
         localStorage.setItem("cart", JSON.stringify(cart));
         renderCart();
+        updateCartCount();
     }
 
     renderCart();
+    updateCartCount();
 
 });
