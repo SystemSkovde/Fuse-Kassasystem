@@ -97,7 +97,7 @@ table select {
 
 .top-nav {
     display: flex;
-    justify-content: flex-end;  /* symbolerna till höger */
+    justify-content: space-between;  /* symbolerna till höger */
     align-items: center;
     gap: 20px;                  /* avstånd mellan symboler */
     padding: 10px 20px;
@@ -109,6 +109,12 @@ table select {
 .top-nav .material-symbols-outlined {
     font-size: 28px;
     cursor: pointer;
+}
+
+.nav-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }
 
 .cart-icon {
@@ -129,11 +135,6 @@ table select {
     height: 18px;
     display: flex;
     justify-content: center;
-    align-items: center;
-}
-.nav-right {
-    display: flex;
-    gap: 20px;
     align-items: center;
 }
             
