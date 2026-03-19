@@ -62,34 +62,46 @@
     background-color: white;
     border-radius: 4px;
     border: solid black 0.5px;
-}
-.smal {
-    font-size: 16px !important;  /* !important tvingar storleken */
-}
-
-    button {
-      padding: 10px 20px;
-      border: 1px solid #999;
-      background-color: #eee;
-      border-radius: 5px;
-      cursor: pointer;
+    }
+    .smal {
+        font-size: 16px !important;  /* !important tvingar storleken */
     }
 
-    button:hover {
-      background-color: #ddd;
+        button {
+          padding: 10px 20px;
+          border: 1px solid #999;
+          background-color: #eee;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+
+        button:hover {
+          background-color: #ddd;
+        }
+        a{
+        text-decoration: none;
+        color: black;
     }
-    a{
-    text-decoration: none;
-    color: black;
-}
+
+    .big {
+    font-size: 40px !important;  /* !important tvingar storleken */
+    }
+
   </style>
 </head>
 <body>
 
   <div class="container">
     
-    <div class="top-icons">
-      🏠 ✉️
+    <div class="top-bar">
+      <span class="material-symbols-outlined big">
+        drafts
+      </span>
+      <div class="icons-right">
+        <span class="material-symbols-outlined big">
+          home
+      </span>
+      </div>
     </div>
 
     <h1>Balances</h1>
