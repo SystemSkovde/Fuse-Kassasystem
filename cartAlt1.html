@@ -10,18 +10,6 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
         <style>
-            table{ 
-                border-collapse: collapse; 
-                width: 100%; 
-                margin-bottom: 20px; 
-            }
-
-            th, td{ 
-                border: 1px solid #ccc; 
-                padding: 8px; 
-                text-align: left; 
-            }
-
             select { 
                 width: 50px; 
             }
@@ -38,20 +26,129 @@
                 cursor: pointer;
                 transition: 0.2s;
             }
+            .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.cart-table th,
+.cart-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.cart-table th {
+    background-color: #f5f5f5;
+}
+
+.cart-table select {
+    padding: 5px;
+}
+
+.remove-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cart-total {
+    margin-top: 15px;
+    font-size: 30px;
+    text-align: center; /* centrerad total */
+}
+
+.pay-button-wrapper {
+    margin-top: 10px;
+    text-align: center; /* centrerad PAY-knapp */
+}
+
+.pay-btn {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 15px 100px;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.pay-btn:hover {
+    background-color: #219150;
+}
+
+/* Back-knapp */
+.back {
+    display: inline-flex;      
+    align-items: center;
+    padding: 8px 10px;
+    border: 2px solid #000000; 
+    border-radius: 6px;
+    background-color: #ffffff; 
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 20px; 
+    text-decoration: none;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: flex-end;  /* symbolerna till höger */
+    align-items: center;
+    gap: 20px;                  /* avstånd mellan symboler */
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.top-nav .material-symbols-outlined {
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.cart-icon {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+}
+
+.cart-icon .circle {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 14px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+            
         </style>   
     </head>
 <body>
     
-    <nav>
+   <nav class="top-nav">
+    <a href="hem1.html">
         <span class="material-symbols-outlined big">home</span>
-        
-        <div class="cart-icon-wrapper">
-            <span class="circle" id="cart-count">0</span>
-            <span class="material-symbols-outlined big">shopping_basket</span>
-        </div>
-        
-        <span class="material-symbols-outlined big" style="cursor:pointer;" onclick="location.href='Minsida.html'">person</span>
-    </nav>
+    </a>
+        <a href="cartAlt1.html" class="cart-icon">
+        <span class="circle" id="cart-count">0</span>
+        <span class="material-symbols-outlined big">shopping_basket</span>
+    </a>
+    <a href="Minsida.html">
+        <span class="material-symbols-outlined big">person</span>
+    </a>
+
+</nav>
     
     <h1>Shopping Cart</h1>
     
