@@ -97,7 +97,7 @@ table select {
 
 .top-nav {
     display: flex;
-    justify-content: flex-end;  /* symbolerna till höger */
+    justify-content: space-between;  /* symbolerna till höger */
     align-items: center;
     gap: 20px;                  /* avstånd mellan symboler */
     padding: 10px 20px;
@@ -109,6 +109,12 @@ table select {
 .top-nav .material-symbols-outlined {
     font-size: 28px;
     cursor: pointer;
+}
+
+.nav-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }
 
 .cart-icon {
@@ -131,16 +137,16 @@ table select {
     justify-content: center;
     align-items: center;
 }
-
             
         </style>   
     </head>
 <body>
     
    <nav class="top-nav">
-    <a href="hem1.html">
+    <a href="Hem.html">
         <span class="material-symbols-outlined big">home</span>
     </a>
+    <div class="nav-right">
         <a href="cartAlt1.html" class="cart-icon">
         <span class="circle" id="cart-count">0</span>
         <span class="material-symbols-outlined big">shopping_basket</span>
@@ -148,6 +154,7 @@ table select {
     <a href="Minsida.html">
         <span class="material-symbols-outlined big">person</span>
     </a>
+    </div>
 
 </nav>
     
@@ -265,6 +272,7 @@ icon.addEventListener("click", () => {
 });
 
 tdDelete.appendChild(icon);
+
             tr.appendChild(tdDelete);
 
             cartTable.appendChild(tr);
