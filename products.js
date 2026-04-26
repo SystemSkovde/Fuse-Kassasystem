@@ -11,8 +11,8 @@ fetch("products.php")
   products.forEach(product => {
     const div = document.createElement("div");
     div.innerHTML = `
-      <h3>${product.namn}</h3>
-      <p>Pris: ${product.pris} kr</p>
+      <h3>${product.name}</h3>
+      <p>Pris: ${product.price} kr</p>
     `;
     container.appendChild(div);
   });
