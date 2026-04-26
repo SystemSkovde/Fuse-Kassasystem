@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "Fuse");
+$conn = new mysqli("127.0.0.1", "dbftg", "Myrlejon2026!", "Fuse");
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
