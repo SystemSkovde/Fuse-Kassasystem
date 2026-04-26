@@ -8,11 +8,11 @@
 
 
 if ($pdo->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $pdo->connect_error);
 }
 
 $sql = "SELECT * FROM Products";
-$result = $conn->query($sql);
+$result = $pdo->query($sql);
 
 $products = [];
 
@@ -22,5 +22,5 @@ while($row = $result->fetch_assoc()) {
 
 echo json_encode($products);
 
-$conn->close();
+$pdo->close();
 ?>
