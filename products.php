@@ -1,7 +1,13 @@
 <?php
-$conn = new mysqli("127.0.0.1", "dbftg", "Myrlejon2026!", "Fuse");
+    $pdo = new PDO(
+            'mysql:dbname=Fuse;host=127.0.0.1;charset=utf8mb4',
+            'dbftg',
+            'Myrlejon2026!',
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+        );
 
-if ($conn->connect_error) {
+
+if ($pdo->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
