@@ -96,23 +96,23 @@ button {
 
 <h1>Fuse</h1>
 
-<div class="container">
+<form action="Hem.html"   class="container">
 
 
     <label for="cid">CID</label>
-    <input type="text" id="cid" placeholder="Ange din CID">
+    <input required type="text" id="cid" placeholder="Ange din CID" >
 
     
     <label for="pass">Password</label>
-    <input type="password" id="pass" placeholder="Ange ditt lösenord">
+    <input required type="password" id="pass" placeholder="Ange ditt lösenord" >
     
-<div id="knapp">
-    <button class="login-btn" onclick="location.href='Hem.html'">Log in</button>
+    <div id="knapp">
+    <input type="submit" value="Log in"  class="login-btn" onclick="location.href='Hem.html'">
+    </div>
+</form>
 
     <button class="forgot">Forgot password?</button>
-    </div>
 
-</div>
-
+  
 </body>
 </html>
