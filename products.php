@@ -1,6 +1,6 @@
 <?php
 $pdo = new PDO(
-            'mysql:dbname=Fuse;host=127.0.0.1;charset=utf8mb4',
+            'mysql:dbname=Fuse;host=projekt.webug.se;charset=utf8mb4',
             'dbftg',
             'Myrlejon2026!',
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
