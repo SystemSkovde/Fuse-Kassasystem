@@ -132,11 +132,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     return "";
 }
-
+    // Pop-up för felmeddelanden
     function showMessage(text, type) {
         const msg = document.getElementById("cart-message");
+        const msgTitle = document.getElementById("cart-message-titel");
         const msgText = document.getElementById("cart-message-text");
 
+        msgTitle.textContent = title;
         msgText.textContent = text;
 
         msg.classList.remove("error", "success");
@@ -197,12 +199,12 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     if (total > balance) {
-        showMessage("Insufficient balance!","error");
+        showMessage("Payment declined", "Insufficient funds. Please edit cart or update balance.","error");
         return;
     }
 
     // Här kan du t.ex. skicka ordern till server eller visa bekräftelse
-    showMessage(`Payment complete! Total: ${total} kr`,"success");
+    showMessage("Payment complete!", `Total: ${total} kr`,"success");
     
     // Tömmer varukorgen
     cart = {};
