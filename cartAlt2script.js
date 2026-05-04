@@ -138,6 +138,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const msgTitle = document.getElementById("cart-message-title");
         const msgText = document.getElementById("cart-message-text");
 
+
+        if (!msg || !msgTitle || !msgText) {
+            console.error("Popup elements missing in HTML");
+            return;
+        }
+
         msgTitle.textContent = title;
         msgText.textContent = text;
 
