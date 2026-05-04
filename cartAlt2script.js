@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return "";
 }
     // Pop-up för felmeddelanden
-    function showMessage(text, type) {
+    function showMessage(title, text, type) {
         const msg = document.getElementById("cart-message");
         const msgTitle = document.getElementById("cart-message-title");
         const msgText = document.getElementById("cart-message-text");
@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Här kan du t.ex. skicka ordern till server eller visa bekräftelse
-    showMessage("Payment complete!", `Total: ${total} kr`,"success");
+    showMessage("Payment successful!", `Total: ${total} kr`,"success");
     
     // Tömmer varukorgen
     cart = {};
