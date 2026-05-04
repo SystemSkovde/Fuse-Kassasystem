@@ -133,6 +133,22 @@ document.addEventListener("DOMContentLoaded", function () {
     return "";
 }
 
+    function showMessage(text, type) {
+        const msg = document.getElementById("cart-message");
+        const msgText = document.getElementById("cart-message-text");
+
+        msgText.textContent = text;
+
+        msg.classList.remove("error", "success");
+        msg.classList.add(type);
+
+        msg.style.display = "block";
+    }
+
+    window.closeMessage = function () {
+        document.getElementById("cart-message").style.display = "none";
+    }
+
     // Total kostnad
     function updateCartCount() {
         const badge = document.getElementById("cart-count");
@@ -170,26 +186,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.payCart = function() {
     if (Object.keys(cart).length === 0) {
-        alert("Your cart is empty!");
+        showMessage("Your cart is empty!","error");
         return;
-    }
-
-    function showMessage(text) {
-        const msg = document.getElementById("cart-message");
-        msg.textContent = text;
-        msg.style.display = "block";
-
-        msgText.textContent = text;
-
-        msg.classList.remove("error", "success");
-
-        msg.classList.add(type);
-
-        msg.style.display = "block";
-    }
-
-    function closeMessage() {
-        document.getElementById("cart-message").style.display = "none";
     }
 
     const balance = 500; // test-saldo
@@ -204,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Här kan du t.ex. skicka ordern till server eller visa bekräftelse
-    showMessage(`Payment complete! Total: ${Object.values(cart).reduce((sum, item) => sum + item.price * item.quantity, 0)} kr`,"success");
+    showMessage(`Payment complete! Total: ${total} kr`,"success");
     
     // Tömmer varukorgen
     cart = {};
