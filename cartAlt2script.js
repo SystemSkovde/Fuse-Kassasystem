@@ -174,6 +174,17 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
+    const balance = 500; // test-saldo
+    const total = Object.values(cart).reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+    );
+
+    if (total > balance) {
+        alert("Insufficient balance!");
+        return;
+    }
+
     // Här kan du t.ex. skicka ordern till server eller visa bekräftelse
     alert(`Payment complete! Total: ${Object.values(cart).reduce((sum, item) => sum + item.price * item.quantity, 0)} kr`);
     
