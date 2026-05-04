@@ -136,7 +136,6 @@
     transform: translate(-50%, -50%);
     width: 600px;
     box-sizing: border-box;
-    background: rgb(225, 100, 100);
     color: white;
     padding: 50px;
     border-radius: 14px;
@@ -145,6 +144,22 @@
     text-align: center;
     display: none;
     z-index: 9999;
+}
+
+.cart-message.error {
+    background:rgb(225, 100, 100)
+}
+
+.cart-message.success {
+    background:#27ae60;
+}
+
+.close-msg {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 32px;
 }
 
 </style>
@@ -173,7 +188,13 @@
 <div id="cart"></div>
 
 <!--Varkorg felmeddelande-->
-<div id="cart-message" class="cart-message"></div>
+<div id="cart-message" class="cart-message">
+    <span id="cart-message-text"></span>
+    <span class="material-symbols-outlined close msg" onclick="closeMessage()">
+        close
+    </span>
+
+</div>
 
 <!-- Script -->
 <script src="cartAlt2script.js"></script>

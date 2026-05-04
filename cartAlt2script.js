@@ -175,13 +175,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function showMessage(text) {
-    const msg = document.getElementById("cart-message");
-    msg.textContent = text;
-    msg.style.display = "block";
+        const msg = document.getElementById("cart-message");
+        msg.textContent = text;
+        msg.style.display = "block";
 
-    setTimeout(() => {
-        msg.style.display = "none";
-    }, 2500);
+        msgText.textContent = text;
+
+        msg.classList.remove("error", "success");
+
+        msg.classList.add(type);
+
+        msg.style.display = "block";
+    }
+
+    function closeMessage() {
+        document.getElementById("cart-message").style.display = "none";
     }
 
     const balance = 500; // test-saldo
@@ -191,12 +199,12 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     if (total > balance) {
-        showMessage("Insufficient balance!");
+        showMessage("Insufficient balance!","error");
         return;
     }
 
     // Här kan du t.ex. skicka ordern till server eller visa bekräftelse
-    showMessage(`Payment complete! Total: ${Object.values(cart).reduce((sum, item) => sum + item.price * item.quantity, 0)} kr`);
+    showMessage(`Payment complete! Total: ${Object.values(cart).reduce((sum, item) => sum + item.price * item.quantity, 0)} kr`,"success");
     
     // Tömmer varukorgen
     cart = {};
