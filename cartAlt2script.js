@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
             html += `
             <tr>
                 <td>${item.category}</td> <!-- Category -->
-                <td>${item.price} <!-- Price -->
+                <td>${item.price}</td> <!-- Price -->
 
                 <td>
                     <select onchange="changeQuantity('${item.code}', this.value)">
@@ -67,7 +67,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 </td>
 
                 <td>
-                    <button onclick="removeItem('${item.code}')">Delete</button>
+                    <span class="material-symbols-outlined delete-icon"
+                        onclick="removeItem('${item.code}')">
+                    close
+                    </span>
                 </td>
             </tr>
             `;
