@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Pop-up för felmeddelanden
     function showMessage(text, type) {
         const msg = document.getElementById("cart-message");
-        const msgTitle = document.getElementById("cart-message-titel");
+        const msgTitle = document.getElementById("cart-message-title");
         const msgText = document.getElementById("cart-message-text");
 
         msgTitle.textContent = title;
