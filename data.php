@@ -10,12 +10,13 @@ $pdo = new PDO(
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
+
+$response = [];
+
+
 $sql = "SELECT * FROM Products";
 $stmt = $pdo->query($sql);
-
-$products = $stmt->fetchAll();
-
-echo json_encode($products);
+$response['products'] = $stmt->fetchAll();
 
 
 $cid = $_POST['cid'] ?? null;
@@ -26,19 +27,16 @@ if ($cid !== null && $password !== null) {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':cid' => $cid]);
 
-    $user = $stmt->fetchAll();
+    $response['user'] = $stmt->fetchAll();
 
-    echo json_encode($user);
-}
 
-if ($cid !== null && $password !== null) {
-    $sql = "SELECT * FROM Accounts WHERE Cid = :cid";
+       $sql = "SELECT * FROM Accounts WHERE Cid = :cid";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':cid' => $cid]);
 
-    $accounts = $stmt->fetchAll();
+    $response['accounts'] = $stmt->fetchAll();
 
-    echo json_encode($accounts);
 }
+echo json_encode($response);
 
 ?>
