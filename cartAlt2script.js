@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.payCart = function() {
     if (Object.keys(cart).length === 0) {
-        showMessage("Your cart is empty!","error");
+        showMessage("Empty cart","Your cart is empty!","error");
         return;
     }
 
