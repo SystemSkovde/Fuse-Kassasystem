@@ -31,4 +31,14 @@ if ($cid !== null && $password !== null) {
     echo json_encode($user);
 }
 
+if ($cid !== null && $password !== null) {
+    $sql = "SELECT * FROM Accounts WHERE Cid = :cid";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':cid' => $cid]);
+
+    $accounts = $stmt->fetch();
+
+    echo json_encode($accounts);
+}
+
 ?>
