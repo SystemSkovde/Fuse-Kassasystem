@@ -26,7 +26,7 @@ if ($cid !== null && $password !== null) {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':cid' => $cid]);
 
-    $user = $stmt->fetch();
+    $user = $stmt->fetchAll();
 
     echo json_encode($user);
 }
@@ -36,7 +36,7 @@ if ($cid !== null && $password !== null) {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':cid' => $cid]);
 
-    $accounts = $stmt->fetch();
+    $accounts = $stmt->fetchAll();
 
     echo json_encode($accounts);
 }
