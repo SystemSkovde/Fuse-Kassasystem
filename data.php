@@ -27,7 +27,7 @@ if ($cid !== null && $password !== null) {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':cid' => $cid]);
 
-    $response['user'] = $stmt->fetchAll();
+    $response['user'] = $stmt->fetch();
 
 
        $sql = "SELECT * FROM Accounts WHERE Cid = :cid";
