@@ -1,4 +1,4 @@
-fetch("products.php")
+fetch("data.php")
   .then(response => response.json())
   .then(data => {
     console.log(data);
