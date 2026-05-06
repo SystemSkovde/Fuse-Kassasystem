@@ -29,15 +29,18 @@ docReady(function () {
         
     };
 
-    const html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
+
+    
+ const html5QrCode = new Html5Qrcode("qr-reader");
+
+html5QrCode.start(
+    { facingMode: "environment" },
+    {
         fps: 10,
-        qrbox: {
-    width: 250,
-    height: 250
-}
-    });
-    
-    
+        qrbox: { width: 550, height: 400 }
+    },
+    onScanSuccess
+);
 
     let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
