@@ -37,7 +37,7 @@ html5QrCode.start(
     { facingMode: "environment" },
     {
         fps: 10,
-        qrbox: { width: 375, height: 400 }
+        qrbox: { width: 250, height: 400 }
     },
     onScanSuccess
 );
