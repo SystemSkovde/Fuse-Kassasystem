@@ -7,9 +7,6 @@ document.addEventListener("DOMContentLoaded", fn);
 }
 }
 
-
-
-
 docReady(function () {
     document.querySelector("form")?.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -127,5 +124,15 @@ function updateCart() {
 window.startScanner = function () {
     resultContainer.innerHTML = "";
 };
+window.addEventListener("focus", function () {
+    cart = JSON.parse(localStorage.getItem("cart")) || {};
+    updateCartCount();
+});
 
+window.addEventListener("storage", function (e) {
+    if (e.key === "cart") {
+        cart = JSON.parse(localStorage.getItem("cart")) || {};
+        updateCartCount();
+    }
+});
 });
