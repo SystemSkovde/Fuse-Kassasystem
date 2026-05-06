@@ -35,16 +35,17 @@ let currentCode = null;
 
 
 
-// ===== QR SCANNER =====
-function initScanner() {
+ const html5QrCode = new Html5Qrcode("qr-reader");
 
-    const html5QrcodeScanner = new Html5QrcodeScanner(
-        "qr-reader",
-        { fps: 10, qrbox: { width: 328, height: 388 } }
-    );
+html5QrCode.start(
+    { facingMode: "environment" },
+    {
+        fps: 10,
+        qrbox: { width: 550, height: 400 }
+    },
+    onScanSuccess
+);
 
-    html5QrcodeScanner.render(onScanSuccess, onScanError);
-}
 
 function onScanSuccess(decodedText) {
 
