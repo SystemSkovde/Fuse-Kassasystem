@@ -31,7 +31,7 @@ const wrapO = document.querySelector("#o-wrap");
 
 const resultContainer = document.getElementById("qr-reader-results");
 
-let cart = {};
+let cart = JSON.parse(localStorage.getItem("cart")) || {};
 let currentMaterial = null;
 let currentCode = null;
 
