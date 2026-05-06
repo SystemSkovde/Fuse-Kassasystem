@@ -6,11 +6,14 @@ setTimeout(fn, 1);
 document.addEventListener("DOMContentLoaded", fn);
 }
 }
-window.addEventListener("resize", () => {
-    location.reload();
-});
+
+
+
 
 docReady(function () {
+    document.querySelector("form")?.addEventListener("submit", function (e) {
+    e.preventDefault();
+});
    let products = {};
 
 fetch("data.php")
