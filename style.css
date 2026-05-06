@@ -98,14 +98,17 @@ footer {
 
 #qr-reader {
     width: 100%;
-    height: 60%;      /* bestämmer hur hög kameran är */
-    overflow: hidden;   /* klipper bort resten av kamerabilden */
+    max-width: 600px;
+    height: 400px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 12px;
 }
 
 #qr-reader video {
     width: 100%;
-    height: 70%;
-    object-fit: cover;  /* fyller ytan snyggt */
+    height: 100%;
+    object-fit: cover;
 }
 
 .choice{
