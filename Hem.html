@@ -67,32 +67,39 @@
   </style>
 </head>
 <body>
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
+ <script>
+document.addEventListener("DOMContentLoaded", function () {
     const user = JSON.parse(localStorage.getItem("user"));
-    
+
     if (user && user.Name) {
-        document.getElementById("username").textContent = user.Cid + " - " + user.Name;;
-    } 
-    else {
+        document.getElementById("username").textContent = user.Cid + " - " + user.Name;
+    } else {
         document.getElementById("username").textContent = "Guest";
     }
 
-});
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
-function updateCartCount() {
-    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+        let total = Object.values(cart).reduce((sum, item) => {
+            return sum + item.quantity;
+        }, 0);
 
-    let total = Object.values(cart).reduce((sum, item) => {
-        return sum + item.quantity;
-    }, 0);
-
-    const el = document.getElementById("cart-count");
-    if (el) {
-        el.textContent = total;
+        const el = document.getElementById("cart-count");
+        if (el) {
+            el.textContent = total;
+        }
     }
-}
-  </script>
+    updateCartCount();
+
+    window.addEventListener("focus", updateCartCount);
+    window.addEventListener("storage", function (e) {
+        if (e.key === "cart") {
+            updateCartCount();
+        }
+    });
+
+});
+</script>
 
   <div class="container">
     
