@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
             updateCartCount();
             return;
         }
+
         let html = `
         <table class="cart-table">
             <thead>
@@ -48,15 +49,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 </td>
 
                 <td>
-                    <select onchange="changePot('${item.code}', this.value)">
-                        <option value="personal" ${item.pot === "personal" ? "selected" : ""}>Personal</option>
-                        <option value="course" ${item.pot === "course" ? "selected" : ""}>Course</option>
+                    <!-- Account selector (personal + course accounts i samma dropdown) -->
+                    <select onchange="changeAccount('${item.code}', this.value)">
+                        <option value="">Select account</option>
+                        ${accounts.map(acc => `
+                            <option value="${acc.AccountName}" 
+                                ${item.accountId === acc.AccountName ? "selected" : ""}>
+                                ${acc.AccountName}
+                            </option>
+                        `).join("")}
                     </select>
-
-                    ${renderAccountSelector(item)}
                 </td>
 
                 <td>
+                    <!-- Delete item -->
                     <span class="material-symbols-outlined delete-icon"
                         onclick="removeItem('${item.code}')">
                     close
@@ -81,9 +87,9 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
         `;
 
-    cartDiv.innerHTML = html;
-    updateCartCount();
-}
+        cartDiv.innerHTML = html;
+        updateCartCount();
+    }
 
     function createOptions(selected) {
         let options = "";
@@ -93,33 +99,29 @@ document.addEventListener("DOMContentLoaded", function () {
         return options;
     }
 
-    function renderAccountSelector(item) {
-        if (item.pot !== "course") {
-            return "";
-        }
+    // Ändra account (val av sub account / kurs / personal)
+    window.changeAccount = function (code, accountId) {
+        cart[code].accountId = accountId;
+        save();
+    };
 
-        if (!accounts.length) {
-            return `<span>No accounts available</span>`;
-        }
+    // Ändra antal
+    window.changeQuantity = function (code, quantity) {
+        cart[code].quantity = parseInt(quantity);
+        save();
+    };
 
-        return `
-            <select onchange="changeAccount('${item.code}', this.value)">
-                <option value="">Select course account</option>
-                ${accounts.map(acc => `
-                    <option value="${acc.AccountName}" ${item.accountId === acc.AccountName ? "selected" : ""}>
-                        ${acc.AccountName}
-                    </option>
-                `).join("")}
-            </select>
-        `;
-    }
+    // Ta bort produkt
+    window.removeItem = function (code) {
+        delete cart[code];
+        save();
+    };
 
     // Pop-up för felmeddelanden
     function showMessage(title, text, type) {
         const msg = document.getElementById("cart-message");
         const msgTitle = document.getElementById("cart-message-title");
         const msgText = document.getElementById("cart-message-text");
-
 
         if (!msg || !msgTitle || !msgText) {
             console.error("Popup elements missing in HTML");
@@ -135,11 +137,12 @@ document.addEventListener("DOMContentLoaded", function () {
         msg.style.display = "block";
     }
 
+    // Stäng popup
     window.closeMessage = function () {
         document.getElementById("cart-message").style.display = "none";
-    }
+    };
 
-    // Total kostnad
+    // Uppdatera cart count badge
     function updateCartCount() {
         const badge = document.getElementById("cart-count");
         if (!badge) return;
@@ -151,60 +154,36 @@ document.addEventListener("DOMContentLoaded", function () {
         badge.textContent = total;
     }
 
-    // Ändra antal
-    window.changeQuantity = function (code, quantity) {
-        cart[code].quantity = parseInt(quantity);
-        save();
-    };
+    // Betala cart
+    window.payCart = function() {
 
-    // Ändra pott
-    window.changePot = function (code, pot) {
-        cart[code].pot = pot;
-
-        if (pot !== "course") {
-            cart[code].accountId = "";
+        if (Object.keys(cart).length === 0) {
+            showMessage("Empty cart","Your cart is empty!","error");
+            return;
         }
 
-        save();
+        const balance = 500; // test-saldo
+
+        const total = Object.values(cart).reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0
+        );
+
+        if (total > balance) {
+            showMessage("Payment declined", "Insufficient funds. Please edit cart or update balance.","error");
+            return;
+        }
+
+        // Här kan du t.ex. skicka ordern till server eller visa bekräftelse
+        showMessage("Payment successful!", `Total: ${total} kr`,"success");
+        
+        // Tömmer varukorgen
+        cart = {};
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        renderCart();
+        updateCartCount();
     };
-
-    window.changeAccount = function (code, accountId) {
-        cart[code].accountId = accountId;
-        save();
-    };
-
-    // Ta bort produkt
-    window.removeItem = function (code) {
-        delete cart[code];
-        save();
-    };
-
-    window.payCart = function() {
-    if (Object.keys(cart).length === 0) {
-        showMessage("Empty cart","Your cart is empty!","error");
-        return;
-    }
-
-    const balance = 500; // test-saldo
-    const total = Object.values(cart).reduce(
-        (sum, item) => sum + item.price * item.quantity,
-        0
-    );
-
-    if (total > balance) {
-        showMessage("Payment declined", "Insufficient funds. Please edit cart or update balance.","error");
-        return;
-    }
-
-    // Här kan du t.ex. skicka ordern till server eller visa bekräftelse
-    showMessage("Payment successful!", `Total: ${total} kr`,"success");
-    
-    // Tömmer varukorgen
-    cart = {};
-    localStorage.setItem("cart", JSON.stringify(cart));
-    renderCart();
-    updateCartCount();
-}
 
     function save() {
         localStorage.setItem("cart", JSON.stringify(cart));
