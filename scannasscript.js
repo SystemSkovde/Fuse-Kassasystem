@@ -84,9 +84,8 @@ document.getElementById("add-to-cart").addEventListener("click", function () {
     } else {
         cart[currentCode] = {
             code: currentCode,
-            name: currentMaterial.Category,
+            name: currentMaterial.Name,
             price: currentMaterial.Price,
-            account: currentMaterial.Account,
             quantity: quantity
         };
     }
@@ -96,7 +95,7 @@ document.getElementById("add-to-cart").addEventListener("click", function () {
     document.getElementById("amount").value = "1";
  
     const addedText = document.getElementById("Added");
-    addedText.textContent = `${quantity} ${currentMaterial.Name} added to cart!`;
+    addedText.textContent = `${quantity} ${currentMaterial.nameame} added to cart!`;
 
     wrapC.classList.remove("show");
     wrapO.classList.add("show");
