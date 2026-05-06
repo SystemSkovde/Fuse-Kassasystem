@@ -95,7 +95,7 @@ document.getElementById("add-to-cart").addEventListener("click", function () {
     document.getElementById("amount").value = "1";
  
     const addedText = document.getElementById("Added");
-    addedText.textContent = `${quantity} ${currentMaterial.nameame} added to cart!`;
+    addedText.textContent = `${quantity} ${currentMaterial.Name} added to cart!`;
 
     wrapC.classList.remove("show");
     wrapO.classList.add("show");
