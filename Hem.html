@@ -79,6 +79,19 @@
     }
 
 });
+
+function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
+    let total = Object.values(cart).reduce((sum, item) => {
+        return sum + item.quantity;
+    }, 0);
+
+    const el = document.getElementById("cart-count");
+    if (el) {
+        el.textContent = total;
+    }
+}
   </script>
 
   <div class="container">
@@ -89,12 +102,24 @@ help
 </span>
       
       <div class="icons-right">
-        <!-- Kundkorg -->
-        <span class="material-symbols-outlined big" onclick="location.href='cartAlt1.html'">
-          shopping_basket
-        </span>
 
-        <!-- Gubbe -->
+        <span style="position: relative; display: inline-block;">
+          <span class="material-symbols-outlined big" onclick="location.href='cartAlt1.html'">
+             shopping_basket
+            </span>
+            <span id="cart-count" style="
+              position: absolute;
+              top: -5px;
+              right: -10px;
+              background: red;
+              color: white;
+              font-size: 12px;
+              padding: 2px 6px;
+              border-radius: 50%;
+            ">0</span>
+          </span>
+
+     
         <span class="material-symbols-outlined big" onclick="location.href='Minsida.html'">
           person
         </span>
