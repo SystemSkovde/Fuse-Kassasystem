@@ -30,7 +30,7 @@ docReady(function () {
 
     const html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
         fps: 10,
-        qrbox: 500
+        qrbox: 400
     });
 
     let cart = JSON.parse(localStorage.getItem("cart")) || {};
