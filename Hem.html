@@ -67,6 +67,19 @@
   </style>
 </head>
 <body>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const user = JSON.parse(localStorage.getItem("user"));
+    
+    if (user && user.Name) {
+        document.getElementById("username").textContent = user.Cid + " - " + user.Name;;
+    } 
+    else {
+        document.getElementById("username").textContent = "Guest";
+    }
+
+});
+  </script>
 
   <div class="container">
     
@@ -91,7 +104,7 @@ help
 
 
     <h1>Fuse</h1>
-    <p class="welcome">Welcome Namn Namnsson!</p>
+    <p class="welcome">Welcome <span id="username"></span>!</p>
 
     <button class="btn" onclick="location.href='scannaAlt1.html'">
       Buy materials

@@ -6,12 +6,26 @@ setTimeout(fn, 1);
 document.addEventListener("DOMContentLoaded", fn);
 }
 }
-window.addEventListener("resize", () => {
-    location.reload();
-});
+
+
+
 
 docReady(function () {
+    document.querySelector("form")?.addEventListener("submit", function (e) {
+    e.preventDefault();
+});
+   let products = {};
 
+fetch("data.php")
+    .then(res => res.json())
+    .then(data => {
+
+        data.products.forEach(p => {
+           products[p.BarCode] = p;  
+        });
+
+        initScanner();
+    });
 const wrapC = document.querySelector(".wrap-c");
 const wrapO = document.querySelector("#o-wrap");
 
@@ -21,50 +35,32 @@ let cart = {};
 let currentMaterial = null;
 let currentCode = null;
 
-// ===== MATERIAL DATABAS =====
-const materials = {
-    "123456789": {
-        Category: "Trä",
-        Price: "20",
-        Account: "Personal"
-    },
-    "987654321": {
-        Category: "Stål",
-        Price: "40",
-        Account: "Personal"
-    },
-    "555666777": {
-        Category: "Plast",
-        Price: "50",
-        Account: "Kurs1"
-    }
-};
+
+
 
 // ===== QR SCANNER =====
-const html5QrcodeScanner = new Html5QrcodeScanner(
-    "qr-reader",
-    {
-        fps: 10,
-        qrbox: { 
-            width: 328, 
-            height: 388 
-        }
-    }
-);
+function initScanner() {
+
+    const html5QrcodeScanner = new Html5QrcodeScanner(
+        "qr-reader",
+        { fps: 10, qrbox: { width: 328, height: 388 } }
+    );
+
+    html5QrcodeScanner.render(onScanSuccess, onScanError);
+}
 
 function onScanSuccess(decodedText) {
 
     decodedText = decodedText.trim();
 
-    if (!materials[decodedText]) return;
-
-    const material = materials[decodedText];
+    if (!products[decodedText]) return;
+    const material = products[decodedText];
 
     currentMaterial = material;
     currentCode = decodedText;
 
     // Uppdatera UI
-    document.getElementById("material-name").textContent = material.Category;
+    document.getElementById("material-name").textContent = material.Name;
     document.getElementById("material-price").textContent = material.Price + " kr";
 
     // Visa popup
@@ -75,7 +71,6 @@ function onScanError(errorMessage) {
     // Ignorera
 }
 
-html5QrcodeScanner.render(onScanSuccess, onScanError);
 
 // ===== ADD TO CART =====
 document.getElementById("add-to-cart").addEventListener("click", function () {
@@ -89,9 +84,8 @@ document.getElementById("add-to-cart").addEventListener("click", function () {
     } else {
         cart[currentCode] = {
             code: currentCode,
-            name: currentMaterial.Category,
+            name: currentMaterial.Name,
             price: currentMaterial.Price,
-            account: currentMaterial.Account,
             quantity: quantity
         };
     }
@@ -101,7 +95,7 @@ document.getElementById("add-to-cart").addEventListener("click", function () {
     document.getElementById("amount").value = "1";
  
     const addedText = document.getElementById("Added");
-    addedText.textContent = `${quantity} ${currentMaterial.Category} added to cart!`;
+    addedText.textContent = `${quantity} ${currentMaterial.Name} added to cart!`;
 
     wrapC.classList.remove("show");
     wrapO.classList.add("show");

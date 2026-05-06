@@ -10,21 +10,33 @@ $pdo = new PDO(
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
+
+$response = [];
+
+
 $sql = "SELECT * FROM Products";
 $stmt = $pdo->query($sql);
+$response['products'] = $stmt->fetchAll();
 
-$products = $stmt->fetchAll();
 
-echo json_encode($products);
+$cid = $_POST['cid'] ?? null;
+$password = $_POST['password'] ?? null;
 
-$data = json_decode(file_get_contents("php://input"), true);
-$cid = $data['cid'];
-$password = $data['password'];
+if ($cid !== null && $password !== null) {
+    $sql = "SELECT * FROM Users WHERE cid = :cid";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':cid' => $cid]);
 
-$sql2 = "SELECT * FROM Users where cid = :cid";
-$stmt = $pdo->prepare($sql2);
-$stmt->execute([':cid' => $cid]);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-echo json_encode($user);
+    $response['user'] = $stmt->fetch();
+
+
+       $sql = "SELECT * FROM Accounts WHERE Cid = :cid";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':cid' => $cid]);
+
+    $response['accounts'] = $stmt->fetchAll();
+
+}
+echo json_encode($response);
 
 ?>
