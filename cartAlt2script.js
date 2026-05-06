@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const cartDiv = document.getElementById("cart");
     let cart = JSON.parse(localStorage.getItem("cart")) || {};
+    const user = JSON.parse(localStorage.getItem("user"));
+    const Account = JSON.parse(localStorage.getItem("accounts"));
 
     const courses = [
         { id: "course1", name: "Web Development" },
@@ -28,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <table class="cart-table">
             <thead>
                 <tr>
-                    <th>Category</th>
+                    <th>Name</th>
                     <th>Price</th>
                     <th>Amount</th>
                     <th>Account</th>
@@ -42,15 +44,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         Object.values(cart).forEach(item => {
 
-            totalCost += item.price * item.quantity; // Lägger till Total Cost
+            totalCost += item.Price * item.quantity; // Lägger till Total Cost
 
             html += `
             <tr>
-                <td>${item.category}</td> <!-- Category -->
-                <td>${item.price}</td> <!-- Price -->
+                <td>${item.Name}</td> <!-- Category -->
+                <td>${item.Price}</td> <!-- Price -->
 
                 <td>
-                    <select onchange="changeQuantity('${item.code}', this.value)">
+                    <select onchange="changeQuantity('${item.BarCode}', this.value)">
                         ${createOptions(item.quantity)}
                     </select>
                 </td>
@@ -68,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <td>
                     <span class="material-symbols-outlined delete-icon"
-                        onclick="removeItem('${item.code}')">
+                        onclick="removeItem('${item.BarCode}')">
                     close
                     </span>
                 </td>
@@ -106,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function renderAccountSelector(item) {
     if (item.pot === "course") {
         return `
-            <select onchange="changeAccount('${item.code}', this.value)">
+            <select onchange="changeAccount('${item.BarCode}', this.value)">
                 <option value="">Select course</option>
                 ${courses.map(c => `
                     <option value="${c.id}" ${item.accountId === c.id ? "selected" : ""}>
@@ -119,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (item.pot === "group") {
         return `
-            <select onchange="changeAccount('${item.code}', this.value)">
+            <select onchange="changeAccount('${item.BarCode}', this.value)">
                 <option value="">Select group</option>
                 ${groups.map(g => `
                     <option value="${g.id}" ${item.accountId === g.id ? "selected" : ""}>
@@ -170,25 +172,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Ändra antal
-    window.changeQuantity = function (code, quantity) {
-        cart[code].quantity = parseInt(quantity);
+    window.changeQuantity = function (BarCode, quantity) {
+        cart[BarCode].quantity = parseInt(quantity);
         save();
     };
 
     // Ändra pott
-    window.changePot = function (code, pot) {
-        cart[code].pot = pot;
+    window.changePot = function (BarCode, pot) {
+        cart[BarCode].pot = pot;
         save();
     };
 
-    window.changeAccount = function (code, accountId) {
-        cart[code].accountId = accountId;
+    window.changeAccount = function (BarCode, accountId) {
+        cart[BarCode].accountId = accountId;
         save();
     };
 
     // Ta bort produkt
-    window.removeItem = function (code) {
-        delete cart[code];
+    window.removeItem = function (BarCode) {
+        delete cart[BarCode];
         save();
     };
 
