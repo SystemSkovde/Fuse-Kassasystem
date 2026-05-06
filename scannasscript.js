@@ -120,6 +120,12 @@ function updateCart() {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+
+function loadCart() {
+    cart = JSON.parse(localStorage.getItem("cart")) || {};
+    updateCart();
+}
+
 // ===== RESET SCANNER (optional) =====
 window.startScanner = function () {
     resultContainer.innerHTML = "";
@@ -135,4 +141,6 @@ window.addEventListener("storage", function (e) {
         updateCartCount();
     }
 });
+
+loadCart();
 });
