@@ -175,3 +175,28 @@ table{
     justify-content: center;
     display: flex;
 }
+
+#close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    width: 32px;
+    height: 32px;
+
+    background-color: red;
+    color: white;
+
+    border: none;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+    z-index: 20;
+}
