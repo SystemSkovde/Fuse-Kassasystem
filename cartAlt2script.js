@@ -3,17 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const cartDiv = document.getElementById("cart");
     let cart = JSON.parse(localStorage.getItem("cart")) || {};
     const user = JSON.parse(localStorage.getItem("user"));
-    const Account = JSON.parse(localStorage.getItem("accounts"));
-
-    const courses = [
-        { id: "course1", name: "Web Development" },
-        { id: "course2", name: "UX Design" }
-    ];
-
-    const groups = [
-        { id: "group1", name: "Project A" },
-        { id: "group2", name: "Lab Team" }
-    ];
+    const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
 
     function renderCart() {
         const cartDiv = document.getElementById("cart");
@@ -60,9 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>
                     <select onchange="changePot('${item.code}', this.value)">
                         <option value="personal" ${item.pot === "personal" ? "selected" : ""}>Personal</option>
-                        <option value="research" ${item.pot === "research" ? "selected" : ""}>Research</option>
                         <option value="course" ${item.pot === "course" ? "selected" : ""}>Course</option>
-                        <option value="group" ${item.pot === "group" ? "selected" : ""}>Group</option>
                     </select>
 
                     ${renderAccountSelector(item)}
@@ -106,34 +94,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function renderAccountSelector(item) {
-    if (item.pot === "course") {
+        if (item.pot !== "course") {
+            return "";
+        }
+
+        if (!accounts.length) {
+            return `<span>No accounts available</span>`;
+        }
+
         return `
             <select onchange="changeAccount('${item.code}', this.value)">
-                <option value="">Select course</option>
-                ${courses.map(c => `
-                    <option value="${c.id}" ${item.accountId === c.id ? "selected" : ""}>
-                        ${c.name}
+                <option value="">Select course account</option>
+                ${accounts.map(acc => `
+                    <option value="${acc.AccountName}" ${item.accountId === acc.AccountName ? "selected" : ""}>
+                        ${acc.AccountName}
                     </option>
                 `).join("")}
             </select>
         `;
     }
 
-    if (item.pot === "group") {
-        return `
-            <select onchange="changeAccount('${item.code}', this.value)">
-                <option value="">Select group</option>
-                ${groups.map(g => `
-                    <option value="${g.id}" ${item.accountId === g.id ? "selected" : ""}>
-                        ${g.name}
-                    </option>
-                `).join("")}
-            </select>
-        `;
-    }
-
-    return "";
-}
     // Pop-up för felmeddelanden
     function showMessage(title, text, type) {
         const msg = document.getElementById("cart-message");
@@ -180,6 +160,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Ändra pott
     window.changePot = function (code, pot) {
         cart[code].pot = pot;
+
+        if (pot !== "course") {
+            cart[code].accountId = "";
+        }
+
         save();
     };
 
