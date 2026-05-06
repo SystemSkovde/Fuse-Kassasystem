@@ -101,9 +101,7 @@ footer {
     height: 85vh;
     max-width: 600px;
     margin: auto;
-    position: relative;
     overflow: hidden;
-    border-radius: 12px;
 }
 
 #qr-reader video {
