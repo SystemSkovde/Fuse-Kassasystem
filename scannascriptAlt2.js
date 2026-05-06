@@ -26,12 +26,18 @@ docReady(function () {
             category: "Plastic roll",
             price: "30"
         }
+        
     };
 
     const html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", {
         fps: 10,
-        qrbox: 400
+        qrbox: {
+    width: 250,
+    height: 250
+}
     });
+    
+    
 
     let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
