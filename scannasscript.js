@@ -41,10 +41,11 @@ html5QrCode.start(
     { facingMode: "environment" },
     {
         fps: 10,
-        qrbox: { width: 550, height: 400 }
+        qrbox: { width: 250, height: 400 }
     },
     onScanSuccess
 );
+
 
 
 function onScanSuccess(decodedText) {
