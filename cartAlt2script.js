@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const balance = 500; // test-saldo
     const total = Object.values(cart).reduce(
-        (sum, item) => sum + item.price * item.quantity,
+        (sum, item) => sum + item.Price * item.quantity,
         0
     );
 
