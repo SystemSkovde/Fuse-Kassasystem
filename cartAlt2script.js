@@ -44,15 +44,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         Object.values(cart).forEach(item => {
 
-            totalCost += item.Price * item.quantity; // Lägger till Total Cost
+            totalCost += item.price * item.quantity; // Lägger till Total Cost
 
             html += `
             <tr>
-                <td>${item.Name}</td> <!-- Category -->
-                <td>${item.Price}</td> <!-- Price -->
+                <td>${item.name}</td> <!-- Category -->
+                <td>${item.price}</td> <!-- Price -->
 
                 <td>
-                    <select onchange="changeQuantity('${item.BarCode}', this.value)">
+                    <select onchange="changeQuantity('${item.code}', this.value)">
                         ${createOptions(item.quantity)}
                     </select>
                 </td>
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <td>
                     <span class="material-symbols-outlined delete-icon"
-                        onclick="removeItem('${item.BarCode}')">
+                        onclick="removeItem('${item.code}')">
                     close
                     </span>
                 </td>
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function renderAccountSelector(item) {
     if (item.pot === "course") {
         return `
-            <select onchange="changeAccount('${item.BarCode}', this.value)">
+            <select onchange="changeAccount('${item.code}', this.value)">
                 <option value="">Select course</option>
                 ${courses.map(c => `
                     <option value="${c.id}" ${item.accountId === c.id ? "selected" : ""}>
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (item.pot === "group") {
         return `
-            <select onchange="changeAccount('${item.BarCode}', this.value)">
+            <select onchange="changeAccount('${item.code}', this.value)">
                 <option value="">Select group</option>
                 ${groups.map(g => `
                     <option value="${g.id}" ${item.accountId === g.id ? "selected" : ""}>
@@ -172,25 +172,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Ändra antal
-    window.changeQuantity = function (BarCode, quantity) {
-        cart[BarCode].quantity = parseInt(quantity);
+    window.changeQuantity = function (code, quantity) {
+        cart[code].quantity = parseInt(quantity);
         save();
     };
 
     // Ändra pott
-    window.changePot = function (BarCode, pot) {
-        cart[BarCode].pot = pot;
+    window.changePot = function (code, pot) {
+        cart[code].pot = pot;
         save();
     };
 
-    window.changeAccount = function (BarCode, accountId) {
-        cart[BarCode].accountId = accountId;
+    window.changeAccount = function (code, accountId) {
+        cart[code].accountId = accountId;
         save();
     };
 
     // Ta bort produkt
-    window.removeItem = function (BarCode) {
-        delete cart[BarCode];
+    window.removeItem = function (code) {
+        delete cart[code];
         save();
     };
 
@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const balance = 500; // test-saldo
     const total = Object.values(cart).reduce(
-        (sum, item) => sum + item.Price * item.quantity,
+        (sum, item) => sum + item.price * item.quantity,
         0
     );
 
