@@ -49,13 +49,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 </td>
 
                 <td>
-                    <!-- Account selector (personal + course accounts i samma dropdown) -->
+                    <!-- Account selector (visar balance) -->
                     <select onchange="changeAccount('${item.code}', this.value)">
                         <option value="">Select account</option>
                         ${accounts.map(acc => `
                             <option value="${acc.AccountName}" 
                                 ${item.accountId === acc.AccountName ? "selected" : ""}>
-                                ${acc.AccountName}
+                                ${acc.AccountName} (${acc.Balance} kr)
                             </option>
                         `).join("")}
                     </select>
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return options;
     }
 
-    // Ändra account (val av sub account / kurs / personal)
+    // Ändra account
     window.changeAccount = function (code, accountId) {
         cart[code].accountId = accountId;
         save();
@@ -117,16 +117,13 @@ document.addEventListener("DOMContentLoaded", function () {
         save();
     };
 
-    // Pop-up för felmeddelanden
+    // Pop-up
     function showMessage(title, text, type) {
         const msg = document.getElementById("cart-message");
         const msgTitle = document.getElementById("cart-message-title");
         const msgText = document.getElementById("cart-message-text");
 
-        if (!msg || !msgTitle || !msgText) {
-            console.error("Popup elements missing in HTML");
-            return;
-        }
+        if (!msg || !msgTitle || !msgText) return;
 
         msgTitle.textContent = title;
         msgText.textContent = text;
@@ -137,12 +134,10 @@ document.addEventListener("DOMContentLoaded", function () {
         msg.style.display = "block";
     }
 
-    // Stäng popup
     window.closeMessage = function () {
         document.getElementById("cart-message").style.display = "none";
     };
 
-    // Uppdatera cart count badge
     function updateCartCount() {
         const badge = document.getElementById("cart-count");
         if (!badge) return;
@@ -154,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
         badge.textContent = total;
     }
 
-    // Betala cart
+    // PAY med balans per konto
     window.payCart = function() {
 
         if (Object.keys(cart).length === 0) {
@@ -162,22 +157,42 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const balance = 500; // test-saldo
-
         const total = Object.values(cart).reduce(
             (sum, item) => sum + item.price * item.quantity,
             0
         );
 
-        if (total > balance) {
-            showMessage("Payment declined", "Insufficient funds. Please edit cart or update balance.","error");
+        // bygg upp konto-balance map
+        const accountBalances = {};
+        accounts.forEach(acc => {
+            accountBalances[acc.AccountName] = acc.Balance;
+        });
+
+        // kontroll per konto
+        let valid = true;
+
+        Object.values(cart).forEach(item => {
+            const acc = item.accountId;
+            const cost = item.price * item.quantity;
+
+            if (!acc) return;
+
+            if (accountBalances[acc] < cost) {
+                valid = false;
+            }
+        });
+
+        if (!valid) {
+            showMessage(
+                "Payment declined",
+                "One or more accounts has insufficient balance.",
+                "error"
+            );
             return;
         }
 
-        // Här kan du t.ex. skicka ordern till server eller visa bekräftelse
-        showMessage("Payment successful!", `Total: ${total} kr`,"success");
-        
-        // Tömmer varukorgen
+        showMessage("Payment successful!", `Total: ${total} kr`, "success");
+
         cart = {};
         localStorage.setItem("cart", JSON.stringify(cart));
 
