@@ -16,15 +16,12 @@
     }
 
     .container {
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 20px;
-      text-align: center;
-    }
+    margin: 0 auto;
+    text-align: center;
+}
 
     .top-bar {
       display: flex;
-      justify-content: space-between;
       align-items: center;
       font-size: 24px;
       margin-bottom: 40px;
@@ -64,18 +61,26 @@
     .big {
     font-size: 40px !important;  /* !important tvingar storleken */
     }
+
+    button,
+form,
+input {
+    display: flex;
+    margin: 10px auto;
+}
+table {
+    margin: 0 auto;
+}
+#Inventory {
+    display: flex;
+    justify-content: center;
+}
   </style>
 </head>
 <body>
  <script>
 document.addEventListener("DOMContentLoaded", function () {
     const user = JSON.parse(localStorage.getItem("user"));
-
-    if (user && user.Name) {
-        document.getElementById("username").textContent = user.Cid + " - " + user.Name;
-    } else {
-        document.getElementById("username").textContent = "Guest";
-    }
 
     function updateCartCount() {
         let cart = JSON.parse(localStorage.getItem("cart")) || {};
@@ -102,12 +107,13 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
   <div class="container">
-    <a href="AdminHem.html">
+ 
+    <div class="top-bar">
+           <a href="AdminHem.html">
           <span class="material-symbols-outlined big">
             home
           </span>
         </a>
-    <div class="top-bar">
       <span class="material-symbols-outlined big">
 help
 </span>
@@ -136,18 +142,13 @@ help
         </span>
       </div>
     </div>
-  </div>
-
-
-
-    <h1>Fuse</h1>
-    <p class="welcome">Welcome <span id="username"></span>!</p>
+     <h1>Fuse</h1>
     
-    <button  onclick="">
+    <button>
       Add item
     </button>
 
-    <button onclick="">
+    <button id="editBtn">
       Edit item
     </button>
 
@@ -155,11 +156,16 @@ help
      Filters
     </button>
     <form>
-        <input input="text" placeholder="Search inventory">
+        <input id="Search" type="text" placeholder="Search">
     </form>
     <div id="Inventory"></div>
     
-<script src="Lagerscript.js"></script>
+<script src="Amanda.js"></script>
+  </div>
+
+
+
+   
 
 </body>
 </html>
