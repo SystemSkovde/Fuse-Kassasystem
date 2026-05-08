@@ -19,7 +19,7 @@ fetch("data.php")
         data.products.forEach(p => {
            products[p.BarCode] = p;  
         });
-
+        RenderProducts();
         initScanner();
     });
 
@@ -40,7 +40,7 @@ fetch("data.php")
             <tbody>
         `;
 
-        Object.values(p).forEach(item => {
+        Object.values(products).forEach(item => {
             html += `
             <tr>
                 <td>${item.Name}</td> 
