@@ -129,14 +129,27 @@ home
   <!-- Back-knappen -->
 <div class="back">
     <span class="material-symbols-outlined smal">arrow_back_ios</span>
-    <a href="Hem.html">Back</a>
+    <a  id="Home" href="#">Back</a>
 </div>
 
 <!-- Logga ut-knappen -->
 <div class="Loggaut">
     <span class="material-symbols-outlined">logout</span>
     <a href="Loggain.html">Sign out</a>
+
 </div>
+
+<script>
+const user = JSON.parse(localStorage.getItem("user"));
+
+const homeLink = document.getElementById("Home");
+
+if (user.cid === "Admin") {
+    homeLink.href = "AdminHem.html";
+} else {
+    homeLink.href = "Hem.html";
+}
+   </script>
 
 </body>
 </html>
