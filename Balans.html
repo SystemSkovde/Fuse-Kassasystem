@@ -107,7 +107,7 @@ a {
 help
 </span>
     <div class="icons-right">
-        <a href="Hem.html">
+        <a id="Home" href="#">
           <span class="material-symbols-outlined big">
             home
           </span>
@@ -150,5 +150,16 @@ help
     <a href="Hem.html">Back</a>
   </div> 
 
+<script>
+const user = JSON.parse(localStorage.getItem("user"));
+
+const homeLink = document.getElementById("Home");
+
+if (user.Cid === "Admin") {
+    homeLink.href = "AdminHem.html";
+} else {
+    homeLink.href = "Hem.html";
+}
+   </script>
 </body>
 </html>
