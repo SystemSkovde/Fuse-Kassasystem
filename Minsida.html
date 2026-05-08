@@ -161,16 +161,15 @@
   </div>
 
   <script>
-    const user = JSON.parse(localStorage.getItem("user"));
+const user = JSON.parse(localStorage.getItem("user"));
 
-    const homeLink = document.getElementById("Home");
+const homeLink = document.getElementById("Home");
 
-    if (user && user.Cid === "Admin") {
-      homeLink.href = "AdminHem.html";
-    } else {
-      homeLink.href = "Hem.html";
-    }
-  </script>
-
+if (user && user.Cid === "Admin") {
+    homeLink.href = "AdminHem.html";
+} else {
+    homeLink.href = "Hem.html";
+}
+</script>
 </body>
 </html>
