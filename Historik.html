@@ -131,7 +131,11 @@
 <body>
   <div class="content">
     <div class="top-icons">
-      <span class="material-symbols-outlined big">home </span>
+      <a id="Home" href="#">
+          <span class="material-symbols-outlined big">
+            home
+          </span>
+        </a>
         <div class="top-bar">
       <span class="material-symbols-outlined big">
 help
@@ -184,5 +188,16 @@ help
     <div class="bottom-buttons">
       <button class="btn" onclick="location.href='Minsida.html'">Back</button>
   </div>
+  <script>
+const user = JSON.parse(localStorage.getItem("user"));
+
+const homeLink = document.getElementById("Home");
+
+if (user.Cid === "Admin") {
+    homeLink.href = "AdminHem.html";
+} else {
+    homeLink.href = "Hem.html";
+}
+   </script>
 </body>
 </html>
