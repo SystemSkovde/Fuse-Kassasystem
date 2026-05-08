@@ -179,9 +179,11 @@
 
 <body>
 <nav class="top-nav">
-    <a href="hem.html">
-        <span class="material-symbols-outlined big">home</span>
-    </a>
+    <a id="Home" href="#">
+          <span class="material-symbols-outlined big">
+            home
+          </span>
+        </a>
 
     <div class="nav-right">
         <a href="cartAlt2.html" class="cart-icon">
@@ -222,6 +224,17 @@
     <span class="material-symbols-outlined smal">arrow_back_ios</span>
     <a href="scanna.html">Back</a>
 </div>
+<script>
+const user = JSON.parse(localStorage.getItem("user"));
+
+const homeLink = document.getElementById("Home");
+
+if (user.Cid === "Admin") {
+    homeLink.href = "AdminHem.html";
+} else {
+    homeLink.href = "Hem.html";
+}
+   </script>
 
 </body>
 </html>
