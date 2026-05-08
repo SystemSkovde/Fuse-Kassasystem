@@ -87,8 +87,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (!backLink) return;
 
-    if (user && user.Role === "Admin") {
-        backLink.href = "HemAdmin.html";
+    if (user && user.Cid === "Admin") {
+        backLink.href = "AdminHem.html";
     } else {
         backLink.href = "Hem.html";
     }
