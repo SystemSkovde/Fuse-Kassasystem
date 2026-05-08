@@ -21,7 +21,11 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
         localStorage.setItem("accounts", JSON.stringify(data.accounts));
         localStorage.setItem("products", JSON.stringify(data.products));
 
-        window.location.href = "Hem.html";
+       if (cid === "Admin") {
+    window.location.href = "AdminHem.html";
+} else {
+    window.location.href = "Hem.html";
+}
     })
     .catch(err => console.error(err));
 });
