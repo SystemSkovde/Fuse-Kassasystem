@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fuse</title>
-     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
   <style>
     body {
       margin: 0;
@@ -59,63 +61,70 @@
     }
 
     .big {
-    font-size: 40px !important;  /* !important tvingar storleken */
-}
+      font-size: 40px !important;
+    }
 
-/* Back-knapp */
-.back {
-  position: fixed;
-    bottom: 20px;
-    left: 20px;
+    /* Back-knapp */
+    .back {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
 
-    display: inline-flex;      
-    align-items: center;
-    padding: 8px 10px;
-    border: 2px solid #000000; 
-    border-radius: 6px;
-    background-color: #ffffff; 
-    cursor: pointer;
-    font-weight: bold;
-    text-decoration: none;
-}
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 10px;
+      border: 2px solid #000000;
+      border-radius: 6px;
+      background-color: #ffffff;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+    }
 
-.Loggaut {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+    .Loggaut {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
 
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 10px;
-    border: 2px solid #000000;
-    border-radius: 6px;
-    background-color: #ffffff;
-    cursor: pointer;
-    font-weight: bold;
-    text-decoration: none;
-}
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 10px;
+      border: 2px solid #000000;
+      border-radius: 6px;
+      background-color: #ffffff;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .back a,
+    .Loggaut a {
+      text-decoration: none;
+      color: black;
+      margin-left: 5px;
+    }
   </style>
-
-  
 </head>
+
 <body>
 
   <div class="container">
-    
+
     <div class="top-bar">
-        <div class="top-bar">
+
       <span class="material-symbols-outlined big">
-help
-</span>
+        help
+      </span>
+
       <div class="icons-right">
         <span class="material-symbols-outlined big">
-home
-</span>
+          home
+        </span>
       </div>
+
     </div>
 
     <h1>Fuse Account</h1>
-    
 
     <!-- Knappen för Balans -->
     <button class="btn" onclick="location.href='Balans.html'">
@@ -123,34 +132,45 @@ home
     </button>
 
     <!-- Knappen för Order History -->
-    <button class="btn" onclick="location.href='Historik.html'">Order history</button>
+    <button class="btn" onclick="location.href='Historik.html'">
+      Order history
+    </button>
 
   </div>
 
   <!-- Back-knappen -->
-<div class="back">
-    <span class="material-symbols-outlined smal">arrow_back_ios</span>
-    <a  id="Home" href="#">Back</a>
-</div>
+  <div class="back">
+    <span class="material-symbols-outlined smal">
+      arrow_back_ios
+    </span>
 
-<!-- Logga ut-knappen -->
-<div class="Loggaut">
-    <span class="material-symbols-outlined">logout</span>
-    <a href="Loggain.html">Sign out</a>
+    <a id="Home" href="#">
+      Back
+    </a>
+  </div>
 
-</div>
+  <!-- Logga ut-knappen -->
+  <div class="Loggaut">
+    <span class="material-symbols-outlined">
+      logout
+    </span>
 
-<script>
-const user = JSON.parse(localStorage.getItem("user"));
+    <a href="Loggain.html">
+      Sign out
+    </a>
+  </div>
 
-const homeLink = document.getElementById("Home");
+  <script>
+    const user = JSON.parse(localStorage.getItem("user"));
 
-if (user.Cid === "Admin") {
-    homeLink.href = "AdminHem.html";
-} else {
-    homeLink.href = "Hem.html";
-}
-   </script>
+    const homeLink = document.getElementById("Home");
+
+    if (user && user.Cid === "Admin") {
+      homeLink.href = "AdminHem.html";
+    } else {
+      homeLink.href = "Hem.html";
+    }
+  </script>
 
 </body>
 </html>
