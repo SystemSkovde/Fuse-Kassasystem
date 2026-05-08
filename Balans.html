@@ -26,6 +26,10 @@ body {
   margin-bottom: 40px;
 }
 
+.icons-right {
+  margin-left: auto;
+}
+
 .icons-right span {
   margin-left: 15px;
   cursor: pointer;
@@ -70,7 +74,7 @@ h2 {
 }
 
 .smal {
-    font-size: 16px !important;  /* !important tvingar storleken */
+    font-size: 16px !important;
 }
 
 button {
@@ -91,7 +95,7 @@ a {
 }
 
 .big {
-  font-size: 40px !important;  /* !important tvingar storleken */
+  font-size: 40px !important;
 }
 
 </style>
@@ -100,26 +104,30 @@ a {
 
   <br>
   <br>
+
   <div class="container">
-    <div class="top-bar">
-         <div class="top-bar">
+
+<div class="top-bar">
+
+  <span class="material-symbols-outlined big">
+    help
+  </span>
+
+  <div class="icons-right">
+    <a id="Home" href="#">
       <span class="material-symbols-outlined big">
-help
-</span>
-    <div class="icons-right">
-        <a id="Home" href="#">
-          <span class="material-symbols-outlined big">
-            home
-          </span>
-        </a>
-      </div>
-    </div>
-    </div>
+        home
+      </span>
+    </a>
+  </div>
+
+</div>
 
     <h1>Balances</h1>
    
     <br>
     <br>
+
     <div class="section">
       <h2>Personal</h2>
       <div class="item">500kr</div><br>
@@ -143,12 +151,14 @@ help
       <div class="item">Group 2: 500kr</div>
     </div>
 
-  <div class="back">
-    <span class="material-symbols-outlined">
-      arrow_back_ios
-    </span>
-    <a href="Minsida.html">Back</a>
-  </div> 
+    <div class="back">
+      <span class="material-symbols-outlined">
+        arrow_back_ios
+      </span>
+      <a href="Minsida.html">Back</a>
+    </div>
+
+  </div>
 
 <script>
 const user = JSON.parse(localStorage.getItem("user"));
