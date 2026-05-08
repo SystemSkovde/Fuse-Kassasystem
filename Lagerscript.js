@@ -24,24 +24,15 @@ fetch("data.php")
     });
 
   function RenderProducts() {
-        const cartDiv = document.getElementById("cart");
-    
-        // Kontroll om varukorgen är tom
-        if (Object.keys(cart).length === 0) {
-            cartDiv.innerHTML = `
-                <p>Your cart is empty</p>
-            `;
-            updateCartCount();
-            return;
-        }
+        const IventoryDiv = document.getElementById("Inventory");
 
         let html = `
         <table class="cart-table">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Name</th>
-                    <th>Name</th>
+                    <th>Category</th>
+                    <th>SubCategory</th>
                     <th>Stock</th>
                     <th>Price</th>
                 </tr>
@@ -49,66 +40,24 @@ fetch("data.php")
             <tbody>
         `;
 
-        let totalCost = 0;
-
-        Object.values(cart).forEach(item => {
-
-            totalCost += item.price * item.quantity; // Lägger till Total Cost
-
+        Object.values(p).forEach(item => {
             html += `
             <tr>
-                <td>${item.name}</td> <!-- Category -->
-                <td>${item.price}</td> <!-- Price -->
-
-                <td>
-                    <select onchange="changeQuantity('${item.code}', this.value)">
-                        ${createOptions(item.quantity)}
-                    </select>
-                </td>
-
-                <td>
-                    <!-- Account selector (visar balance) -->
-                    <select onchange="changeAccount('${item.code}', this.value)">
-                        <option value="">Select account</option>
-                        ${accounts.map(acc => `
-                            <option value="${acc.AccountName}" 
-                                ${item.accountId === acc.AccountName ? "selected" : ""}>
-                                ${acc.AccountName} (${acc.Balance} kr)
-                            </option>
-                        `).join("")}
-                    </select>
-                </td>
-
-                <td>
-                    <!-- Delete item -->
-                    <span class="material-symbols-outlined delete-icon"
-                        onclick="removeItem('${item.code}')">
-                    close
-                    </span>
-                </td>
+                <td>${item.Name}</td> 
+                <td>${item.Category}</td> 
+                <td>${item.SubCategory}</td> 
+                <td>${item.Stock}</td> 
+                <td>${item.Price}</td> 
             </tr>
             `;
         });
 
         html += `
             </tbody>
-        </table>
+        </table>`;
 
-        <!-- Total cost -->
-        <div class="cart-total">
-            <strong>Total: ${totalCost} kr</strong>
-        </div>
-
-        <!-- Pay button -->
-        <div class="pay-button-wrapper">
-            <button onclick="payCart()" class="pay-btn">Pay</button>
-        </div>
-        `;
-
-        cartDiv.innerHTML = html;
+        IventoryDiv.innerHTML = html;
         updateCartCount();
     }
-
-
 
 });
