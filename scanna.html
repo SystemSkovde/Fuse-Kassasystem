@@ -19,7 +19,7 @@
                 <span class="material-symbols-outlined smal">
                     arrow_back_ios
                 </span>
-                <a href="Hem.html">Back</a>
+                <a href="#" id="back-link">Back</a>
             </div> 
             <h1 id="scan">Scan barcode</h1>
         </nav>
@@ -80,9 +80,19 @@
 </footer>
 </div>
  </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const backLink = document.getElementById("back-link");
 
+    if (!backLink) return;
 
-
-
-    </body>
+    if (user && user.Role === "Admin") {
+        backLink.href = "HemAdmin.html";
+    } else {
+        backLink.href = "Hem.html";
+    }
+});
+</script>
+</body>
 </html>
