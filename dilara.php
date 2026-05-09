@@ -23,20 +23,13 @@ $Category = $_POST['Category'] ?? null;
 $SubCategory = $_POST['SubCategory'] ?? null;
 
 if ($Category !== null && $SubCategory !== null) {
-    $sql = "SELECT * FROM Products WHERE Category = :Category";
+    $sql = "SELECT * FROM Products WHERE Category = :Category AND SubCategory = :SubCategory";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([':Category' => $Category]);
+    $stmt->execute([':Category' => $Category, ':SubCategory' => $SubCategory]);
 
-    $response['user'] = $stmt->fetch();
-
-
-       $sql = "SELECT * FROM Accounts WHERE Cid = :cid";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([':cid' => $cid]);
-
-    $response['accounts'] = $stmt->fetchAll();
-
+    $response['products'] = $stmt->fetchAll();
 }
+
 echo json_encode($response);
 
 ?>
