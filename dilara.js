@@ -20,7 +20,6 @@ fetch("data.php")
            products[p.BarCode] = p;  
         });
         RenderProducts();
-        initScanner();
     });
 
   function RenderProducts() {
@@ -57,7 +56,6 @@ fetch("data.php")
         </table>`;
 
         IventoryDiv.innerHTML = html;
-        updateCartCount();
     }
 
 });
