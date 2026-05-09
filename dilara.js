@@ -23,7 +23,24 @@ fetch("data.php")
     });
 
   function RenderProducts() {
-        const IventoryDiv = document.getElementById("Inventory");
+       const subcategorySelect = document.getElementById("category");
+
+const categories = new Set();
+
+Object.values(products).forEach(item => {
+    categories.add(item.Category);
+});
+
+categories.forEach(category => {
+
+    subcategorySelect.innerHTML += `
+        <option value="${category}">
+            ${category}
+        </option>
+    `;
+});
+    
+    const IventoryDiv = document.getElementById("Inventory");
 
         let html = `
         <table class="cart-table">
