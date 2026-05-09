@@ -19,8 +19,8 @@ $stmt = $pdo->query($sql);
 $response['products'] = $stmt->fetchAll();
 
 
-$cid = $_POST['cid'] ?? null;
-$password = $_POST['password'] ?? null;
+$cid = $_POST['Category'] ?? null;
+$password = $_POST['SubCategory'] ?? null;
 
 if ($cid !== null && $password !== null) {
     $sql = "SELECT * FROM Users WHERE cid = :cid";
