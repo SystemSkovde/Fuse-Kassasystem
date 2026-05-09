@@ -1,39 +1,34 @@
 <?php
 
-$conn = new mysqli(
-    "localhost",
-    "root",
-    "",
-    "database_name"
+// Databas-anslutning
+$pdo = new PDO(
+    'mysql:dbname=Fuse;host=projekt.webug.se;charset=utf8mb4',
+    'dbftg',
+    'Myrlejon2026!',
+    [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
 );
+
+// Sätt attribut korrekt
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
 
 
 // Categories
-$categories = [];
-
-$result = $conn->query("SELECT * FROM categories");
-
-while($row = $result->fetch_assoc()) {
-    $categories[] = $row;
-}
+$sql = "SELECT * FROM categories";
+$stmt = $pdo->query($sql);
+$categories = $stmt->fetchAll();
 
 
 
 // Subcategories
-$subcategories = [];
-
-$result = $conn->query("SELECT * FROM subcategories");
-
-while($row = $result->fetch_assoc()) {
-    $subcategories[] = $row;
-}
+$sql = "SELECT * FROM subcategories";
+$stmt = $pdo->query($sql);
+$subcategories = $stmt->fetchAll();
 
 
 
 // Products
-$products = [];
-
 $sql = "
 SELECT
 products.id,
@@ -49,11 +44,8 @@ JOIN subcategories
 ON products.subcategory_id = subcategories.id
 ";
 
-$result = $conn->query($sql);
-
-while($row = $result->fetch_assoc()) {
-    $products[] = $row;
-}
+$stmt = $pdo->query($sql);
+$products = $stmt->fetchAll();
 
 
 
