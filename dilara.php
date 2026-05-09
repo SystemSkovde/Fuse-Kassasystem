@@ -23,31 +23,40 @@ $Category = $_POST['Category'] ?? null;
 $SubCategory = $_POST['SubCategory'] ?? null;
 
 if ($Category !== null && $SubCategory !== null) {
-    $sql = "SELECT * FROM Products WHERE Category = :Category AND SubCategory = :SubCategory";
+    $sql = "SELECT * FROM Products 
+            WHERE Category = :Category 
+            AND SubCategory = :SubCategory";
+
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([':Category' => $Category, ':SubCategory' => $SubCategory]);
+    $stmt->execute([
+        ':Category' => $Category,
+        ':SubCategory' => $SubCategory
+    ]);
+    $response['products'] = $stmt->fetchAll();
+
+}
+else if ($Category !== null) {
+    // ONLY CATEGORY
+    $sql = "SELECT * FROM Products 
+            WHERE Category = :Category";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':Category' => $Category
+    ]);
+    $response['products'] = $stmt->fetchAll();
+
+}
+else {
+ // ONLY SUBCATEGORY (NO CATEGORY)
+    $sql = "SELECT * FROM Products 
+            WHERE SubCategory = :SubCategory";
+      $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':SubCategory' => $SubCategory
+    ]);
 
     $response['products'] = $stmt->fetchAll();
 }
-else if 
- ($Category !== null) {
-    $sql = "SELECT * FROM Products WHERE Category = :Category AND SubCategory = :SubCategory";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([':Category' => $Category, ':SubCategory' => $SubCategory]);
-
-    $response['products'] = $stmt->fetchAll();
- }
- else
-   {
-    $sql = "SELECT * FROM Products WHERE Category = :Category AND SubCategory = :SubCategory";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([':Category' => $Category, ':SubCategory' => $SubCategory]);
-
-    $response['products'] = $stmt->fetchAll();
- }
-
-
-    
 
 echo json_encode($response);
 
