@@ -19,13 +19,13 @@ $stmt = $pdo->query($sql);
 $response['products'] = $stmt->fetchAll();
 
 
-$cid = $_POST['Category'] ?? null;
-$password = $_POST['SubCategory'] ?? null;
+$Category = $_POST['Category'] ?? null;
+$SubCategory = $_POST['SubCategory'] ?? null;
 
-if ($cid !== null && $password !== null) {
-    $sql = "SELECT * FROM Users WHERE cid = :cid";
+if ($Category !== null && $SubCategory !== null) {
+    $sql = "SELECT * FROM Products WHERE Category = :Category";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([':cid' => $cid]);
+    $stmt->execute([':Category' => $Category]);
 
     $response['user'] = $stmt->fetch();
 
