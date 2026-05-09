@@ -30,7 +30,7 @@ if ($Category !== null && $SubCategory !== null) {
     $response['products'] = $stmt->fetchAll();
 }
 else if 
- ($Category !== null && $SubCategory !== null) {
+ ($Category !== null) {
     $sql = "SELECT * FROM Products WHERE Category = :Category AND SubCategory = :SubCategory";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':Category' => $Category, ':SubCategory' => $SubCategory]);
