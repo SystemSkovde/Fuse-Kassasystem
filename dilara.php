@@ -37,6 +37,14 @@ else if
 
     $response['products'] = $stmt->fetchAll();
  }
+ else
+   {
+    $sql = "SELECT * FROM Products WHERE Category = :Category AND SubCategory = :SubCategory";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':Category' => $Category, ':SubCategory' => $SubCategory]);
+
+    $response['products'] = $stmt->fetchAll();
+ }
 
 
     
