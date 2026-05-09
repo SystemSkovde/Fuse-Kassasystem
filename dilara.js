@@ -12,7 +12,7 @@ docReady(function () {
 });
    let products = {};
 
-fetch("data.php")
+fetch("dilara.php")
     .then(res => res.json())
     .then(data => {
 
