@@ -17,13 +17,11 @@ docReady(function () {
         data.products.forEach(p => {
             products[p.BarCode] = p;  
         });
-        initScanner();
     });
     
     const wrapC = document.querySelector(".wrap-c");
     const wrapO = document.querySelector("#o-wrap");
     const resultContainer = document.getElementById("qr-reader-results");
-    
     let cart = JSON.parse(localStorage.getItem("cart")) || {};
     let currentMaterial = null;
     let currentCode = null;
@@ -47,15 +45,10 @@ docReady(function () {
         currentMaterial = material;
         currentCode = decodedText;
         
-        // Uppdatera UI
         document.getElementById("material-name").textContent = material.Name;
         document.getElementById("material-price").textContent = material.Price + " kr";
 
-        // Visa popup
         wrapC.classList.add("show");
-    }
-    
-    function onScanError(errorMessage) {
     }
 
     // ===== ADD TO CART =====
@@ -91,10 +84,6 @@ docReady(function () {
         wrapC.classList.remove("show");
     });
     
-    wrapO.addEventListener("click", () => {
-        wrapO.classList.remove("show");
-    });
-    
     function updateCart() {
         let totalQuantity = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
         
@@ -107,20 +96,15 @@ docReady(function () {
         updateCart();
     }
     
-    // ===== RESET SCANNER (optional) =====
-    window.startScanner = function () {
-    resultContainer.innerHTML = "";
-    };
-    
-    window.addEventListener("focus", function () {
+   window.addEventListener("focus", function () {
     cart = JSON.parse(localStorage.getItem("cart")) || {};
-    updateCartCount();
-    });
+    updateCart();
+});
     
     window.addEventListener("storage", function (e) {
         if (e.key === "cart") {
             cart = JSON.parse(localStorage.getItem("cart")) || {};
-            updateCartCount();
+           updateCart();
         }
     });
     
