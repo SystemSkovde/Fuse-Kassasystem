@@ -143,9 +143,16 @@ help
     <h1>Fuse</h1>
     <p class="welcome">Welcome <span id="username"></span>!</p>
     
-    <button  onclick="">
-      Add item
-    </button>
+    <form id="add-form">
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="text" id="category" placeholder="Category" required>
+      <input type="text" id="subcategory" placeholder="SubCategory" required>
+      <input type="number" id="stock" placeholder="Stock" required>
+      <input type="number" id="price" placeholder="Price"required>
+      <input type="hidden" id="barcode" placeholder="Barcode">
+
+      <button type="submit">Add item</button>
+    </form>
 
     <button onclick="">
       Edit item
@@ -159,7 +166,7 @@ help
     </form>
     <div id="Inventory"></div>
     
-<script src="Lagerscript.js"></script>
+<script src="hedvigLagerscript.js"></script>
 
 </body>
 </html>

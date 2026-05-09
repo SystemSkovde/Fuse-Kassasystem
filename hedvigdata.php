@@ -13,6 +13,27 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
 $response = [];
 
+if (isset($_POST['action']) && $_POST['action'] === 'insert') {
+
+    $sql = "INSERT INTO Products (Name, Category, SubCategory, Stock, Price, BarCode)
+            VALUES (:name, :category, :subcategory, :stock, :price, :barcode)";
+
+    $stmt = $pdo->prepare($sql);
+
+    $ok = $stmt->execute([
+        ':name' => $_POST['name'],
+        ':category' => $_POST['category'],
+        ':subcategory' => $_POST['subcategory'],
+        ':stock' => $_POST['stock'],
+        ':price' => $_POST['price'],
+        ':barcode' => $_POST['barcode']
+    ]);
+
+    echo json_encode([
+        'success' => $ok
+    ]);
+    exit;
+}
 
 $sql = "SELECT * FROM Products";
 $stmt = $pdo->query($sql);
