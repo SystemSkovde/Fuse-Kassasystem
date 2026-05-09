@@ -76,3 +76,4 @@ categories.forEach(category => {
     }
 
 });
+
