@@ -47,13 +47,13 @@ else if ($Category !== null) {
 
 }
 else if {
- ($subcategory !== null) {
+ ($SubCategory !== null) {
     // ONLY CATEGORY
     $sql = "SELECT * FROM Products 
-            WHERE subcategory = :subcategory";
+            WHERE SubCategory = :SubCategory";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
-        ':subcategory' => $SubCategory
+        ':SubCategory' => $SubCategory
     ]);
     $response['products'] = $stmt->fetchAll();
  }
