@@ -15,6 +15,18 @@ $response = [];
 
 if (isset($_POST['action']) && $_POST['action'] === 'insert') {
 
+    $stmtMax = $pdo->query("SELECT MAX(BarCode) AS last_barcode FROM Products");
+    $row = $stmtMax->fetch();
+
+    $lastBarcode = $row['last_barcode'];
+
+    if (!$lastBarcode) {
+        $newBarcode = 100001;
+    } else {
+        $newBarcode = (int)$lastBarcode + 1;
+    }
+    
+
     $sql = "INSERT INTO Products (Name, Category, SubCategory, Stock, Price, BarCode)
             VALUES (:name, :category, :subcategory, :stock, :price, :barcode)";
 
@@ -26,11 +38,12 @@ if (isset($_POST['action']) && $_POST['action'] === 'insert') {
         ':subcategory' => $_POST['subcategory'],
         ':stock' => $_POST['stock'],
         ':price' => $_POST['price'],
-        ':barcode' => $_POST['barcode']
+        ':barcode' => $newBarcode
     ]);
 
     echo json_encode([
-        'success' => $ok
+        'success' => $ok,
+        'new_barcode' => $newBarcode
     ]);
     exit;
 }

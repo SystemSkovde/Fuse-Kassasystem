@@ -3,18 +3,36 @@
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shopping Cart</title>
 <link rel="stylesheet" href="style.css">
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    overflow-x: hidden;
+}
+
 .big {
     font-size: 40px !important;  /* !important tvingar storleken */
+}
+
+.h1 {
+    text-align: center;
 }
 
 .cart-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    table-layout: fixed;
 }
 
 .cart-table th,
@@ -22,13 +40,18 @@
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
+    overflow: hidden;
 }
 
-.cart-table th {
-    background-color: #f5f5f5;
+.cart-table td:nth-child(4),
+.cart-table th:nth-child(4) {
+    width: 140px;
 }
 
 .cart-table select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     padding: 5px;
 }
 
@@ -56,7 +79,9 @@
     background-color: #27ae60;
     color: white;
     border: none;
-    padding: 15px 100px;
+    width: 100%;
+    max-width: 320px;
+    padding: 15px 0;
     font-size: 25px;
     cursor: pointer;
     border-radius: 5px;
@@ -68,16 +93,19 @@
 
 /* Back-knapp */
 .back {
-    display: inline-flex;      
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: inline-flex;
     align-items: center;
-    padding: 8px 10px;
-    border: 2px solid #000000; 
-    border-radius: 6px;
-    background-color: #ffffff; 
+    padding: 12px 16px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    background-color: #ffffff;
     cursor: pointer;
     font-weight: bold;
-    margin-bottom: 20px; 
     text-decoration: none;
+    z-index: 1000;
 }
 
 .top-nav {
@@ -172,6 +200,97 @@
     right: 10px;
     cursor: pointer;
     font-size: 32px;
+}
+
+/* Mobilvy */
+@media (max-width: 768px) {
+    body {
+        font-size: 20px;
+    }
+
+    h1 {
+        font-size: 34px;
+        margin: 20px 0;
+    }
+
+    .top-nav {
+        padding: 18px 20px;
+    }
+
+    .top-nav .material-symbols-outlined,
+    .big {
+        font-size: 46px !important;
+    }
+
+    .cart-icon .circle {
+        width: 26px;
+        height: 26px;
+        font-size: 16px;
+        top: -10px;
+        right: -10px;
+    }
+
+    .cart-table th,
+    .cart-table td {
+        padding: 8px 4px;
+        font-size: 15px;
+        word-wrap: break-word;
+    }
+
+    .cart-table select {
+        width: 100%;
+        max-width: 60px;
+        padding: 4px;
+        font-size: 14px;
+    }
+
+    .remove-btn {
+        padding: 6px 8px;
+        font-size: 14px;
+    }
+
+    .delete-icon {
+        font-size: 24px;
+    }
+
+    .cart-total {
+        font-size: 34px;
+        margin-top: 25px;
+    }
+
+    .pay-btn {
+        padding: 18px 60px;
+        font-size: 28px;
+        border-radius: 10px;
+    }
+
+    .back {
+        padding: 12px 16px;
+        font-size: 20px;
+        border-radius: 10px;
+    }
+
+    .back a {
+        font-size: 20px;
+    }
+
+    .smal {
+        font-size: 22px !important;
+    }
+
+    .cart-message {
+        width: 90%;
+        padding: 30px 20px;
+        font-size: 26px;
+    }
+
+    .popup-title {
+        font-size: 26px;
+    }
+
+    .close-msg {
+        font-size: 38px;
+    }
 }
 
 </style>
