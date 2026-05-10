@@ -143,9 +143,16 @@ help
     <h1>Fuse</h1>
     <p class="welcome">Welcome <span id="username"></span>!</p>
     
-    <button  onclick="">
-      Add item
-    </button>
+    <form id="add-form">
+      <input type="number" id="nr" placeholder="Nr" required>
+      <input type="text" id="item-name" placeholder="Name" required>
+      <input type="text" id="category" placeholder="Category" required>
+      <input type="text" id="subcategory" placeholder="SubCategory" required>
+      <input type="number" id="stock" placeholder="Stock" required>
+      <input type="number" id="price" placeholder="Price"required>
+
+      <button type="submit">Add item</button>
+    </form>
 
     <button onclick="">
       Edit item
