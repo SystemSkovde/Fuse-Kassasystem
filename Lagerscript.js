@@ -6,11 +6,61 @@ document.addEventListener("DOMContentLoaded", fn);
 }
 }
 
-   let products = [];
+   
+const editBtn = document.getElementById("editBtn");
+ const searchInput = document.getElementById("Search");
+ 
+searchInput?.addEventListener("input", function () {
+    const searchValue = searchInput.value;
 
-docReady(function () {
+    fetch("Data.php?search=" + encodeURIComponent(searchValue))
+        .then(res => res.json())
+        .then(data => {
+
+            products = {}; // reset
+
+            data.products.forEach(p => {
+                products[p.BarCode] = p;
+            });
+
+            RenderProducts();
+        });
+});
+
+    // EDIT MODE BUTTON
+    editBtn?.addEventListener("click", () => {
+        isEditMode = !isEditMode;
+        RenderProducts();
+    });
+
+    // CHANGE EVENT (event delegation)
+    inventory?.addEventListener("change", (e) => {
+        if (e.target.tagName === "INPUT") {
+            const barcode = e.target.dataset.barcode;
+            const field = e.target.dataset.field;
+            const value = e.target.value; 
+
+            fetch("Data.php", {
+                method: "POST",
+                headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        barcode: barcode,
+        field: field,
+        value: value
+    })
+});
+        }
+    });
+
+
 
    let products = {};
+
+   searchInput?.addEventListener("input", function () {
+    const searchValue = searchInput.value;
+
     document.getElementById("add-form")?.addEventListener("submit", function (e) {
         e.preventDefault();
 
@@ -52,6 +102,7 @@ docReady(function () {
 renderProducts(products);
 fillDropdowns();
             });
+            
         // FYLL DROPDOWNS
 function fillDropdowns() {
 
