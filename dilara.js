@@ -23,6 +23,13 @@ fetch("dilara.php")
         });
 
         RenderProducts();
+
+        document.getElementById("Category")
+        .addEventListener("change", RenderProducts);
+
+        document.getElementById("SubCategory")
+        .addEventListener("change", RenderProducts);
+
     });
 
 function RenderProducts() {
@@ -31,77 +38,101 @@ const categorySelect = document.getElementById("Category");
 const subCategorySelect = document.getElementById("SubCategory");
 
 
-    const categories = new Set();
-    const subCategories = new Set();
+// RESET
+categorySelect.innerHTML = `
+<option value="">Choose category</option>
+`;
 
-    Object.values(products).forEach(item => {
+subCategorySelect.innerHTML = `
+<option value="">Choose subcategory</option>
+`;
 
-        categories.add(item.Category);
+const categories = new Set();
+const subCategories = new Set();
 
-        subCategories.add(item.SubCategory);
-    });
+Object.values(products).forEach(item => {
 
+    categories.add(item.Category);
 
-
-    // CATEGORY
-    categories.forEach(Category => {
-
-        categorySelect.innerHTML += `
-            <option value="${Category}">
-                ${Category}
-            </option>
-        `;
-    });
+    subCategories.add(item.SubCategory);
+});
 
 
 
-    // SUBCATEGORY
-    subCategories.forEach(SubCategory => {
+// CATEGORY
+categories.forEach(Category => {
 
-        subCategorySelect.innerHTML += `
-            <option value="${SubCategory}">
-                ${SubCategory}
-            </option>
-        `;
-    });
-
-
-
-
-    const IventoryDiv = document.getElementById("Inventory");
-
-    let html = `
-    <table class="cart-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Category</th>
-                <th>SubCategory</th>
-                <th>Stock</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
+    categorySelect.innerHTML += `
+        <option value="${Category}">
+            ${Category}
+        </option>
     `;
+});
 
-    Object.values(products).forEach(item => {
 
-        html += `
+
+// SUBCATEGORY
+subCategories.forEach(SubCategory => {
+
+    subCategorySelect.innerHTML += `
+        <option value="${SubCategory}">
+            ${SubCategory}
+        </option>
+    `;
+});
+
+
+
+const selectedCategory =
+document.getElementById("Category").value;
+
+const selectedSubCategory =
+document.getElementById("SubCategory").value;
+
+
+
+const IventoryDiv = document.getElementById("Inventory");
+
+let html = `
+<table class="cart-table">
+    <thead>
         <tr>
-            <td>${item.Name}</td>
-            <td>${item.Category}</td>
-            <td>${item.SubCategory}</td>
-            <td>${item.Stock}</td>
-            <td>${item.Price}</td>
+            <th>Name</th>
+            <th>Category</th>
+            <th>SubCategory</th>
+            <th>Stock</th>
+            <th>Price</th>
         </tr>
-        `;
-    });
+    </thead>
+    <tbody>
+`;
 
+Object.values(products).forEach(item => {
+
+    if (
+        (selectedCategory === "" || item.Category === selectedCategory) &&
+        (selectedSubCategory === "" || item.SubCategory === selectedSubCategory)
+    )
+
+{
     html += `
-        </tbody>
-    </table>`;
+    <tr>
+        <td>${item.Name}</td>
+        <td>${item.Category}</td>
+        <td>${item.SubCategory}</td>
+        <td>${item.Stock}</td>
+        <td>${item.Price}</td>
+    </tr>
+    `;
+}
 
-    IventoryDiv.innerHTML = html;
+});
+
+html += `
+    </tbody>
+</table>`;
+
+IventoryDiv.innerHTML = html;
 }
 
 });
