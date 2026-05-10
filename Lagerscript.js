@@ -6,10 +6,10 @@ document.addEventListener("DOMContentLoaded", fn);
 }
 }
 
-   
+    const inventory = document.getElementById("Inventory");
 const editBtn = document.getElementById("editBtn");
  const searchInput = document.getElementById("Search");
- 
+
 searchInput?.addEventListener("input", function () {
     const searchValue = searchInput.value;
 
