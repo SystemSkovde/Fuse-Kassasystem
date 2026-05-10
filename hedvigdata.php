@@ -42,7 +42,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'insert') {
     ]);
 
     echo json_encode([
-        'success' => $ok
+        'success' => $ok,
         'new_barcode' => $newBarcode
     ]);
     exit;
