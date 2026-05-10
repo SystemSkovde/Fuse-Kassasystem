@@ -31,15 +31,6 @@ const categorySelect = document.getElementById("category");
 const subCategorySelect = document.getElementById("subcategory");
 
 
-// RESET
-categorySelect.innerHTML = `
-<option value="">Choose category</option>
-`;
-
-subCategorySelect.innerHTML = `
-<option value="">Choose subcategory</option>
-`;
-
     const categories = new Set();
     const subCategories = new Set();
 
