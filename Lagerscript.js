@@ -26,7 +26,7 @@ docReady(function () {
             return;
         }
 
-    fetch("hedvigdata.php", {
+    fetch("data.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({ action: "insert", nr, name, category, subcategory, stock, price })
@@ -50,7 +50,6 @@ fetch("data.php")
            products[p.BarCode] = p;  
         });
         RenderProducts();
-        initScanner();
     });
 
   function RenderProducts() {
