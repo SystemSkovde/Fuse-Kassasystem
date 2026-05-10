@@ -8,67 +8,74 @@ document.addEventListener("DOMContentLoaded", fn);
 
 docReady(function () {
 
-document.querySelector("form")?.addEventListener("submit", function (e) {
-    e.preventDefault();
-});
+let products = [];
 
-let products = {};
-
+// HÄMTA DATA
 fetch("dilara.php")
     .then(res => res.json())
     .then(data => {
 
-        data.products.forEach(p => {
-           products[p.BarCode] = p;
-        });
+        products = data.products;
 
-        RenderProducts();
-    });
-
-function RenderProducts() {
-
-const categorySelect = document.getElementById("Category");
-const subCategorySelect = document.getElementById("SubCategory");
-
-
-    const categories = new Set();
-    const subCategories = new Set();
-
-    Object.values(products).forEach(item => {
-
-        categories.add(item.Category);
-
-        subCategories.add(item.SubCategory);
+        fillDropdowns();
+        renderProducts(products);
     });
 
 
+// FYLL DROPDOWNS
+function fillDropdowns() {
 
-    // CATEGORY
-    categories.forEach(Category => {
+    const categorySelect = document.getElementById("Category");
+    const subCategorySelect = document.getElementById("SubCategory");
 
-        categorySelect.innerHTML += `
-            <option value="${Category}">
-                ${Category}
-            </option>
-        `;
+    categorySelect.innerHTML = `<option value="">Choose category</option>`;
+    subCategorySelect.innerHTML = `<option value="">Choose subcategory</option>`;
+
+    const categories = [...new Set(products.map(p => p.Category))];
+    const subCategories = [...new Set(products.map(p => p.SubCategory))];
+
+    categories.forEach(c => {
+        categorySelect.innerHTML += `<option value="${c}">${c}</option>`;
     });
 
-
-
-    // SUBCATEGORY
-    subCategories.forEach(SubCategory => {
-
-        subCategorySelect.innerHTML += `
-            <option value="${SubCategory}">
-                ${SubCategory}
-            </option>
-        `;
+    subCategories.forEach(sc => {
+        subCategorySelect.innerHTML += `<option value="${sc}">${sc}</option>`;
     });
 
+    // EVENT LISTENERS
+    categorySelect.addEventListener("change", filter);
+    subCategorySelect.addEventListener("change", filter);
+}
 
 
+// FILTER LOGIK
+function filter() {
 
-    const IventoryDiv = document.getElementById("Inventory");
+    const selectedCategory = document.getElementById("Category").value;
+    const selectedSubCategory = document.getElementById("SubCategory").value;
+
+    let filtered = products;
+
+    if (selectedCategory !== "") {
+        filtered = filtered.filter(p =>
+            p.Category === selectedCategory
+        );
+    }
+
+    if (selectedSubCategory !== "") {
+        filtered = filtered.filter(p =>
+            p.SubCategory === selectedSubCategory
+        );
+    }
+
+    renderProducts(filtered);
+}
+
+
+// VISA PRODUKTER
+function renderProducts(list) {
+
+    const div = document.getElementById("Inventory");
 
     let html = `
     <table class="cart-table">
@@ -84,7 +91,7 @@ const subCategorySelect = document.getElementById("SubCategory");
         <tbody>
     `;
 
-    Object.values(products).forEach(item => {
+    list.forEach(item => {
 
         html += `
         <tr>
@@ -101,7 +108,7 @@ const subCategorySelect = document.getElementById("SubCategory");
         </tbody>
     </table>`;
 
-    IventoryDiv.innerHTML = html;
+    div.innerHTML = html;
 }
 
 });
