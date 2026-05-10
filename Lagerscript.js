@@ -16,8 +16,8 @@ docReady(function () {
 
         const nr = document.getElementById("nr")?.value;
         const name = document.getElementById("item-name")?.value;
-        const category = document.getElementById("category")?.value;
-        const subcategory = document.getElementById("subcategory")?.value;
+        const category = document.getElementById("category1")?.value;
+        const subcategory = document.getElementById("subcategory1")?.value;
         const stock = document.getElementById("stock")?.value;
         const price = document.getElementById("price")?.value;
 
