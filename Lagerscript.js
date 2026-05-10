@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", fn);
 }
 }
 
+   let products = [];
+
 docReady(function () {
 
    let products = {};
@@ -44,15 +46,11 @@ docReady(function () {
             .then(res => res.json())
             .then(data => {
 
-                products = {};
-                productList = data.products;
+            
+              products = data.products;
 
-                data.products.forEach(p => {
-                    products[p.BarCode] = p;
-                });
-
-                RenderProducts(productList);
-                fillDropdowns();
+renderProducts(products);
+fillDropdowns();
             });
         // FYLL DROPDOWNS
 function fillDropdowns() {
@@ -86,7 +84,7 @@ function filter() {
     const selectedCategory = document.getElementById("Category").value;
     const selectedSubCategory = document.getElementById("SubCategory").value;
 
-    let filtered = Object.values(products);
+    let filtered = products;
 
     if (selectedCategory !== "") {
         filtered = filtered.filter(p =>
