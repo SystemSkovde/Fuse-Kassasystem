@@ -50,7 +50,6 @@ fetch("data.php")
            products[p.BarCode] = p;  
         });
         RenderProducts();
-        initScanner();
     });
 
   function RenderProducts() {
