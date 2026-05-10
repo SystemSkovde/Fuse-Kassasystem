@@ -63,8 +63,8 @@ function fillDropdowns() {
     categorySelect.innerHTML = `<option value="">Choose category</option>`;
     subCategorySelect.innerHTML = `<option value="">Choose subcategory</option>`;
 
-    const categories = [...new Set(products.map(p => p.Category))];
-    const subCategories = [...new Set(products.map(p => p.SubCategory))];
+    const categories = [...new Set(Object.values(products).map(p => p.Category))];
+const subCategories = [...new Set(Object.values(products).map(p => p.SubCategory))];
 
     categories.forEach(c => {
         categorySelect.innerHTML += `<option value="${c}">${c}</option>`;
