@@ -103,7 +103,7 @@ function filter() {
     renderProducts(filtered);
 }
 
-  function RenderProducts() {
+  function RenderProducts(list) {
         const IventoryDiv = document.getElementById("Inventory");
 
         let html = `
@@ -121,7 +121,7 @@ function filter() {
             <tbody>
         `;
 
-        Object.values(products).forEach(item => {
+       list.forEach(item => {
             html += `
             <tr>
                 <td>${item.Nr}</td>
