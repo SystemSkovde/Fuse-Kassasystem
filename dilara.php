@@ -46,8 +46,7 @@ else if ($Category !== null) {
     $response['products'] = $stmt->fetchAll();
 
 }
-else if {
- ($SubCategory !== null) {
+else if  ($SubCategory !== null) {
     // ONLY CATEGORY
     $sql = "SELECT * FROM Products 
             WHERE SubCategory = :SubCategory";
@@ -58,6 +57,6 @@ else if {
     $response['products'] = $stmt->fetchAll();
  }
 echo json_encode($response);
-}
+
 
 ?>
