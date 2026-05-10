@@ -13,32 +13,33 @@ docReady(function () {
     document.getElementById("add-form")?.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        fetch("hedvigdata.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: new URLSearchParams({
-                action: "insert",
-                nr: document.getElementById("nr").value,
-                name: document.getElementById("name").value,
-                category: document.getElementById("category").value,
-                subcategory: document.getElementById("subcategory").value,
-                stock: document.getElementById("stock").value,
-                price: document.getElementById("price").value,
-            })
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
+        const nr = document.getElementById("nr")?.value;
+        const name = document.getElementById("item-name")?.value;
+        const category = document.getElementById("category")?.value;
+        const subcategory = document.getElementById("subcategory")?.value;
+        const stock = document.getElementById("stock")?.value;
+        const price = document.getElementById("price")?.value;
 
-            if (data.success) {
-                location.reload();
-            } else {
-                alert("Could not add item");
-            }
-        });
-    });
+        if (!nr || !name || !category || !subcategory || !stock || !price) {
+            alert("Fill in all boxes!");
+            return;
+        }
+
+    fetch("hedvigdata.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ action: "insert", nr, name, category, subcategory, stock, price })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        } else {
+            alert("Could not add item");
+        }
+    })
+    .catch(err => console.error("Error:", err));
+});
 
     fetch("hedvigdata.php")
         .then(res => res.json())
