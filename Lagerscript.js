@@ -1,4 +1,6 @@
+let isEditMode = false;
 let products = [];
+
 function docReady(fn) {
     if (document.readyState === "complete" || document.readyState === "interactive") {
 setTimeout(fn, 1);
