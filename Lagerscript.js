@@ -135,11 +135,35 @@ function renderProducts(list) {
         html += `
         <tr>
             <td>${item.Nr}</td>
-            <td>${item.Name}</td>
-            <td>${item.Category}</td>
-            <td>${item.SubCategory}</td>
-            <td>${item.Stock}</td>
-            <td>${item.Price}</td>
+          <td>
+                    ${isEditMode
+                        ? `<input value="${item.Name}" data-barcode="${item.BarCode}" data-field="Name">`
+                        : item.Name}
+                </td>
+
+                <td>
+                    ${isEditMode
+                        ? `<input value="${item.Category}" data-barcode="${item.BarCode}" data-field="Category">`
+                        : item.Category}
+                </td>
+
+                <td>
+                    ${isEditMode
+                        ? `<input value="${item.SubCategory}" data-barcode="${item.BarCode}" data-field="SubCategory">`
+                        : item.SubCategory}
+                </td>
+
+                <td>
+                    ${isEditMode
+                        ? `<input type="number" value="${item.Stock}" data-barcode="${item.BarCode}" data-field="Stock">`
+                        : item.Stock}
+                </td>
+
+                <td>
+                    ${isEditMode
+                        ? `<input type="number" value="${item.Price}" data-barcode="${item.BarCode}" data-field="Price">`
+                        : item.Price}
+                </td>
         </tr>
         `;
     });
