@@ -91,15 +91,16 @@ else if  ($SubCategory !== null) {
     $response['products'] = $stmt->fetchAll();
  }
 
- $search = $_GET['search'] ?? null;
+ $sql = "SELECT * FROM Products";
 $params = [];
+
+$search = $_GET['search'] ?? null;
 
 if ($search) {
     $sql .= " WHERE Name LIKE :search 
               OR Category LIKE :search 
               OR SubCategory LIKE :search 
               OR BarCode LIKE :search";
-
     $params[':search'] = "%$search%";
 }
 
@@ -109,7 +110,7 @@ $stmt->execute($params);
 $response['products'] = $stmt->fetchAll();
 
 
-$data = json_decode(file_get_contents("php://input"), true);
+
 if ($data && isset($data['barcode'])) {
 
     $allowedFields = ['Name', 'Category', 'SubCategory', 'Stock', 'Price'];

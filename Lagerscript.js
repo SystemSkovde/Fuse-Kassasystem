@@ -56,7 +56,7 @@ searchInput?.addEventListener("input", function () {
 
 
 
-   let products = {};
+   let products = [];
 
    searchInput?.addEventListener("input", function () {
     const searchValue = searchInput.value;
@@ -93,15 +93,14 @@ searchInput?.addEventListener("input", function () {
 });
 
  fetch("data.php")
-            .then(res => res.json())
-            .then(data => {
+.then(res => res.json())
+.then(data => {
 
-            
-              products = data.products;
+    products = data.products || [];
 
-renderProducts(products);
-fillDropdowns();
-            });
+    RenderProducts(products);
+    fillDropdowns();
+});
             
         // FYLL DROPDOWNS
 function fillDropdowns() {
@@ -135,8 +134,7 @@ function filter() {
     const selectedCategory = document.getElementById("Category").value;
     const selectedSubCategory = document.getElementById("SubCategory").value;
 
-    let filtered = products;
-
+   let filtered = [...products];
     if (selectedCategory !== "") {
         filtered = filtered.filter(p =>
             p.Category === selectedCategory
