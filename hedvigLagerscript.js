@@ -13,8 +13,6 @@ docReady(function () {
     document.getElementById("add-form")?.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        document.getElementById("barcode").value = Date.now();
-
         fetch("hedvigdata.php", {
             method: "POST",
             headers: {
@@ -27,7 +25,6 @@ docReady(function () {
                 subcategory: document.getElementById("subcategory").value,
                 stock: document.getElementById("stock").value,
                 price: document.getElementById("price").value,
-                barcode: document.getElementById("barcode").value
             })
         })
         .then(res => res.json())
