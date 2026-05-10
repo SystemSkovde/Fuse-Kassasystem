@@ -20,6 +20,7 @@ docReady(function () {
             },
             body: new URLSearchParams({
                 action: "insert",
+                nr: document.getElementById("nr").value,
                 name: document.getElementById("name").value,
                 category: document.getElementById("category").value,
                 subcategory: document.getElementById("subcategory").value,
@@ -56,6 +57,7 @@ docReady(function () {
         <table class="cart-table">
             <thead>
                 <tr>
+                    <th>Number</th>
                     <th>Name</th>
                     <th>Category</th>
                     <th>SubCategory</th>
@@ -69,6 +71,7 @@ docReady(function () {
         Object.values(products).forEach(item => {
             html += `
             <tr>
+                <td>${item.Nr}</td>
                 <td>${item.Name}</td>
                 <td>${item.Category}</td>
                 <td>${item.SubCategory}</td>
