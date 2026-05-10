@@ -88,7 +88,6 @@ fetch("data.php")
         </table>`;
 
         IventoryDiv.innerHTML = html;
-        updateCartCount();
     }
 
 });
