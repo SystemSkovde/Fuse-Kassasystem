@@ -7,9 +7,7 @@ document.addEventListener("DOMContentLoaded", fn);
 }
 
 docReady(function () {
-    document.querySelector("form")?.addEventListener("submit", function (e) {
-    e.preventDefault();
-});
+
    let products = {};
     document.getElementById("add-form")?.addEventListener("submit", function (e) {
         e.preventDefault();
