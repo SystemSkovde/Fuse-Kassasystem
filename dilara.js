@@ -10,32 +10,13 @@ docReady(function () {
 
 document.querySelector("form")?.addEventListener("submit", function (e) {
     e.preventDefault();
-
-    LoadProducts();
 });
 
 let products = {};
 
-LoadProducts();
-
-function LoadProducts() {
-
-    const category = document.getElementById("Category").value;
-    const subCategory = document.getElementById("SubCategory").value;
-
-    const formData = new FormData();
-
-    formData.append("Category", category);
-    formData.append("SubCategory", subCategory);
-
-    fetch("dilara.php", {
-        method: "POST",
-        body: formData
-    })
+fetch("dilara.php")
     .then(res => res.json())
     .then(data => {
-
-        products = {};
 
         data.products.forEach(p => {
            products[p.BarCode] = p;
@@ -43,7 +24,6 @@ function LoadProducts() {
 
         RenderProducts();
     });
-}
 
 function RenderProducts() {
 
@@ -51,85 +31,77 @@ const categorySelect = document.getElementById("Category");
 const subCategorySelect = document.getElementById("SubCategory");
 
 
-// RESET
-categorySelect.innerHTML = `
-<option value="">Choose category</option>
-`;
+    const categories = new Set();
+    const subCategories = new Set();
 
-subCategorySelect.innerHTML = `
-<option value="">Choose subcategory</option>
-`;
+    Object.values(products).forEach(item => {
 
-const categories = new Set();
-const subCategories = new Set();
+        categories.add(item.Category);
 
-Object.values(products).forEach(item => {
-
-    categories.add(item.Category);
-
-    subCategories.add(item.SubCategory);
-});
+        subCategories.add(item.SubCategory);
+    });
 
 
 
-// CATEGORY
-categories.forEach(Category => {
+    // CATEGORY
+    categories.forEach(Category => {
 
-    categorySelect.innerHTML += `
-        <option value="${Category}">
-            ${Category}
-        </option>
+        categorySelect.innerHTML += `
+            <option value="${Category}">
+                ${Category}
+            </option>
+        `;
+    });
+
+
+
+    // SUBCATEGORY
+    subCategories.forEach(SubCategory => {
+
+        subCategorySelect.innerHTML += `
+            <option value="${SubCategory}">
+                ${SubCategory}
+            </option>
+        `;
+    });
+
+
+
+
+    const IventoryDiv = document.getElementById("Inventory");
+
+    let html = `
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>SubCategory</th>
+                <th>Stock</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
     `;
-});
 
+    Object.values(products).forEach(item => {
 
-
-// SUBCATEGORY
-subCategories.forEach(SubCategory => {
-
-    subCategorySelect.innerHTML += `
-        <option value="${SubCategory}">
-            ${SubCategory}
-        </option>
-    `;
-});
-
-
-
-const IventoryDiv = document.getElementById("Inventory");
-
-let html = `
-<table class="cart-table">
-    <thead>
+        html += `
         <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>SubCategory</th>
-            <th>Stock</th>
-            <th>Price</th>
+            <td>${item.Name}</td>
+            <td>${item.Category}</td>
+            <td>${item.SubCategory}</td>
+            <td>${item.Stock}</td>
+            <td>${item.Price}</td>
         </tr>
-    </thead>
-    <tbody>
-`;
-
-Object.values(products).forEach(item => {
+        `;
+    });
 
     html += `
-    <tr>
-        <td>${item.Name}</td>
-        <td>${item.Category}</td>
-        <td>${item.SubCategory}</td>
-        <td>${item.Stock}</td>
-        <td>${item.Price}</td>
-    </tr>
-    `;
-});
+        </tbody>
+    </table>`;
 
-html += `
-    </tbody>
-</table>`;
-
-IventoryDiv.innerHTML = html;
+    IventoryDiv.innerHTML = html;
 }
 
 });
