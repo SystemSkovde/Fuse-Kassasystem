@@ -101,7 +101,7 @@ function filter() {
     renderProducts(filtered);
 }
 
-  function RenderProducts(list) {
+  function renderProducts(list) {
         const IventoryDiv = document.getElementById("Inventory");
 
         let html = `
