@@ -86,7 +86,7 @@ function filter() {
     const selectedCategory = document.getElementById("Category").value;
     const selectedSubCategory = document.getElementById("SubCategory").value;
 
-    let filtered = products;
+    let filtered = Object.values(products);
 
     if (selectedCategory !== "") {
         filtered = filtered.filter(p =>
