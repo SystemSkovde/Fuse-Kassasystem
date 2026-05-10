@@ -164,8 +164,16 @@ footer {
       text-align: center;
 }
 
-table{
-    border: black solid 1;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+th, td {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    text-align: left;
 }
 
 #C-head{
