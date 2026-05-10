@@ -40,15 +40,20 @@ docReady(function () {
     .catch(err => console.error("Error:", err));
 });
 
-fetch("data.php")
-    .then(res => res.json())
-    .then(data => {
+ fetch("data.php")
+            .then(res => res.json())
+            .then(data => {
 
-        data.products.forEach(p => {
-           products[p.BarCode] = p;  
-        });
-          fillDropdowns();
-        renderProducts(products);
+                products = {};
+                productList = data.products;
+
+                data.products.forEach(p => {
+                    products[p.BarCode] = p;
+                });
+
+                RenderProducts(productList);
+                fillDropdowns();
+            });
         // FYLL DROPDOWNS
 function fillDropdowns() {
 
@@ -97,9 +102,6 @@ function filter() {
 
     renderProducts(filtered);
 }
-
-        RenderProducts();
-    });
 
   function RenderProducts() {
         const IventoryDiv = document.getElementById("Inventory");
