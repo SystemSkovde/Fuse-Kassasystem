@@ -53,6 +53,43 @@ $sql = "SELECT * FROM Products";
 $stmt = $pdo->query($sql);
 $response['products'] = $stmt->fetchAll();
 
+$Category = $_POST['Category'] ?? null;
+$SubCategory = $_POST['SubCategory'] ?? null;
+
+if ($Category !== null && $SubCategory !== null) {
+    $sql = "SELECT * FROM Products 
+            WHERE Category = :Category 
+            AND SubCategory = :SubCategory";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':Category' => $Category,
+        ':SubCategory' => $SubCategory
+    ]);
+    $response['products'] = $stmt->fetchAll();
+
+}
+else if ($Category !== null) {
+    // ONLY CATEGORY
+    $sql = "SELECT * FROM Products 
+            WHERE Category = :Category";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':Category' => $Category
+    ]);
+    $response['products'] = $stmt->fetchAll();
+
+}
+else if  ($SubCategory !== null) {
+    // ONLY CATEGORY
+    $sql = "SELECT * FROM Products 
+            WHERE SubCategory = :SubCategory";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ':SubCategory' => $SubCategory
+    ]);
+    $response['products'] = $stmt->fetchAll();
+ }
 
 $cid = $_POST['cid'] ?? null;
 $password = $_POST['password'] ?? null;

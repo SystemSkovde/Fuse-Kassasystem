@@ -47,6 +47,57 @@ fetch("data.php")
         data.products.forEach(p => {
            products[p.BarCode] = p;  
         });
+          fillDropdowns();
+        renderProducts(products);
+        // FYLL DROPDOWNS
+function fillDropdowns() {
+
+    const categorySelect = document.getElementById("Category");
+    const subCategorySelect = document.getElementById("SubCategory");
+
+    categorySelect.innerHTML = `<option value="">Choose category</option>`;
+    subCategorySelect.innerHTML = `<option value="">Choose subcategory</option>`;
+
+    const categories = [...new Set(products.map(p => p.Category))];
+    const subCategories = [...new Set(products.map(p => p.SubCategory))];
+
+    categories.forEach(c => {
+        categorySelect.innerHTML += `<option value="${c}">${c}</option>`;
+    });
+
+    subCategories.forEach(sc => {
+        subCategorySelect.innerHTML += `<option value="${sc}">${sc}</option>`;
+    });
+
+    // EVENT LISTENERS
+    categorySelect.addEventListener("change", filter);
+    subCategorySelect.addEventListener("change", filter);
+}
+
+
+// FILTER LOGIK
+function filter() {
+
+    const selectedCategory = document.getElementById("Category").value;
+    const selectedSubCategory = document.getElementById("SubCategory").value;
+
+    let filtered = products;
+
+    if (selectedCategory !== "") {
+        filtered = filtered.filter(p =>
+            p.Category === selectedCategory
+        );
+    }
+
+    if (selectedSubCategory !== "") {
+        filtered = filtered.filter(p =>
+            p.SubCategory === selectedSubCategory
+        );
+    }
+
+    renderProducts(filtered);
+}
+
         RenderProducts();
     });
 
