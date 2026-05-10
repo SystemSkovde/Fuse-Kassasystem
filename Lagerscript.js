@@ -1,5 +1,6 @@
 function docReady(fn) {
-if (document.readyState === "complete" || document.readyState === "interactive") {
+let products = [];
+    if (document.readyState === "complete" || document.readyState === "interactive") {
 setTimeout(fn, 1);
 } else {
 document.addEventListener("DOMContentLoaded", fn);
@@ -17,11 +18,7 @@ searchInput?.addEventListener("input", function () {
         .then(res => res.json())
         .then(data => {
 
-            products = {}; // reset
-
-            data.products.forEach(p => {
-                products[p.BarCode] = p;
-            });
+           products = data.products || [];
 
             RenderProducts();
         });
@@ -53,10 +50,6 @@ searchInput?.addEventListener("input", function () {
 });
         }
     });
-
-
-
-   let products = [];
 
    searchInput?.addEventListener("input", function () {
     const searchValue = searchInput.value;
