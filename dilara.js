@@ -7,73 +7,100 @@ document.addEventListener("DOMContentLoaded", fn);
 }
 
 docReady(function () {
-    document.querySelector("form")?.addEventListener("submit", function (e) {
+
+document.querySelector("form")?.addEventListener("submit", function (e) {
     e.preventDefault();
 });
-   let products = {};
+
+let products = {};
 
 fetch("dilara.php")
     .then(res => res.json())
     .then(data => {
 
         data.products.forEach(p => {
-           products[p.BarCode] = p;  
+           products[p.BarCode] = p;
         });
+
         RenderProducts();
     });
 
-  function RenderProducts() {
-       const subcategorySelect = document.getElementById("category");
+function RenderProducts() {
 
-const categories = new Set();
+    const categorySelect = document.getElementById("category");
+    const subCategorySelect = document.getElementById("subcategory");
 
-Object.values(products).forEach(item => {
-    categories.add(item.Category);
-});
+    const categories = new Set();
+    const subCategories = new Set();
 
-categories.forEach(category => {
+    Object.values(products).forEach(item => {
 
-    subcategorySelect.innerHTML += `
-        <option value="${category}">
-            ${category}
-        </option>
-    `;
-});
-    
+        categories.add(item.Category);
+
+        subCategories.add(item.SubCategory);
+    });
+
+
+
+    // CATEGORY
+    categories.forEach(category => {
+
+        categorySelect.innerHTML += `
+            <option value="${category}">
+                ${category}
+            </option>
+        `;
+    });
+
+
+
+    // SUBCATEGORY
+    subCategories.forEach(subCategory => {
+
+        subCategorySelect.innerHTML += `
+            <option value="${subCategory}">
+                ${subCategory}
+            </option>
+        `;
+    });
+
+
+
+
     const IventoryDiv = document.getElementById("Inventory");
 
-        let html = `
-        <table class="cart-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>SubCategory</th>
-                    <th>Stock</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-        `;
-
-        Object.values(products).forEach(item => {
-            html += `
+    let html = `
+    <table class="cart-table">
+        <thead>
             <tr>
-                <td>${item.Name}</td> 
-                <td>${item.Category}</td> 
-                <td>${item.SubCategory}</td> 
-                <td>${item.Stock}</td> 
-                <td>${item.Price}</td> 
+                <th>Name</th>
+                <th>Category</th>
+                <th>SubCategory</th>
+                <th>Stock</th>
+                <th>Price</th>
             </tr>
-            `;
-        });
+        </thead>
+        <tbody>
+    `;
+
+    Object.values(products).forEach(item => {
 
         html += `
-            </tbody>
-        </table>`;
+        <tr>
+            <td>${item.Name}</td>
+            <td>${item.Category}</td>
+            <td>${item.SubCategory}</td>
+            <td>${item.Stock}</td>
+            <td>${item.Price}</td>
+        </tr>
+        `;
+    });
 
-        IventoryDiv.innerHTML = html;
-    }
+    html += `
+        </tbody>
+    </table>`;
+
+    IventoryDiv.innerHTML = html;
+}
 
 });
-
