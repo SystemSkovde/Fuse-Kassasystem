@@ -56,5 +56,7 @@ else if  ($SubCategory !== null) {
     ]);
     $response['products'] = $stmt->fetchAll();
  }
+echo json_encode($response);
+
 
 ?>
