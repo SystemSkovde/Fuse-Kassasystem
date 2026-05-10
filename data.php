@@ -110,7 +110,7 @@ $stmt->execute($params);
 $response['products'] = $stmt->fetchAll();
 
 
-
+$data = json_decode(file_get_contents("php://input"), true);
 if ($data && isset($data['barcode'])) {
 
     $allowedFields = ['Name', 'Category', 'SubCategory', 'Stock', 'Price'];
