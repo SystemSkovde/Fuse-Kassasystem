@@ -13,6 +13,41 @@ $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
 $response = [];
 
+if (isset($_POST['action']) && $_POST['action'] === 'insert') {
+    try {
+
+        $stmtMax = $pdo->query("SELECT MAX(BarCode) AS last_barcode FROM Products");
+        $row = $stmtMax->fetch();
+
+        $lastBarcode = $row['last_barcode'];
+
+        if (!$lastBarcode) {
+            $newBarcode = 100001;
+        } else {
+            $newBarcode = (int)$lastBarcode + 1;
+        }
+    
+        $sql = "INSERT INTO Products (Nr , Name, Category, SubCategory, Stock, Price, BarCode)
+                VALUES (:nr, :name, :category, :subcategory, :stock, :price, :barcode)";
+
+        $stmt = $pdo->prepare($sql);
+
+        $ok = $stmt->execute([
+            ':nr'=> $_POST['nr'],
+            ':name' => $_POST['name'],
+            ':category' => $_POST['category'],
+            ':subcategory' => $_POST['subcategory'],
+            ':stock' => $_POST['stock'],
+            ':price' => $_POST['price'],
+            ':barcode' => $newBarcode
+        ]);
+
+    echo json_encode(['success' => $ok, 'new_barcode' => $newBarcode]);
+    }catch (Exception $e) {
+        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+    }
+    exit;
+}
 
 $sql = "SELECT * FROM Products";
 $stmt = $pdo->query($sql);
