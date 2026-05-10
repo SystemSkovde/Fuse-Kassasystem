@@ -27,18 +27,9 @@ fetch("dilara.php")
 
 function RenderProducts() {
 
-const categorySelect = document.getElementById("category");
-const subCategorySelect = document.getElementById("subcategory");
+const categorySelect = document.getElementById("Category");
+const subCategorySelect = document.getElementById("SubCategory");
 
-
-// RESET
-categorySelect.innerHTML = `
-<option value="">Choose category</option>
-`;
-
-subCategorySelect.innerHTML = `
-<option value="">Choose subcategory</option>
-`;
 
     const categories = new Set();
     const subCategories = new Set();
@@ -53,11 +44,11 @@ subCategorySelect.innerHTML = `
 
 
     // CATEGORY
-    categories.forEach(category => {
+    categories.forEach(Category => {
 
         categorySelect.innerHTML += `
-            <option value="${category}">
-                ${category}
+            <option value="${Category}">
+                ${Category}
             </option>
         `;
     });

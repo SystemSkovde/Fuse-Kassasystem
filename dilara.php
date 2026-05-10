@@ -46,18 +46,17 @@ else if ($Category !== null) {
     $response['products'] = $stmt->fetchAll();
 
 }
-else {
- // ONLY SUBCATEGORY (NO CATEGORY)
+else if  ($SubCategory !== null) {
+    // ONLY CATEGORY
     $sql = "SELECT * FROM Products 
             WHERE SubCategory = :SubCategory";
-      $stmt = $pdo->prepare($sql);
+    $stmt = $pdo->prepare($sql);
     $stmt->execute([
         ':SubCategory' => $SubCategory
     ]);
-
     $response['products'] = $stmt->fetchAll();
-}
-
+ }
 echo json_encode($response);
+
 
 ?>
