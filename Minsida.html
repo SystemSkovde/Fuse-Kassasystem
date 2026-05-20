@@ -146,7 +146,7 @@
       arrow_back_ios
     </span>
 
-    <a id="Home" href="#">
+    <a id="Back" href="#">
       Back
     </a>
   </div>
@@ -166,11 +166,14 @@
 const user = JSON.parse(localStorage.getItem("user"));
 
 const homeLink = document.getElementById("Home");
+const backLink = document.getElementById("Back");
 
 if (user.role === "admin") {
     homeLink.href = "AdminHem.html";
+    backLink.href = "AdminHem.html";
 } else {
     homeLink.href = "Hem.html";
+    backLink.href = "Hem.html";
 }
 </script>
 </body>
