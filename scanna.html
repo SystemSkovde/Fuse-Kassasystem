@@ -88,7 +88,7 @@
 
             if (!backLink) return;
 
-            if (user && user.Cid === "Admin") {
+            if (user.role === "admin") {
                 backLink.href = "AdminHem.html";
             } else {
                 backLink.href = "Hem.html";
