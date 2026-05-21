@@ -205,6 +205,12 @@ if (isset($_POST['action']) && $_POST['action'] === 'saveOrder') {
                 ':qty' => $item['quantity'],
                 ':price' => $item['price']
             ]);
+
+            $pdo->prepare("UPDATE Products SET Stock = Stock - :qty WHERE article_id = :itemId")
+                ->execute([
+                    ':qty' => $item['quantity'],
+                    ':itemId' => $product['article_id']
+                ]);
         }
 
         echo json_encode([

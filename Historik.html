@@ -218,7 +218,7 @@ fetch("data.php", {
 
     let html = "";
 
-    Object.entries(orders).forEach(([id, order]) => {
+    Object.entries(orders).reverse().forEach(([id, order]) => {
 
         html += `
         <div class="history-section">
@@ -230,7 +230,7 @@ fetch("data.php", {
             <table>
                 <thead>
                     <tr>
-                        <th>Product</th>
+                        <th>Products</th>
                         <th>Price</th>
                         <th>Amount</th>
                         <th>Account</th>
