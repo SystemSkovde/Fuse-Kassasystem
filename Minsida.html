@@ -34,6 +34,11 @@
       cursor: pointer;
     }
 
+    #Home {
+      color: black;
+      text-decoration: none;
+    }
+
     h1 {
       margin: 20px 0;
     }
@@ -64,7 +69,6 @@
       font-size: 40px !important;
     }
 
-    /* Back-knapp */
     .back {
       position: fixed;
       bottom: 20px;
@@ -103,6 +107,7 @@
       color: black;
       margin-left: 5px;
     }
+
   </style>
 </head>
 
@@ -112,35 +117,30 @@
 
     <div class="top-bar">
 
+      <a id="Home" href="#">
+        <span class="material-symbols-outlined big">
+          home
+        </span>
+      </a>
+
       <span class="material-symbols-outlined big">
         help
       </span>
-
-      <div class="icons-right">
-       <a id="Home" href="#">
-          <span class="material-symbols-outlined big">
-            home
-          </span>
-        </a>
-      </div>
 
     </div>
 
     <h1>Fuse Account</h1>
 
-    <!-- Knappen för Balans -->
     <button class="btn" onclick="location.href='Balans.html'">
       Balance
     </button>
 
-    <!-- Knappen för Order History -->
     <button class="btn" onclick="location.href='Historik.html'">
       Order history
     </button>
 
   </div>
 
-  <!-- Back-knappen -->
   <div class="back">
     <span class="material-symbols-outlined smal">
       arrow_back_ios
@@ -151,7 +151,6 @@
     </a>
   </div>
 
-  <!-- Logga ut-knappen -->
   <div class="Loggaut">
     <span class="material-symbols-outlined">
       logout
@@ -162,7 +161,8 @@
     </a>
   </div>
 
-  <script>
+<script>
+
 const user = JSON.parse(localStorage.getItem("user"));
 
 const homeLink = document.getElementById("Home");
@@ -175,6 +175,8 @@ if (user.role === "admin") {
     homeLink.href = "Hem.html";
     backLink.href = "Hem.html";
 }
+
 </script>
+
 </body>
 </html>
