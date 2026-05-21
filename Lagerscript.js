@@ -22,7 +22,7 @@ docReady(function () {
 
     document.getElementById("add-form")?.addEventListener("submit", function (e) {
         e.preventDefault();
-        const nr = document.getElementById("article-id")?.value;
+        const nr = document.getElementById("article_id")?.value;
         const name = document.getElementById("item-name")?.value;
         const category = document.getElementById("category1")?.value;
         const subcategory = document.getElementById("subcategory1")?.value;
@@ -134,7 +134,7 @@ function renderProducts(list) {
     list.forEach(item => {
         html += `
         <tr>
-            <td>${item.Nr}</td>
+            <td>${item.article_id}</td>
           <td>
                     ${isEditMode
                 ? `<input value="${item.Name}" data-barcode="${item.BarCode}" data-field="Name">`
