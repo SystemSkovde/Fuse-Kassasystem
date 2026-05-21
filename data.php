@@ -27,13 +27,12 @@ if (isset($_POST['action']) && $_POST['action'] === 'insert') {
             $newBarcode = (int)$lastBarcode + 1;
         }
     
-        $sql = "INSERT INTO Products (Nr , Name, Category, SubCategory, Stock, Price, BarCode)
-                VALUES (:nr, :name, :category, :subcategory, :stock, :price, :barcode)";
+        $sql = "INSERT INTO Products (Name, Category, SubCategory, Stock, Price, BarCode)
+                VALUES (:name, :category, :subcategory, :stock, :price, :barcode)";
 
         $stmt = $pdo->prepare($sql);
 
         $ok = $stmt->execute([
-            ':nr'=> $_POST['nr'],
             ':name' => $_POST['name'],
             ':category' => $_POST['category'],
             ':subcategory' => $_POST['subcategory'],
@@ -132,9 +131,12 @@ $cid = $_POST['cid'] ?? null;
 $password = $_POST['password'] ?? null;
 
 if ($cid !== null && $password !== null) {
-    $sql = "SELECT * FROM Users WHERE cid = :cid";
+    $sql = "SELECT * FROM Users WHERE cid = :cid AND Password = :password";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([':cid' => $cid]);
+    $stmt->execute([
+        ':cid' => $cid,
+        ':password' => $password
+    ]);
 
     $response['user'] = $stmt->fetch();
 
