@@ -2,15 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fuse Login</title>
 
 <style>
-
-/* =========================
-   📱 MOBIL (EXAKT ORIGINAL)
-   ========================= */
-
 body {
     background: white;
     display: flex;
@@ -18,9 +12,10 @@ body {
     align-items: center;
     justify-content: center;
     padding-top: 40px;
+    font-family: Arial, sans-serif;
 }
 
-/* Title */
+/* Huvudrubrik (standard mobil/normal) */
 h1 {
     font-size: 70px;
     font-weight: bold;
@@ -29,12 +24,7 @@ h1 {
     text-align: center;
 }
 
-/* Container */
-.container {
-    width: 90%;
-}
-
-/* Labels */
+/* LABEL */
 label {
     font-size: 40px;
     color: black;
@@ -42,7 +32,7 @@ label {
     margin-bottom: 6px;
 }
 
-/* Inputs */
+/* INPUT */
 input {
     width: 100%;
     padding: 14px;
@@ -50,82 +40,79 @@ input {
     border: 1px solid black;
     border-radius: 8px;
     font-size: 40px;
+    transition: 0.25s;
 }
 
-/* Login button */
-.login-btn {
+/* FOKUS */
+input:focus {
+    border-color: #020305;
+    outline: none;
+    box-shadow: 0 0 4px rgba(7, 9, 11, 0.3);
+}
+
+/* KNAPPAR */
+button, .login-btn, .forgot {
     display: block;
     width: 50%;
     margin: 20px auto;
     padding: 15px;
     font-size: 40px;
-    border: none;
     border-radius: 8px;
+    cursor: pointer;
+    border: none;
+}
+
+/* LOGIN */
+.login-btn {
     background: #07080a;
     color: white;
-    cursor: pointer;
 }
 
-/* Forgot button */
+/* FORGOT */
 .forgot {
-    display: block;
-    margin: 10px auto;
-    padding: 8px 16px;
-    font-size: 18px;
-    width: auto;
-    border: none;
-    border-radius: 8px;
     background: #e3e3e3;
     color: #333;
-    cursor: pointer;
 }
 
-/* knap wrapper */
-#knapp {
-    margin-top: 100px;
+/* CONTAINER */
+.container {
+    width: 90%;
+    flex-direction: column;
+    align-items: center;
 }
-
 
 /* =========================
-   🖥️ DATOR (ENDAST HÄR ÄNDRAS)
+   DESKTOP / MEDIA QUERY
    ========================= */
-
 @media (min-width: 768px) {
 
-    body {
-        padding-top: 20px;
-    }
-
-    h1 {
-        font-size: 40px;
-        margin-bottom: 20px;
-    }
-
+    /* gör hela sidan mer kompakt */
     .container {
         width: 320px;
     }
 
+    h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
     label {
         font-size: 16px;
+        margin-bottom: 4px;
     }
 
     input {
         font-size: 16px;
         padding: 8px 10px;
         margin-bottom: 12px;
+        border-radius: 6px;
     }
 
-    .login-btn {
+    button, .login-btn, .forgot {
         font-size: 16px;
         padding: 10px;
         width: 100%;
         margin: 10px 0;
-    }
-
-    .forgot {
-        font-size: 14px;
-        padding: 6px 12px;
-        width: auto; /* 👈 fixar att den inte blir lång */
     }
 
     #knapp {
@@ -156,5 +143,6 @@ input {
 
 <button class="forgot">Forgot password?</button>
 
+<script src="loggain.js"></script>
 </body>
 </html>
