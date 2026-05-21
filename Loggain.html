@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fuse Login</title>
 
 <style>
@@ -78,7 +79,7 @@ button, .login-btn, .forgot {
 
 /* CONTAINER */
 .container {
-    width: 90%;
+    width: 20%;
     flex-direction: column;
     align-items: center;
 }
@@ -86,7 +87,7 @@ button, .login-btn, .forgot {
 /* =========================
    DESKTOP / MEDIA QUERY
    ========================= */
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
 
     /* gör hela sidan mer kompakt */
     .container {
@@ -110,8 +111,13 @@ button, .login-btn, .forgot {
         border-radius: 6px;
     }
 
-    button, .login-btn, .forgot {
+    .forgot {
+     width: 10%;
         font-size: 16px;
+    }
+
+    .login-btn{
+   font-size: 16px;
         padding: 10px;
         width: 100%;
         margin: 10px 0;
