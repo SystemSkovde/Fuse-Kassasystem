@@ -3,6 +3,8 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
 
     const cid = document.getElementById("cid").value;
     const pass = document.getElementById("pass").value;
+  
+
 
     fetch("data.php", {
         method: "POST",
@@ -17,15 +19,20 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
     .then(res => res.json())
     .then(data => {
 
-        localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("accounts", JSON.stringify(data.accounts));
-        localStorage.setItem("products", JSON.stringify(data.products));
+    if (!data.user) {
+        alert(data.error || "Login failed");
+        return;
+    }
 
-       if (cid === "Admin") {
-    window.location.href = "AdminHem.html";
-} else {
-    window.location.href = "Hem.html";
-}
-    })
+    localStorage.setItem("user", JSON.stringify(data.user));
+    localStorage.setItem("accounts", JSON.stringify(data.accounts || []));
+
+    const user = data.user;
+
+    window.location.href =
+        user.role === "admin"
+            ? "AdminHem.html"
+            : "Hem.html";
+})
     .catch(err => console.error(err));
 });

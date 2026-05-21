@@ -1,124 +1,207 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fuse</title>
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuse</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <style>
         .big {
-    font-size: 40px !important;  /* !important tvingar storleken */
+            font-size: 40px !important;
+            /* !important tvingar storleken */
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            padding-left: 30px;
+            ;
+        }
+
+        .left-icons,
+        .icons-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* avstånd mellan ikoner i varje grupp */
+        }
+
+        h1 {
+            margin: 20px 0;
+        }
+
+        .welcome {
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .btn {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 12px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #e6e6e6;
+        }
+
+        #Inventory {
+            text-align: center;
+        }
+
+        #Inventory table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            table-layout: fixed;
+        }
+
+        #Inventory th,
+        #Inventory td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+             overflow: hidden;
+        }
+        #Inventory tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
 }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #ffffff;
-    }
 
-    .container {
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 20px;
-      text-align: center;
-    }
+        .back {
+            background-color: white;
+            border-radius: 8px;
+            width: 100px;
+            height: 35px;
+            border: solid black 0.5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100%;
+            gap: 5px;
+            padding: 0 8px;
+            margin-top: 20px;
+            align-self: flex-start;
+            margin-left: 20px;
+        }
 
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 24px;
-      margin-bottom: 40px;
-    }
+        #back-link {
+            color: black;
+            text-decoration: none;
+        }
 
-    .icons-right span {
-      margin-left: 15px;
-      cursor: pointer;
-    }
+        .card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
 
-    h1 {
-      margin: 20px 0;
-    }
+        input,
+        select,
+        button {
+            width: 90%;
+            font-size: 16px;
+            padding: 5px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
 
-    .welcome {
-      margin-bottom: 40px;
-      color: #333;
-    }
+        #Add {
+            background-color: rgb(150, 208, 241);
+        }
 
-    .btn {
-      display: block;
-      width: 80%;
-      margin: 10px auto;
-      padding: 12px;
-      border: 2px solid #333;
-      border-radius: 8px;
-      background: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .btn:hover {
-      background-color: #e6e6e6;
-    }
-
-    .big {
-    font-size: 40px !important;  /* !important tvingar storleken */
-    }
-  </style>
+        .card button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
+
 <body>
- <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const user = JSON.parse(localStorage.getItem("user"));
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const user = JSON.parse(localStorage.getItem("user"));
 
-    if (user && user.Name) {
-        document.getElementById("username").textContent = user.Cid + " - " + user.Name;
-    } else {
-        document.getElementById("username").textContent = "Guest";
-    }
+            if (user && user.Name) {
+                document.getElementById("username").textContent = user.Cid + " - " + user.Name;
+            } else {
+                document.getElementById("username").textContent = "Guest";
+            }
 
-    function updateCartCount() {
-        let cart = JSON.parse(localStorage.getItem("cart")) || {};
+            function updateCartCount() {
+                let cart = JSON.parse(localStorage.getItem("cart")) || {};
 
-        let total = Object.values(cart).reduce((sum, item) => {
-            return sum + item.quantity;
-        }, 0);
+                let total = Object.values(cart).reduce((sum, item) => {
+                    return sum + item.quantity;
+                }, 0);
 
-        const el = document.getElementById("cart-count");
-        if (el) {
-            el.textContent = total;
-        }
-    }
-    updateCartCount();
-
-    window.addEventListener("focus", updateCartCount);
-    window.addEventListener("storage", function (e) {
-        if (e.key === "cart") {
+                const el = document.getElementById("cart-count");
+                if (el) {
+                    el.textContent = total;
+                }
+            }
             updateCartCount();
-        }
-    });
 
-});
-</script>
+            window.addEventListener("focus", updateCartCount);
+            window.addEventListener("storage", function (e) {
+                if (e.key === "cart") {
+                    updateCartCount();
+                }
+            });
 
-  <div class="container">
-    <a href="AdminHem.html">
-          <span class="material-symbols-outlined big">
-            home
-          </span>
-        </a>
+        });
+    </script>
+
+
+    <!-- Nav-->
     <div class="top-bar">
-      <span class="material-symbols-outlined big">
-help
-</span>
-      
-      <div class="icons-right">
-
-        <span style="position: relative; display: inline-block;">
-          <span class="material-symbols-outlined big" onclick="location.href='cartAlt2.html'">
-             shopping_basket
+        <div class="left-icons">
+            <a href="AdminHem.html">
+                <span class="material-symbols-outlined big">
+                    home
+                </span>
+            </a>
+            <span class="material-symbols-outlined big">
+                help
             </span>
-            <span id="cart-count" style="
+        </div>
+
+        <div class="icons-right">
+
+            <span style="position: relative; display: inline-block;">
+                <span class="material-symbols-outlined big" onclick="location.href='cartAlt2.html'">
+                    shopping_basket
+                </span>
+                <span id="cart-count" style="
               position: absolute;
               top: -5px;
               right: -10px;
@@ -128,60 +211,74 @@ help
               padding: 2px 6px;
               border-radius: 50%;
             ">0</span>
-          </span>
+            </span>
 
-     
-        <span class="material-symbols-outlined big" onclick="location.href='Minsida.html'">
-          person
-        </span>
-      </div>
+
+            <span class="material-symbols-outlined big" onclick="location.href='Minsida.html'">
+                person
+            </span>
+        </div>
     </div>
-  </div>
+
 
 
 
     <h1>Fuse</h1>
     <p class="welcome">Welcome <span id="username"></span>!</p>
-    
-    <form id="add-form">
-      <input type="number" id="nr" placeholder="Nr" required>
-      <input type="text" id="item-name" placeholder="Name" required>
-      <input type="text" id="category1" placeholder="Category" required>
-      <input type="text" id="subcategory1" placeholder="SubCategory" required>
-      <input type="number" id="stock" placeholder="Stock" required>
-      <input type="number" id="price" placeholder="Price"required>
 
-      <button type="submit">Add item</button>
-    </form>
 
-    <button id="editBtn">
-      Edit item
-    </button>
 
-    <!-- Form -->
-  <form id="filterForm">
+    <div class="card">
+        <!-- Filter-->
+        <h3>Filter</h3>
+        <form id="filterForm">
 
-    <!-- Category -->
-    <select id="Category"> 
-      <option value="">Choose category</option>
-    </select>
+            <select id="Category">
+                <option value="">Choose category</option>
+            </select>
 
-    <!-- Subcategory -->
-    <select id="SubCategory">
-      <option value="">Choose subcategory</option>
-    </select>
+            <select id="SubCategory">
+                <option value="">Choose subcategory</option>
+            </select>
 
-    <!-- Submit -->
-    <input type="submit" value="Search">
+        </form>
+        <!-- Search-->
+        <form>
+            <input id="Search" type="text" placeholder="Search">
+        </form>
+    </div>
 
-  </form>
-    
-    <form>
-        <input id="Search" type="text" placeholder="Search">
-    </form>
+
+    <!-- Table-->
     <div id="Inventory"></div>
-  
-<script src="Lagerscript.js"></script>
+    <div class="card">
+        <!-- Add-->
+        <form id="add-form">
+            <input type="number" id="nr" placeholder="Nr" required>
+            <input type="text" id="item-name" placeholder="Name" required>
+            <input type="text" id="category1" placeholder="Category" required>
+            <input type="text" id="subcategory1" placeholder="SubCategory" required>
+            <input type="number" id="stock" placeholder="Stock" required>
+            <input type="number" id="price" placeholder="Price" required>
+
+            <button id="Add" type="submit">Add item</button>
+        </form>
+
+        <!-- Edit-->
+        <button id="editBtn">
+            Edit item
+        </button>
+    </div>
+    <!-- Back button-->
+    <div class="back">
+        <span class="material-symbols-outlined smal">
+            arrow_back_ios
+        </span>
+        <a href=AdminHem.html id="back-link">Back</a>
+    </div>
+
+
+    <script src="Lagerscript.js"></script>
 
 </body>
 </html>

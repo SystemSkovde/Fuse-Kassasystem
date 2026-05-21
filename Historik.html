@@ -193,7 +193,7 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 const homeLink = document.getElementById("Home");
 
-if (user.Cid === "Admin") {
+if (user.role === "admin") {
     homeLink.href = "AdminHem.html";
 } else {
     homeLink.href = "Hem.html";

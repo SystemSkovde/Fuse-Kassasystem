@@ -1,98 +1,100 @@
 <!DOCTYPE html>
 <html lang="sv">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Test</title>
-        <link href="style.css" rel="stylesheet">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link href="style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
 
-    </head>
-    
-    
-    <body>
-    
-        <nav>
-            <div class="back">
-                <span class="material-symbols-outlined smal">
-                    arrow_back_ios
+</head>
+
+
+<body>
+
+    <nav>
+        <div class="back">
+            <span class="material-symbols-outlined smal">
+                arrow_back_ios
+            </span>
+            <a href="#" id="back-link">Back</a>
+        </div>
+        <h1 id="scan">Scan barcode</h1>
+    </nav>
+
+
+
+    <div id="start">
+
+        <div class="wrap-c">
+            <div id="C-head">
+                <h2 id="material-name">[Material Name]</h2>
+                <span class="material-symbols-outlined" id="close-btn">
+                    close
                 </span>
-                <a href="#" id="back-link">Back</a>
-            </div> 
-            <h1 id="scan">Scan barcode</h1>
-        </nav>
+            </div>
 
-      
+            <p>Price: <span id="material-price">[price]</span></p>
+            <form>
+                <input type="number" id="amount" value="1" min="1" step="1">
+            </form>
+            <div class="choice" id="add-to-cart">
+                <p>Add to cart</p>
+            </div>
+        </div>
 
- <div id="start">
 
-            <div class="wrap-c">
-    <div id="C-head">
-        <h2 id="material-name">[Material Name]</h2>
-        <span class="material-symbols-outlined" id="close-btn">
-            close
-        </span>
+
+
+        <div id="o-wrap">
+            <p id="Added">[Material Name]</p>
+        </div>
+
     </div>
 
-    <p>Price: <span id="material-price">[price]</span></p>
-<form>
-   <input type="number" id="amount" value="1" min="1" step="1">
-</form>
-    <div class="choice" id="add-to-cart">
-        <p>Add to cart</p>
+
+
+
+
+    <div id="scanner-section">
+        <div id="qr-reader-results"></div>
+        <div id="qr-reader"></div>
+        <script src="https://unpkg.com/html5-qrcode"></script>
+        <script src="scannasscript.js"></script>
+
+
+        <div id="cart"></div>
+
+        <footer>
+            <a href="cartAlt2.html">
+                <div class="cart-icon-wrapper">
+                    <span class="circle" id="cart-count">0</span>
+                    <span class="material-symbols-outlined big">
+                        shopping_basket
+                    </span>
+
+                </div>
+            </a>
+        </footer>
     </div>
-</div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const user = JSON.parse(localStorage.getItem("user"));
+            const backLink = document.getElementById("back-link");
 
+            if (!backLink) return;
 
-
-
-<div id="o-wrap">
-   <p id="Added">[Material Name]</p>
-</div>
-
-</div>
-
-
-
-        
-  
-        <div id="scanner-section"> 
-    <div id="qr-reader-results"></div>
- <div id="qr-reader"></div>
-    <script src="https://unpkg.com/html5-qrcode"></script>
-    <script src="scannasscript.js"></script>
-
-
-<div id="cart"></div>
-
-<footer>
-    <a href="cartAlt2.html">
-      <div class="cart-icon-wrapper">
-        <span class="circle" id="cart-count">0</span>
-        <span class="material-symbols-outlined big">
-        shopping_basket
-    </span>
- 
-     </div>
-        </a>
-</footer>
-</div>
- </div>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const backLink = document.getElementById("back-link");
-
-    if (!backLink) return;
-
-    if (user && user.Cid === "Admin") {
-        backLink.href = "AdminHem.html";
-    } else {
-        backLink.href = "Hem.html";
-    }
-});
-</script>
+            if (user.role === "admin") {
+                backLink.href = "AdminHem.html";
+            } else {
+                backLink.href = "Hem.html";
+            }
+        });
+    </script>
 </body>
+
 </html>

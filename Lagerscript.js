@@ -22,7 +22,7 @@ docReady(function () {
 
     document.getElementById("add-form")?.addEventListener("submit", function (e) {
         e.preventDefault();
-        const nr = document.getElementById("nr")?.value;
+        const nr = document.getElementById("article_id")?.value;
         const name = document.getElementById("item-name")?.value;
         const category = document.getElementById("category1")?.value;
         const subcategory = document.getElementById("subcategory1")?.value;
@@ -39,12 +39,12 @@ docReady(function () {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({ action: "insert", nr, name, category, subcategory, stock, price })
         })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) location.reload();
-            else alert("Could not add item");
-        })
-        .catch(err => console.error("Error:", err));
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) location.reload();
+                else alert("Could not add item");
+            })
+            .catch(err => console.error("Error:", err));
     });
 
     document.getElementById("Search")?.addEventListener("input", function () {
@@ -120,7 +120,7 @@ function renderProducts(list) {
     <table class="cart-table">
         <thead>
             <tr>
-                <th>Number</th>
+                <th>Article ID</th>
                 <th>Name</th>
                 <th>Category</th>
                 <th>SubCategory</th>
@@ -134,35 +134,35 @@ function renderProducts(list) {
     list.forEach(item => {
         html += `
         <tr>
-            <td>${item.Nr}</td>
+            <td>${item.article_id}</td>
           <td>
                     ${isEditMode
-                        ? `<input value="${item.Name}" data-barcode="${item.BarCode}" data-field="Name">`
-                        : item.Name}
+                ? `<input value="${item.Name}" data-barcode="${item.BarCode}" data-field="Name">`
+                : item.Name}
                 </td>
 
                 <td>
                     ${isEditMode
-                        ? `<input value="${item.Category}" data-barcode="${item.BarCode}" data-field="Category">`
-                        : item.Category}
+                ? `<input value="${item.Category}" data-barcode="${item.BarCode}" data-field="Category">`
+                : item.Category}
                 </td>
 
                 <td>
                     ${isEditMode
-                        ? `<input value="${item.SubCategory}" data-barcode="${item.BarCode}" data-field="SubCategory">`
-                        : item.SubCategory}
+                ? `<input value="${item.SubCategory}" data-barcode="${item.BarCode}" data-field="SubCategory">`
+                : item.SubCategory}
                 </td>
 
                 <td>
                     ${isEditMode
-                        ? `<input type="number" value="${item.Stock}" data-barcode="${item.BarCode}" data-field="Stock">`
-                        : item.Stock}
+                ? `<input type="number" value="${item.Stock}" data-barcode="${item.BarCode}" data-field="Stock">`
+                : item.Stock}
                 </td>
 
                 <td>
                     ${isEditMode
-                        ? `<input type="number" value="${item.Price}" data-barcode="${item.BarCode}" data-field="Price">`
-                        : item.Price}
+                ? `<input type="number" value="${item.Price}" data-barcode="${item.BarCode}" data-field="Price">`
+                : item.Price}
                 </td>
         </tr>
         `;
