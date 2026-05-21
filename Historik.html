@@ -138,52 +138,15 @@
         </a>
         <div class="top-bar">
       <span class="material-symbols-outlined big">
-help
-</span>
+            help
+      </span>
     </div>
-    </div>
+  </div>
 
     <h1>Order history</h1>
 
-    <div class="history-section">
-      <div class="history-date">[21-02-2026]</div>
-      <table>
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Cell A</td>
-            <td>Cell B</td>
-            <td>1</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div id="historyContainer"></div>
 
-    <div class="history-section">
-      <div class="history-date">[20-02-2026]</div>
-      <table>
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Cell A</td>
-            <td>Cell B</td>
-            <td>1</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
 
     <div class="bottom-buttons">
       <button class="btn" onclick="location.href='Minsida.html'">Back</button>
@@ -198,6 +161,111 @@ if (user.role === "admin") {
 } else {
     homeLink.href = "Hem.html";
 }
+
+const historyContainer =
+    document.getElementById("historyContainer");
+
+const formData = new FormData();
+
+formData.append(
+    "action",
+    "getOrderHistory"
+);
+
+formData.append(
+    "cid",
+    user.Cid || user.cid
+);
+
+fetch("data.php", {
+    method: "POST",
+    body: formData
+})
+.then(r => r.json())
+.then(rows => {
+
+    if (!rows.length) {
+        historyContainer.innerHTML =
+            "<p>You have no previous orders.</p>";
+        return;
+    }
+
+    let orders = {};
+
+    rows.forEach(row => {
+
+        if (!orders[row.Order_ID]) {
+
+            orders[row.Order_ID] = {
+                date: row.Order_date,
+                total: row.total_amount,
+                status: row.Status,
+                items: []
+            };
+        }
+
+        orders[row.Order_ID].items.push(row);
+    });
+
+    let html = "";
+
+    Object.entries(orders).forEach(([id, order]) => {
+
+        html += `
+        <div class="history-section">
+
+            <div class="history-date">
+                ${order.date}
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+        `;
+
+        order.items.forEach(item => {
+
+            html += `
+                <tr>
+                    <td>${item.Name}</td>
+                    <td>${item.salesPrice} kr</td>
+                    <td>${item.Quantity}</td>
+                </tr>
+            `;
+        });
+
+        html += `
+                </tbody>
+            </table>
+
+            <p style="
+                margin-top:10px;
+                text-align:right;
+                font-weight:bold;
+            ">
+                Total: ${order.total} kr
+                (${order.status})
+            </p>
+
+        </div>
+        `;
+    });
+
+    historyContainer.innerHTML = html;
+})
+.catch(error => {
+    console.error(error);
+
+    historyContainer.innerHTML =
+        "<p>Could not load order history.</p>";
+});
    </script>
 </body>
 </html>
