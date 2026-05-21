@@ -5,6 +5,11 @@
 <title>Fuse Login</title>
 
 <style>
+
+/* =========================
+   MOBIL (EXAKT ORIGINAL)
+   ========================= */
+
 body {
     background: white;
     display: flex;
@@ -15,10 +20,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* =========================
-   MOBIL (DEFAULT)
-   ========================= */
-
+/* Huvudrubrik */
 h1 {
     font-size: 70px;
     font-weight: bold;
@@ -27,12 +29,14 @@ h1 {
     text-align: center;
 }
 
+/* container (MOBIL oförändrad) */
 .container {
     width: 90%;
     flex-direction: column;
     align-items: center;
 }
 
+/* labels (MOBIL oförändrad) */
 label {
     font-size: 40px;
     color: black;
@@ -40,6 +44,7 @@ label {
     margin-bottom: 6px;
 }
 
+/* inputs (MOBIL oförändrad) */
 input {
     width: 100%;
     padding: 14px;
@@ -49,6 +54,7 @@ input {
     font-size: 40px;
 }
 
+/* login knapp (MOBIL oförändrad) */
 .login-btn {
     display: block;
     width: 50%;
@@ -62,6 +68,7 @@ input {
     color: white;
 }
 
+/* forgot (MOBIL oförändrad) */
 .forgot {
     display: block;
     margin: 10px auto;
@@ -75,8 +82,9 @@ input {
     cursor: pointer;
 }
 
+
 /* =========================
-   🖥️ DATOR (MINDRE LOGIN)
+   🖥️ ENDAST DATOR
    ========================= */
 
 @media (min-width: 768px) {
@@ -112,7 +120,7 @@ input {
     .forgot {
         font-size: 14px;
         padding: 6px 12px;
-        width: auto;   /* 👈 gör den inte lång */
+        width: auto;
     }
 }
 
