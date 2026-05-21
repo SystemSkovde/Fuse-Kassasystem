@@ -126,6 +126,8 @@ function renderProducts(list) {
                 <th>SubCategory</th>
                 <th>Stock</th>
                 <th>Price</th>
+                 <th>Description</th>
+                <th>Image</th>
             </tr>
         </thead>
         <tbody>
@@ -164,6 +166,8 @@ function renderProducts(list) {
                 ? `<input type="number" value="${item.Price}" data-barcode="${item.BarCode}" data-field="Price">`
                 : item.Price}
                 </td>
+                 <td>${item.Description}</td>
+                 <td>${item.Img_adress}</td>
         </tr>
         `;
     });
