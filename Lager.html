@@ -7,22 +7,20 @@
     <title>Fuse</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <style>
+
+* {
+    box-sizing: border-box;
+}
+
         .big {
             font-size: 40px !important;
-            /* !important tvingar storleken */
         }
 
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+         margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
         }
-
-
 
         .top-bar {
             display: flex;
@@ -32,7 +30,7 @@
             padding-top: 30px;
             padding-bottom: 30px;
             padding-left: 30px;
-            ;
+
         }
 
         .left-icons,
@@ -57,6 +55,9 @@
             color: #333;
         }
 
+  
+
+
         .btn {
             display: block;
             width: 80%;
@@ -73,18 +74,32 @@
         .btn:hover {
             background-color: #e6e6e6;
         }
+  
 
-        #Inventory {
-            text-align: center;
-        }
+#Inventory table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-        #Inventory table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            table-layout: fixed;
-        }
+@media (max-width: 600px) {
 
+  #Inventory {
+    width: 100%;
+    overflow-x: auto;
+}
+
+    #Inventory table {
+        min-width: 700px;
+        width: max-content;
+    }
+
+    #Inventory td,
+    #Inventory th {
+        white-space: nowrap;
+    }
+}
+
+       
         #Inventory th,
         #Inventory td {
             border: 1px solid #ccc;
@@ -153,39 +168,7 @@
 </head>
 
 <body>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const user = JSON.parse(localStorage.getItem("user"));
-
-            if (user && user.Name) {
-                document.getElementById("username").textContent = user.Cid + " - " + user.Name;
-            } else {
-                document.getElementById("username").textContent = "Guest";
-            }
-
-            function updateCartCount() {
-                let cart = JSON.parse(localStorage.getItem("cart")) || {};
-
-                let total = Object.values(cart).reduce((sum, item) => {
-                    return sum + item.quantity;
-                }, 0);
-
-                const el = document.getElementById("cart-count");
-                if (el) {
-                    el.textContent = total;
-                }
-            }
-            updateCartCount();
-
-            window.addEventListener("focus", updateCartCount);
-            window.addEventListener("storage", function (e) {
-                if (e.key === "cart") {
-                    updateCartCount();
-                }
-            });
-
-        });
-    </script>
+   
 
 
     <!-- Nav-->
@@ -286,5 +269,30 @@
     <script src="Lagerscript.js"></script>
 
 </body>
+ <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function updateCartCount() {
+                let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
+                let total = Object.values(cart).reduce((sum, item) => {
+                    return sum + item.quantity;
+                }, 0);
+
+                const el = document.getElementById("cart-count");
+                if (el) {
+                    el.textContent = total;
+                }
+            }
+            updateCartCount();
+
+            window.addEventListener("focus", updateCartCount);
+            window.addEventListener("storage", function (e) {
+                if (e.key === "cart") {
+                    updateCartCount();
+                }
+            });
+
+        });
+    </script>
 
 </html>
