@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fuse Login</title>
 
 <style>
 
 /* =========================
-   MOBIL (EXAKT ORIGINAL 
+   MOBIL (EXAKT ORIGINAL)
    ========================= */
 
 body {
@@ -44,6 +45,7 @@ input {
     border-radius: 8px;
     font-size: 40px;
     transition: 0.25s;
+    box-sizing: border-box; /* Ser till att padding inte gör inputen bredare än skärmen */
 }
 
 input:focus {
@@ -52,8 +54,8 @@ input:focus {
     box-shadow: 0 0 4px rgba(7, 9, 11, 0.3);
 }
 
-/* Knappar */
-button {
+/* Knappar (Lagt till .login-btn här så den också blir stor på mobilen) */
+button, .login-btn {
     display: block;
     padding: 15px;
     font-size: 40px;
@@ -62,7 +64,7 @@ button {
     cursor: pointer;
     transition: 0.25s;
     width: 50%;
-    margin:20px auto;
+    margin: 20px auto;
 }
 
 .login-btn {
@@ -135,6 +137,7 @@ button {
         font-size: 16px;
         padding: 10px;
         width: 100%;
+        margin: 10px 0;
     }
 
     .forgot {
