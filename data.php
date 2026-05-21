@@ -148,6 +148,79 @@ if ($cid !== null && $password !== null) {
     $response['accounts'] = $stmt->fetchAll();
 
 }
+
+if (isset($_POST['action']) && $_POST['action'] === 'saveOrder') {
+
+    try {
+
+        $cid = $_POST['cid'];
+        $accountId = $_POST['accountId'];
+        $total = $_POST['total'];
+
+        $stmt = $pdo->prepare("
+            INSERT INTO Orders
+            (Cid, Account_ID, Order_date, total_amount, Status)
+            VALUES
+            (:cid, :account, CURDATE(), :total, 'completed')
+        ");
+
+        $stmt->execute([
+            ':cid' => $cid,
+            ':account' => $accountId,
+            ':total' => $total
+        ]);
+
+        $orderId = $pdo->lastInsertId();
+
+        $items = json_decode($_POST['items'], true);
+
+        foreach ($items as $item) {
+
+            $stmtProduct = $pdo->prepare("
+                SELECT article_id
+                FROM Products
+                WHERE BarCode = :barcode
+            ");
+
+            $stmtProduct->execute([
+                ':barcode' => $item['code']
+            ]);
+
+            $product = $stmtProduct->fetch();
+
+            if (!$product) {
+                continue;
+            }
+
+            $stmtItem = $pdo->prepare("
+                INSERT INTO OrderItems
+                (Order_ID, Item_ID, Quantity, salesPrice)
+                VALUES
+                (:orderId, :itemId, :qty, :price)
+            ");
+
+            $stmtItem->execute([
+                ':orderId' => $orderId,
+                ':itemId' => $product['article_id'],
+                ':qty' => $item['quantity'],
+                ':price' => $item['price']
+            ]);
+        }
+
+        echo json_encode([
+            'success' => true
+        ]);
+
+    } catch(Exception $e) {
+
+        echo json_encode([
+            'success' => false,
+            'error' => $e->getMessage()
+        ]);
+    }
+
+    exit;
+}
 echo json_encode($response);
 
 ?>
