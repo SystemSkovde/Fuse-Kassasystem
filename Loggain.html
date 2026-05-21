@@ -7,7 +7,7 @@
 
 <style>
 /* ==========================================================================
-   MOBIL (Den kod du vill ha, gäller för alla skärmar som standard)
+   📱 MOBIL (Din exakta styling, gäller för alla skärmar som standard)
    ========================================================================== */
 body {
     background: white;
@@ -43,7 +43,7 @@ input {
     border-radius: 8px;
     font-size: 40px;
     transition: 0.25s;
-    box-sizing: border-box; /* Hindrar fälten från att tryckas ut utanför skärmen */
+    box-sizing: border-box; /* Hindrar fälten från att tryckas ut utanför skärmen på mobilen */
 }
 
 input:focus {
@@ -52,8 +52,8 @@ input:focus {
     box-shadow: 0 0 4px rgba(7, 9, 11, 0.3);
 }
 
-/* Knappar (Gäller både button-taggen och login-knappen på mobil) */
-button, .login-btn {
+/* Knappar */
+button {
     display: block;
     padding: 15px;
     font-size: 40px;
@@ -65,7 +65,17 @@ button, .login-btn {
     margin: 20px auto;
 }
 
+/* Logga in-knappen (input type="submit") får samma egenskaper som button på mobil */
 .login-btn {
+    display: block;
+    padding: 15px;
+    font-size: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.25s;
+    width: 50%;
+    margin: 20px auto;
     background: #07080a;
     color: white;
 }
@@ -94,7 +104,7 @@ button, .login-btn {
 }
 
 /* ==========================================================================
-   🖥️ ENDAST DATOR (Skrivs över här när skärmen är bredare än 768px)
+   🖥️ ENDAST DATOR (Skriver över mobil-stylingen när skärmen är stor)
    ========================================================================== */
 @media (min-width: 768px) {
     body {
@@ -121,8 +131,7 @@ button, .login-btn {
         margin-bottom: 12px;
     }
 
-    /* Återställ datorknapparna till mindre storlek */
-    button, .login-btn {
+    button {
         font-size: 16px;
         padding: 10px;
         width: 100%;
@@ -133,6 +142,7 @@ button, .login-btn {
         font-size: 16px;
         padding: 10px;
         width: 100%;
+        margin: 10px 0;
     }
 
     .forgot {
