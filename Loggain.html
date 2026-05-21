@@ -6,11 +6,9 @@
 <title>Fuse Login</title>
 
 <style>
-
-/* =========================
-   MOBIL (EXAKT ORIGINAL)
-   ========================= */
-
+/* ==========================================================================
+   MOBIL (Den kod du vill ha, gäller för alla skärmar som standard)
+   ========================================================================== */
 body {
     background: white;
     display: flex;
@@ -45,7 +43,7 @@ input {
     border-radius: 8px;
     font-size: 40px;
     transition: 0.25s;
-    box-sizing: border-box; /* Ser till att padding inte gör inputen bredare än skärmen */
+    box-sizing: border-box; /* Hindrar fälten från att tryckas ut utanför skärmen */
 }
 
 input:focus {
@@ -54,7 +52,7 @@ input:focus {
     box-shadow: 0 0 4px rgba(7, 9, 11, 0.3);
 }
 
-/* Knappar (Lagt till .login-btn här så den också blir stor på mobilen) */
+/* Knappar (Gäller både button-taggen och login-knappen på mobil) */
 button, .login-btn {
     display: block;
     padding: 15px;
@@ -95,13 +93,10 @@ button, .login-btn {
     margin-top: 100px;
 }
 
-
-/* =========================
-   🖥️ ENDAST DATOR (ÄNDRAR ALLT HÄR)
-   ========================= */
-
+/* ==========================================================================
+   🖥️ ENDAST DATOR (Skrivs över här när skärmen är bredare än 768px)
+   ========================================================================== */
 @media (min-width: 768px) {
-
     body {
         padding-top: 20px;
     }
@@ -126,7 +121,8 @@ button, .login-btn {
         margin-bottom: 12px;
     }
 
-    button {
+    /* Återställ datorknapparna till mindre storlek */
+    button, .login-btn {
         font-size: 16px;
         padding: 10px;
         width: 100%;
@@ -137,7 +133,6 @@ button, .login-btn {
         font-size: 16px;
         padding: 10px;
         width: 100%;
-        margin: 10px 0;
     }
 
     .forgot {
@@ -170,7 +165,6 @@ button, .login-btn {
     <div id="knapp">
         <input type="submit" value="Log in" class="login-btn">
     </div>
-
 </form>
 
 <button class="forgot">Forgot password?</button>
