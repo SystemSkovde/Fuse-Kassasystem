@@ -60,6 +60,11 @@ docReady(function () {
     document.getElementById("editBtn")?.addEventListener("click", () => {
         isEditMode = !isEditMode;
         renderProducts(products);
+        if (!isEditMode) {
+            setTimeout(() => {
+                location.reload();
+            }, 500);
+        }
     });
 
     document.getElementById("Inventory")?.addEventListener("change", (e) => {
@@ -72,6 +77,7 @@ docReady(function () {
                     field: e.target.dataset.field,
                     value: e.target.value
                 })
+            }).then(() => {
             });
         }
     });
@@ -126,7 +132,7 @@ function renderProducts(list) {
                 <th>SubCategory</th>
                 <th>Stock</th>
                 <th>Price</th>
-                 <th>Description</th>
+                <th>Description</th>
                 <th>Image</th>
             </tr>
         </thead>
@@ -166,8 +172,15 @@ function renderProducts(list) {
                 ? `<input type="number" value="${item.Price}" data-barcode="${item.BarCode}" data-field="Price">`
                 : item.Price}
                 </td>
-                 <td>${item.Description}</td>
+
+                <td>
+                    ${isEditMode
+                ? `<input value="${item.Description}" data-barcode="${item.BarCode}" data-field="Description">`
+                : item.Description}
+                </td>
+
                  <td>${item.Img_adress}</td>
+            </td>
         </tr>
         `;
     });
