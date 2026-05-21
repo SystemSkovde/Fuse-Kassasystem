@@ -8,7 +8,7 @@
 <style>
 
 /* =========================
-   MOBIL (EXAKT ORIGINAL)
+   📱 MOBIL (EXAKT ORIGINAL)
    ========================= */
 
 body {
@@ -20,7 +20,7 @@ body {
     padding-top: 40px;
 }
 
-/* Huvudrubrik */
+/* Title */
 h1 {
     font-size: 70px;
     font-weight: bold;
@@ -29,7 +29,12 @@ h1 {
     text-align: center;
 }
 
-/* Form-element */
+/* Container */
+.container {
+    width: 90%;
+}
+
+/* Labels */
 label {
     font-size: 40px;
     color: black;
@@ -37,6 +42,7 @@ label {
     margin-bottom: 6px;
 }
 
+/* Inputs */
 input {
     width: 100%;
     padding: 14px;
@@ -44,60 +50,44 @@ input {
     border: 1px solid black;
     border-radius: 8px;
     font-size: 40px;
-    transition: 0.25s;
-    box-sizing: border-box; /* Ser till att padding inte gör inputen bredare än skärmen */
 }
 
-input:focus {
-    border-color: #020305;
-    outline: none;
-    box-shadow: 0 0 4px rgba(7, 9, 11, 0.3);
-}
-
-/* Knappar (Lagt till .login-btn här så den också blir stor på mobilen) */
-button, .login-btn {
+/* Login button */
+.login-btn {
     display: block;
+    width: 50%;
+    margin: 20px auto;
     padding: 15px;
     font-size: 40px;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
-    transition: 0.25s;
-    width: 50%;
-    margin: 20px auto;
-}
-
-.login-btn {
     background: #07080a;
     color: white;
+    cursor: pointer;
 }
 
-.login-btn:hover {
-    background: #0a0b0c;
-}
-
+/* Forgot button */
 .forgot {
+    display: block;
+    margin: 10px auto;
+    padding: 8px 16px;
+    font-size: 18px;
+    width: auto;
+    border: none;
+    border-radius: 8px;
     background: #e3e3e3;
     color: #333;
+    cursor: pointer;
 }
 
-.forgot:hover {
-    background: #d1d1d1;
-}
-
-.container{
-    width: 90%;
-    flex-direction: column;
-    align-items: center;
-}
-
-#knapp{
+/* knap wrapper */
+#knapp {
     margin-top: 100px;
 }
 
 
 /* =========================
-   🖥️ ENDAST DATOR (ÄNDRAR ALLT HÄR)
+   🖥️ DATOR (ENDAST HÄR ÄNDRAS)
    ========================= */
 
 @media (min-width: 768px) {
@@ -117,20 +107,12 @@ button, .login-btn {
 
     label {
         font-size: 16px;
-        margin-bottom: 4px;
     }
 
     input {
         font-size: 16px;
         padding: 8px 10px;
         margin-bottom: 12px;
-    }
-
-    button {
-        font-size: 16px;
-        padding: 10px;
-        width: 100%;
-        margin: 10px 0;
     }
 
     .login-btn {
@@ -142,16 +124,15 @@ button, .login-btn {
 
     .forgot {
         font-size: 14px;
-        padding: 8px 10px;
-        width: auto;
-        margin: 10px auto;
-        display: block;
+        padding: 6px 12px;
+        width: auto; /* 👈 fixar att den inte blir lång */
     }
 
     #knapp {
         margin-top: 20px;
     }
 }
+
 </style>
 </head>
 
@@ -175,6 +156,5 @@ button, .login-btn {
 
 <button class="forgot">Forgot password?</button>
 
-<script src="loggain.js"></script>
 </body>
 </html>
