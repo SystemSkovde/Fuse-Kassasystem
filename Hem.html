@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (user && user.Name) {
-        document.getElementById("username").textContent = user.Cid + " - " + user.Name;
+        document.getElementById("username").textContent = user.role + " - " + user.Name;
     } else {
         document.getElementById("username").textContent = "Guest";
     }
