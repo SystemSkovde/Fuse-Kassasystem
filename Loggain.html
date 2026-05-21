@@ -7,7 +7,7 @@
 <style>
 
 /* =========================
-   MOBIL (EXAKT ORIGINAL)
+   📱 MOBIL (EXAKT SOM DU VILL)
    ========================= */
 
 body {
@@ -17,10 +17,8 @@ body {
     align-items: center;
     justify-content: center;
     padding-top: 40px;
-    font-family: Arial, sans-serif;
 }
 
-/* Huvudrubrik */
 h1 {
     font-size: 70px;
     font-weight: bold;
@@ -29,14 +27,12 @@ h1 {
     text-align: center;
 }
 
-/* container (MOBIL oförändrad) */
 .container {
     width: 90%;
     flex-direction: column;
     align-items: center;
 }
 
-/* labels (MOBIL oförändrad) */
 label {
     font-size: 40px;
     color: black;
@@ -44,7 +40,6 @@ label {
     margin-bottom: 6px;
 }
 
-/* inputs (MOBIL oförändrad) */
 input {
     width: 100%;
     padding: 14px;
@@ -54,7 +49,6 @@ input {
     font-size: 40px;
 }
 
-/* login knapp (MOBIL oförändrad) */
 .login-btn {
     display: block;
     width: 50%;
@@ -68,7 +62,6 @@ input {
     color: white;
 }
 
-/* forgot (MOBIL oförändrad) */
 .forgot {
     display: block;
     margin: 10px auto;
@@ -84,10 +77,14 @@ input {
 
 
 /* =========================
-   🖥️ ENDAST DATOR
+   🖥️ ENDAST DATOR (MEDIA ONLY)
    ========================= */
 
 @media (min-width: 768px) {
+
+    body {
+        font-family: Arial, sans-serif;
+    }
 
     h1 {
         font-size: 36px;
@@ -96,30 +93,31 @@ input {
 
     .container {
         width: 320px;
+        max-width: 320px;
     }
 
     label {
-        font-size: 16px;
+        font-size: 14px;
         margin-bottom: 4px;
     }
 
     input {
-        font-size: 16px;
+        font-size: 14px;
         padding: 8px 10px;
         margin-bottom: 12px;
         border-radius: 6px;
     }
 
     .login-btn {
-        font-size: 16px;
-        padding: 10px;
+        font-size: 14px;
+        padding: 8px;
         width: 100%;
         margin: 10px 0;
     }
 
     .forgot {
-        font-size: 14px;
-        padding: 6px 12px;
+        font-size: 12px;
+        padding: 6px 10px;
         width: auto;
     }
 }
@@ -139,14 +137,11 @@ input {
     <label for="pass">Password</label>
     <input required type="password" name="password" id="pass">
 
-    <div id="knapp">
-        <input type="submit" value="Log in" class="login-btn">
-    </div>
+    <input type="submit" value="Log in" class="login-btn">
 
 </form>
 
 <button class="forgot">Forgot password?</button>
 
-<script src="loggain.js"></script>
 </body>
 </html>
