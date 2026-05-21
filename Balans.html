@@ -130,7 +130,7 @@ a {
       arrow_back_ios
     </span>
 
-    <a id="Back" href="#">
+    <a id="Back" href="Minsida.html">
       Back
     </a>
   </div>
@@ -141,14 +141,11 @@ a {
 const user = JSON.parse(localStorage.getItem("user"));
 const accounts = JSON.parse(localStorage.getItem("accounts"));
 const homeLink = document.getElementById("Home");
-const backLink = document.getElementById("Back");
 
 if (user.role === "admin") {
     homeLink.href = "AdminHem.html";
-    backLink.href = "AdminHem.html";
 } else {
     homeLink.href = "Hem.html";
-    backLink.href = "Hem.html";
 }
 
 function capitalize(str) {
