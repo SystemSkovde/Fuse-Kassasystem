@@ -12,9 +12,10 @@ body {
     align-items: center;
     justify-content: center;
     padding-top: 40px;
+    font-family: Arial, sans-serif;
 }
 
-/* Huvudrubrik */
+/* Huvudrubrik (standard mobil/normal) */
 h1 {
     font-size: 70px;
     font-weight: bold;
@@ -23,9 +24,7 @@ h1 {
     text-align: center;
 }
 
-
-
-/* Form-element */
+/* LABEL */
 label {
     font-size: 40px;
     color: black;
@@ -33,6 +32,7 @@ label {
     margin-bottom: 6px;
 }
 
+/* INPUT */
 input {
     width: 100%;
     padding: 14px;
@@ -43,52 +43,95 @@ input {
     transition: 0.25s;
 }
 
+/* FOKUS */
 input:focus {
     border-color: #020305;
     outline: none;
     box-shadow: 0 0 4px rgba(7, 9, 11, 0.3);
 }
 
-/* Knappar */
-button {
-     display: block;
+/* KNAPPAR */
+button, .login-btn {
+    display: block;
+    width: 50%;
+    margin: 20px auto;
     padding: 15px;
     font-size: 40px;
-    border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: 0.25s;
-    width: 50%;
-    margin:20px auto;
+    border: none;
 }
 
+/* LOGIN */
 .login-btn {
     background: #07080a;
     color: white;
 }
 
-.login-btn:hover {
-    background: #0a0b0c;
-}
-
+/* FORGOT */
 .forgot {
+    width: auto !important;
+    min-width: 140px;
+    max-width: 180px;
+
+    padding: 8px 12px !important;
+    font-size: 16px !important;
+
+    display: inline-block !important;
+    margin: 10px auto !important;
+
     background: #e3e3e3;
     color: #333;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
 }
-
-.forgot:hover {
-    background: #d1d1d1;
-}
-
-.container{
+/* CONTAINER */
+.container {
     width: 90%;
-     flex-direction: column;
+    flex-direction: column;
     align-items: center;
 }
 
-#knapp{
-    margin-top: 100px;
+/* =========================
+   DESKTOP / MEDIA QUERY
+   ========================= */
+@media (min-width: 768px) {
+
+    /* gör hela sidan mer kompakt */
+    .container {
+        width: 320px;
+    }
+
+    h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+
+    input {
+        font-size: 16px;
+        padding: 8px 10px;
+        margin-bottom: 12px;
+        border-radius: 6px;
+    }
+
+    button, .login-btn, .forgot {
+        font-size: 16px;
+        padding: 10px;
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    #knapp {
+        margin-top: 20px;
+    }
 }
+
 </style>
 </head>
 
@@ -96,23 +139,22 @@ button {
 
 <h1>Fuse</h1>
 
-<form id="loginForm"   class="container">
-
+<form id="loginForm" class="container">
 
     <label for="cid">CID</label>
     <input required type="text" name="cid" id="cid">
 
-    
     <label for="pass">Password</label>
-    <input required type="password"   name="password" id="pass">
-    
+    <input required type="password" name="password" id="pass">
+
     <div id="knapp">
-    <input type="submit" value="Log in"  class="login-btn">
+        <input type="submit" value="Log in" class="login-btn">
     </div>
+
 </form>
 
-    <button class="forgot">Forgot password?</button>
+<button class="forgot">Forgot password?</button>
 
-  <script src="loggain.js"></script>
+<script src="loggain.js"></script>
 </body>
 </html>
