@@ -144,10 +144,9 @@
   <div class="top-icons">
 
     <a id="Home" href="#">
-      <span class="material-symbols-outlined big">
-            help
-      </span>
-    </div>
+      <span class="material-symbols-outlined big">home</span>
+    </a>
+    <span class="material-symbols-outlined big">help</span>
   </div>
 
   <h1>Order history</h1>
@@ -192,6 +191,7 @@ fetch("data.php", {
 })
 .then(r => r.json())
 .then(rows => {
+  console.log("Svar från data.php:", rows);
 
     if (!rows.length) {
         historyContainer.innerHTML =
