@@ -221,6 +221,46 @@ if (isset($_POST['action']) && $_POST['action'] === 'saveOrder') {
 
     exit;
 }
+if (
+    isset($_POST['action']) &&
+    $_POST['action'] === 'getOrderHistory'
+) {
+
+    $stmt = $pdo->prepare("
+        SELECT
+            o.Order_ID,
+            o.Order_date,
+            o.total_amount,
+            o.Status,
+
+            oi.Quantity,
+            oi.salesPrice,
+
+            p.Name
+
+        FROM Orders o
+
+        JOIN OrderItems oi
+            ON o.Order_ID = oi.Order_ID
+
+        JOIN Products p
+            ON oi.Item_ID = p.article_id
+
+        WHERE o.Cid = :cid
+
+        ORDER BY o.Order_ID DESC
+    ");
+
+    $stmt->execute([
+        ':cid' => $_POST['cid']
+    ]);
+
+    echo json_encode(
+        $stmt->fetchAll()
+    );
+
+    exit;
+}
 echo json_encode($response);
 
 ?>

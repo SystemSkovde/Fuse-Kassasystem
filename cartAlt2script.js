@@ -192,7 +192,41 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         showMessage("Payment successful!", `Total: ${total} kr`, "success");
+        const firstAccount =
+    Object.values(cart)[0]?.accountId || null;
 
+    const formData = new FormData();
+
+    formData.append("action", "saveOrder");
+    formData.append("cid", user.cid);
+    formData.append("accountId", firstAccount);
+    formData.append("total", total);
+    formData.append(
+        "items",
+        JSON.stringify(Object.values(cart))
+    );
+
+    fetch("data.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(r => r.json())
+    .then(data => {
+
+        if (!data.success) {
+            alert("Failed to save order");
+            return;
+        }
+
+        cart = {};
+        localStorage.setItem(
+            "cart",
+            JSON.stringify(cart)
+        );
+
+        renderCart();
+        updateCartCount();
+    });
         cart = {};
         localStorage.setItem("cart", JSON.stringify(cart));
 
