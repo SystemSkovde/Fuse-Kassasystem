@@ -144,64 +144,14 @@
   <div class="top-icons">
 
     <a id="Home" href="#">
-      <span class="material-symbols-outlined big">
-            help
-      </span>
-    </div>
-  </div>
-
-    <span class="material-symbols-outlined big">
-      help
-    </span>
-
-    <div id="historyContainer"></div>
-
-
-    <div class="bottom-buttons">
-      <button class="btn" onclick="location.href='Minsida.html'">Back</button>
+      <span class="material-symbols-outlined big">home</span>
+    </a>
+    <span class="material-symbols-outlined big">help</span>
   </div>
 
   <h1>Order history</h1>
 
-  <div class="history-section">
-    <div class="history-date">[21-02-2026]</div>
-    <table>
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th>Price</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Cell A</td>
-          <td>Cell B</td>
-          <td>1</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="history-section">
-    <div class="history-date">[20-02-2026]</div>
-    <table>
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th>Price</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Cell A</td>
-          <td>Cell B</td>
-          <td>1</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div id="historyContainer"></div>
 
   <div class="bottom-buttons">
     <button class="btn" onclick="location.href='Minsida.html'">Back</button>
@@ -241,6 +191,7 @@ fetch("data.php", {
 })
 .then(r => r.json())
 .then(rows => {
+  console.log("Svar från data.php:", rows);
 
     if (!rows.length) {
         historyContainer.innerHTML =

@@ -158,7 +158,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'saveOrder') {
         $total = $_POST['total'];
 
         $stmt = $pdo->prepare("
-            INSERT INTO Orders
+            INSERT INTO OrderHistory
             (Cid, Account_ID, Order_date, total_amount, Status)
             VALUES
             (:cid, :account, CURDATE(), :total, 'completed')
@@ -238,7 +238,7 @@ if (
 
             p.Name
 
-        FROM Orders o
+        FROM OrderHistory o
 
         JOIN OrderItems oi
             ON o.Order_ID = oi.Order_ID
