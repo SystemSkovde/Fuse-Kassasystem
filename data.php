@@ -236,7 +236,10 @@ if (
             oi.Quantity,
             oi.salesPrice,
 
-            p.Name
+            p.Name,
+
+            a.AccountName,
+            a.AccountType
 
         FROM OrderHistory o
 
@@ -245,6 +248,9 @@ if (
 
         JOIN Products p
             ON oi.Item_ID = p.article_id
+
+        JOIN Accounts a
+            ON o.Account_ID = a.Account_ID
 
         WHERE o.Cid = :cid
 
