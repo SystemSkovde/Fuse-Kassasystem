@@ -22,7 +22,7 @@ docReady(function () {
 
     document.getElementById("add-form")?.addEventListener("submit", function (e) {
         e.preventDefault();
-        const nr = document.getElementById("nr")?.value;
+        const nr = document.getElementById("article-id")?.value;
         const name = document.getElementById("item-name")?.value;
         const category = document.getElementById("category1")?.value;
         const subcategory = document.getElementById("subcategory1")?.value;
@@ -120,7 +120,7 @@ function renderProducts(list) {
     <table class="cart-table">
         <thead>
             <tr>
-                <th>Number</th>
+                <th>Article ID</th>
                 <th>Name</th>
                 <th>Category</th>
                 <th>SubCategory</th>
