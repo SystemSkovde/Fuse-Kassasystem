@@ -192,7 +192,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         showMessage("Payment successful!", `Total: ${total} kr`, "success");
-        const firstAccount =
+    
+    const firstAccount =
     Object.values(cart)[0]?.accountId || null;
 
     const formData = new FormData();
