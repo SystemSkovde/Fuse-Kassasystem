@@ -132,10 +132,12 @@ $cid = $_POST['cid'] ?? null;
 $password = $_POST['password'] ?? null;
 
 if ($cid !== null && $password !== null) {
-    $sql = "SELECT * FROM Users WHERE cid = :cid and Password = :password";
+    $sql = "SELECT * FROM Users WHERE cid = :cid AND Password = :password";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([':cid' => $cid]);
-    $stmt->execute([':password' => $password]);
+    $stmt->execute([
+        ':cid' => $cid,
+        ':password' => $password
+    ]);
 
     $response['user'] = $stmt->fetch();
 
