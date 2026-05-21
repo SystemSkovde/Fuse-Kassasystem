@@ -102,14 +102,15 @@ footer {
 #qr-reader {
     width: 100%;
     max-width: 600px;
+    height: 400px;
     margin: auto;
-    overflow: hidden;
+    overflow: visible;
 }
 
 #qr-reader video {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+      height: 100%;
+    object-fit: contain;
 }
 .choice{
     background-color: #90ecb6;
