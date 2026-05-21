@@ -95,6 +95,30 @@
     #Inventory th {
         white-space: nowrap;
     }
+    .main-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+}
+
+
+
+@media (min-width: 900px) {
+ 
+    .main-layout {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    #Inventory {
+        flex: 2;
+    }
+
+    .side-card {
+        flex: 1;
+        max-width: 400px;
+    }
 }
 
        
@@ -235,10 +259,10 @@
         </form>
     </div>
 
-
+<div class="main-layout">
     <!-- Table-->
     <div id="Inventory"></div>
-    <div class="card">
+    <div class="card side-card">
         <!-- Add-->
         <form id="add-form">
             <input type="text" id="item-name" placeholder="Name" required>
@@ -254,6 +278,7 @@
         <button id="editBtn">
             Edit item
         </button>
+    </div>
     </div>
     <!-- Back button-->
     <div class="back">
