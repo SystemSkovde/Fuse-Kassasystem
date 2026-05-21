@@ -29,7 +29,7 @@ docReady(function () {
         const stock = document.getElementById("stock")?.value;
         const price = document.getElementById("price")?.value;
 
-        if (!nr || !name || !category || !subcategory || !stock || !price) {
+        if (!name || !category || !subcategory || !stock || !price) {
             alert("Fill in all boxes!");
             return;
         }
